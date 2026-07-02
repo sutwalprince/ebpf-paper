@@ -1,0 +1,241 @@
+[
+  {
+    "id": "xrp-osdi22",
+    "title": "XRP: In-Kernel Storage Functions with eBPF",
+    "authors": [
+      "Yuhong Zhong",
+      "Haoyu Li",
+      "Yu Jian Wu",
+      "Ioannis Zarkadas",
+      "Jeffrey Tao",
+      "Evan Mesterhazy",
+      "Michael Makris",
+      "Junfeng Yang",
+      "Amy Tai",
+      "Ryan Stutsman",
+      "Asaf Cidon"
+    ],
+    "venue": "OSDI",
+    "year": 2022,
+    "links": {
+      "paper": "https://www.usenix.org/conference/osdi22/presentation/zhong"
+    },
+    "summary": "Lets applications ship lookup and aggregation logic as eBPF programs that run inside the NVMe driver's completion path, cutting storage-stack overhead while preserving filesystem semantics.",
+    "paper_title": "XRP: In-Kernel Storage Functions with eBPF",
+    "primary_categories": [
+      "Storage",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Filesystems",
+      "Databases",
+      "Observability"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Storage",
+      "Filesystems",
+      "Databases",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe"
+    ],
+    "system_layers": [
+      "Application Layer",
+      "Kernel Subsystem",
+      "Storage Stack",
+      "Filesystem Layer",
+      "Hardware Interface"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Storage Systems",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Scalability"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "User-Kernel Cooperative"
+    ],
+    "innovation_type": [
+      "New eBPF Framework",
+      "New eBPF Application",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "NVMe Driver",
+      "Block Layer",
+      "ext4"
+    ],
+    "target_workloads": [
+      "Key-value stores",
+      "B+-tree lookups",
+      "LSM-tree lookups",
+      "Range queries",
+      "Aggregations"
+    ],
+    "target_resources": [
+      "NVMe SSDs",
+      "Storage I/O path",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Lower latency",
+      "Higher throughput",
+      "Reduced storage-stack overhead",
+      "Efficient core sharing"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Storage": "The system offloads storage functions and accelerates NVMe I/O operations.",
+        "Filesystems": "It propagates filesystem metadata and integrates with ext4 for logical-to-physical mapping.",
+        "Databases": "Evaluated with BPF-KV and WiredTiger storage engines.",
+        "Operating Systems": "Implements kernel modifications and new eBPF support inside Linux."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "The paper introduces a custom eBPF hook in the NVMe driver interrupt/completion path; among the provided categories, kernel-level probe-style attachment is the closest match."
+      },
+      "system_layers": {
+        "Application Layer": "Database and key-value store logic invokes XRP and supplies eBPF programs.",
+        "Kernel Subsystem": "Core functionality is implemented inside Linux kernel components.",
+        "Storage Stack": "The work targets and bypasses major portions of the storage stack.",
+        "Filesystem Layer": "Uses filesystem metadata digests and ext4 extent mappings.",
+        "Hardware Interface": "Hooks are placed near the NVMe device driver and hardware queues."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete storage data path framework.",
+        "Operating Systems": "Extends Linux kernel and eBPF infrastructure.",
+        "Storage Systems": "Focuses on storage access paths, NVMe devices, and database storage engines.",
+        "Performance Engineering": "Primary contribution is reducing latency and increasing throughput."
+      },
+      "goals": {
+        "Performance Optimization": "Reduces storage-stack overhead and accelerates lookups.",
+        "Scalability": "Improves throughput and behavior under many threads compared with kernel bypass approaches."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF programs execute inside the kernel NVMe completion path.",
+        "User-Kernel Cooperative": "Applications load eBPF programs and cooperate with kernel execution through read_xrp and shared context."
+      },
+      "innovation_type": {
+        "New eBPF Framework": "Introduces XRP as a framework for storage-function execution using eBPF.",
+        "New eBPF Application": "Applies eBPF to storage/data-structure traversal and database operations.",
+        "New eBPF System Design": "Creates a new storage datapath with metadata digest, NVMe-driver hooks, and resubmission logic."
+      }
+    }
+  },
+  {
+    "id": "hi",
+    "title": "Hi",
+    "authors": [],
+    "links": {},
+    "primary_categories": [],
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": []
+  },
+  {
+    "paper_title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
+    "primary_categories": [
+      "Networking",
+      "Caching"
+    ],
+    "secondary_categories": [
+      "Key-Value Stores"
+    ],
+    "supporting_categories": [
+      "Systems"
+    ],
+    "application_domain": [
+      "Networking",
+      "Caching"
+    ],
+    "ebpf_mechanisms": [
+      "XDP"
+    ],
+    "system_layers": [
+      "Application Layer",
+      "Kernel Subsystem",
+      "Network Stack"
+    ],
+    "research_areas": [
+      "Systems",
+      "Networking",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Scalability"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Application"
+    ],
+    "kernel_subsystems": [
+      "Network Stack",
+      "Socket Layer"
+    ],
+    "target_workloads": [
+      "Memcached",
+      "Key-value lookups"
+    ],
+    "target_resources": [
+      "Network I/O",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Lower latency",
+      "Higher throughput"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Accelerates network packet processing for memcached.",
+        "Caching": "Implements in-kernel cache for key-value lookups."
+      }
+    },
+    "title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
+    "id": "bmc-accelerating-memcached-using-safe-in-kernel-caching-and-pre-stack-processing"
+  },
+  {
+    "title": "Test Paper",
+    "primary_categories": [
+      "Storage",
+      "Operating Systems"
+    ],
+    "research_areas": [
+      "Systems"
+    ],
+    "id": "test-paper",
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": []
+  }
+]

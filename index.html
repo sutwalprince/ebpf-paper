@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ebpf_papers — a catalog of eBPF systems research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="header-row">
+      <div class="brand">
+        <span class="brand-mark">$</span>
+        <h1>ebpf_papers</h1>
+      </div>
+      <div class="header-actions">
+        <span id="dirty-indicator" class="dirty-indicator admin-only" hidden style="display:none">&#9679; unsaved changes</span>
+        <button id="export-btn" class="btn btn-ghost admin-only" type="button" style="display:none">export papers.json</button>
+        <button id="import-json-btn" class="btn btn-ghost admin-only" type="button" style="display:none">{ } import JSON</button>
+        <button id="add-paper-btn" class="btn btn-solid admin-only" type="button" style="display:none">+ add paper</button>
+      </div>
+    </div>
+    <p class="tagline">a running catalog of eBPF &amp; kernel-extension systems research</p>
+  </div>
+</header>
+
+<main class="wrap layout">
+
+  <button id="sidebar-toggle" class="sidebar-toggle" type="button" aria-label="Toggle filters">
+    <span class="toggle-icon">&#9776;</span>
+    <span class="toggle-label">filters</span>
+  </button>
+
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="search-block">
+      <label class="search-label" for="search-input">search</label>
+      <div class="search-input-wrap">
+        <span class="prompt-glyph" aria-hidden="true">&#10095;</span>
+        <input id="search-input" type="text" autocomplete="off" spellcheck="false"
+               placeholder="title, author, venue, tag&hellip;">
+      </div>
+    </div>
+
+    <div id="facet-groups" class="facet-groups"><!-- injected by script.js --></div>
+
+    <button id="clear-all" class="clear-all" type="button">clear all filters</button>
+  </aside>
+
+  <section class="results">
+    <div class="results-toolbar">
+      <div id="results-count" class="results-count" aria-live="polite"></div>
+      <div class="sort-block">
+        <label for="sort-select">sort</label>
+        <select id="sort-select">
+          <option value="year-desc">year, newest first</option>
+          <option value="year-asc">year, oldest first</option>
+          <option value="title-asc">title, A&ndash;Z</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="active-filters" class="active-filters" aria-live="polite"><!-- flag chips --></div>
+
+    <div id="paper-list" class="paper-list"><!-- injected by script.js --></div>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <p><strong>no papers match those filters</strong></p>
+      <p>try clearing a filter, or widen your search term.</p>
+      <button id="empty-clear" type="button">clear all filters</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>data lives in <code>papers.json</code> &mdash; see <code>README.md</code> for the schema and how to add papers.</p>
+  </div>
+</footer>
+
+<dialog id="paper-modal" class="paper-modal">
+  <div class="modal-head">
+    <h2 id="modal-title">add paper</h2>
+    <button id="modal-close-x" class="modal-close-x" type="button" aria-label="close" onclick="this.closest('dialog').close()">&times;</button>
+  </div>
+
+  <form id="paper-form" class="paper-form" onsubmit="return false;">
+    <div id="form-error" class="form-error" role="alert" hidden></div>
+
+    <label class="field">
+      <span class="field-label">title <em>required</em></span>
+      <input id="f-title" type="text" placeholder="Paper title">
+    </label>
+
+    <label class="field">
+      <span class="field-label">authors <em>comma-separated</em></span>
+      <input id="f-authors" type="text" placeholder="First Last, First Last">
+    </label>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">venue</span>
+        <input id="f-venue" type="text" placeholder="OSDI, NSDI, SOSP&hellip;">
+      </label>
+      <label class="field field-narrow">
+        <span class="field-label">year</span>
+        <input id="f-year" type="number" placeholder="2026">
+      </label>
+    </div>
+
+    <div class="field-row">
+      <label class="field">
+        <span class="field-label">paper link</span>
+        <input id="f-paper-link" type="text" placeholder="https://&hellip;">
+      </label>
+      <label class="field">
+        <span class="field-label">code link</span>
+        <input id="f-code-link" type="text" placeholder="https://&hellip;">
+      </label>
+      <label class="field">
+        <span class="field-label">talk link</span>
+        <input id="f-talk-link" type="text" placeholder="https://&hellip;">
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="field-label">summary</span>
+      <textarea id="f-summary" rows="2" placeholder="One or two sentences, in your own words."></textarea>
+    </label>
+
+    <label class="field">
+      <span class="field-label">classification JSON <em>optional &mdash; paste the primary_categories / research_areas / etc. block</em></span>
+      <textarea id="f-classification" rows="8" class="mono-textarea" placeholder='{
+  "primary_categories": ["Storage"],
+  "research_areas": ["Storage Systems"],
+  "classification_reasoning": { "...": {} }
+}'></textarea>
+    </label>
+  </form>
+
+  <div class="modal-foot">
+    <button id="modal-delete" class="btn btn-danger" type="button" hidden>delete</button>
+    <div class="modal-foot-right">
+      <button id="modal-cancel" class="btn btn-ghost" type="button">cancel</button>
+      <button id="modal-save" class="btn btn-solid" type="button">save</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="json-import-modal" class="paper-modal json-import-modal">
+  <div class="modal-head">
+    <h2 id="json-modal-title"><span class="json-icon">{ }</span> import paper from JSON</h2>
+    <button class="modal-close-x" type="button" aria-label="close" onclick="this.closest('dialog').close()">&times;</button>
+  </div>
+
+  <div class="json-import-body">
+    <div id="json-import-error" class="form-error" role="alert" hidden></div>
+
+    <div class="json-import-instructions">
+      <div class="instruction-header">
+        <span class="instruction-icon">&#9432;</span>
+        <span>Paste a complete paper JSON object below</span>
+      </div>
+      <p class="instruction-detail">The JSON should include <code>paper_title</code> (or <code>title</code>) and any classification fields like <code>primary_categories</code>, <code>research_areas</code>, <code>classification_reasoning</code>, etc.</p>
+    </div>
+
+    <div class="json-editor-wrap">
+      <div class="json-editor-header">
+        <span class="json-editor-label">paper.json</span>
+        <div class="json-editor-actions">
+          <button id="json-format-btn" class="json-action-btn" type="button" title="Format JSON">&#10697; format</button>
+          <button id="json-clear-btn" class="json-action-btn" type="button" title="Clear">&#10005; clear</button>
+        </div>
+      </div>
+      <textarea id="json-import-textarea" class="json-import-textarea" rows="18" spellcheck="false" placeholder='{
+  "paper_title": "Your Paper Title",
+  "primary_categories": ["Category1"],
+  "research_areas": ["Area1"],
+  "ebpf_mechanisms": ["kprobe"],
+  "classification_reasoning": { ... }
+}'></textarea>
+      <div class="json-status-bar">
+        <span id="json-status" class="json-status">ready</span>
+        <span id="json-char-count" class="json-char-count">0 chars</span>
+      </div>
+    </div>
+
+    <div id="json-preview" class="json-preview" hidden>
+      <div class="json-preview-header">
+        <span class="preview-icon">&#9654;</span>
+        <span>Preview</span>
+      </div>
+      <div id="json-preview-content" class="json-preview-content"></div>
+    </div>
+  </div>
+
+  <div class="modal-foot">
+    <div class="modal-foot-right">
+      <button id="json-import-cancel" class="btn btn-ghost" type="button">cancel</button>
+      <button id="json-import-save" class="btn btn-solid" type="button">&#10095; import paper</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="script.js"></script>
+</body>
+</html>
