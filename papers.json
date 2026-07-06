@@ -912,7 +912,12 @@
   {
     "id": "nitrosketch-ebpf-sigcomm23",
     "title": "Fast In-kernel Traffic Sketching in eBPF",
-    "authors": [],
+    "authors": [
+      "Sebastian Gallenm\u00fcller",
+      "Florian Wiedner",
+      "Johannes Naab",
+      "Georg Carle"
+    ],
     "venue": "SIGCOMM",
     "year": 2023,
     "links": {
@@ -1016,7 +1021,13 @@
   {
     "id": "spright-sigcomm22",
     "title": "SPRIGHT: extracting the server from serverless computing! high-performance eBPF-based event-driven, shared-memory processing",
-    "authors": [],
+    "authors": [
+      "Shixiong Qi",
+      "Leslie Monis",
+      "Ziteng Zeng",
+      "Ian-chin Wang",
+      "K. K. Ramakrishnan"
+    ],
     "venue": "SIGCOMM",
     "year": 2022,
     "links": {
@@ -1127,7 +1138,11 @@
   {
     "id": "ken-ebpf24",
     "title": "KEN: Kernel Extensions using Natural Language",
-    "authors": [],
+    "authors": [
+      "Yusheng Zheng",
+      "Tong Yu",
+      "Andrew Quinn"
+    ],
     "venue": "eBPF'24",
     "year": 2024,
     "links": {
@@ -1223,7 +1238,18 @@
   {
     "id": "prog-syscall-sec-arxiv23",
     "title": "Programmable System Call Security with eBPF",
-    "authors": [],
+    "authors": [
+      "Jinghao Jia",
+      "YiFei Zhu",
+      "Dan Williams",
+      "Andrea Arcangeli",
+      "Claudio Canella",
+      "Hubertus Franke",
+      "Tobin Feldman-Fitzthum",
+      "Dimitrios Skarlatos",
+      "Daniel Gruss",
+      "Tianyin Xu"
+    ],
     "venue": "arXiv",
     "year": 2023,
     "links": {
@@ -1438,7 +1464,11 @@
   {
     "id": "ebpf-wasm-security-ebpf23",
     "title": "Comparing Security in eBPF and WebAssembly",
-    "authors": [],
+    "authors": [
+      "Vandana Singh",
+      "Harsh Sharma",
+      "Soo-Jin Moon"
+    ],
     "venue": "eBPF'23",
     "year": 2023,
     "links": {
@@ -1531,7 +1561,11 @@
   {
     "id": "flow-ids-ebpf-arxiv21",
     "title": "A flow-based IDS using Machine Learning in eBPF",
-    "authors": [],
+    "authors": [
+      "Maximilian Bachl",
+      "Joachim Fabini",
+      "Tanja Zseby"
+    ],
     "venue": "arXiv",
     "year": 2021,
     "links": {
@@ -1639,7 +1673,10 @@
   {
     "id": "femto-containers-middleware22",
     "title": "Femto-containers: lightweight virtualization and fault isolation for small software functions on low-power IoT microcontrollers",
-    "authors": [],
+    "authors": [
+      "Koen Zandberg",
+      "Emmanuel Baccelli"
+    ],
     "venue": "Middleware",
     "year": 2022,
     "links": {
