@@ -69,6 +69,12 @@
 
     <div id="paper-list" class="paper-list"><!-- injected by script.js --></div>
 
+    <div id="pagination" class="pagination" style="display:none; text-align:center; margin-top: 2rem; margin-bottom: 2rem;">
+      <button id="prev-page" class="btn btn-ghost" type="button">&laquo; Prev</button>
+      <span id="page-info" style="margin: 0 1rem; font-family: var(--font-mono); font-size: 0.9rem;">Page 1</span>
+      <button id="next-page" class="btn btn-ghost" type="button">Next &raquo;</button>
+    </div>
+
     <div id="empty-state" class="empty-state" hidden>
       <p><strong>no papers match those filters</strong></p>
       <p>try clearing a filter, or widen your search term.</p>
@@ -78,11 +84,11 @@
 
 </main>
 
-<footer class="site-footer">
+<!-- <footer class="site-footer">
   <div class="wrap">
     <p>data lives in <code>papers.json</code> &mdash; see <code>README.md</code> for the schema and how to add papers.</p>
   </div>
-</footer>
+</footer> -->
 
 <dialog id="paper-modal" class="paper-modal">
   <div class="modal-head">
@@ -208,6 +214,6 @@
   </div>
 </dialog>
 
-<script src="script.js"></script>
+<script src="script.js?v=2"></script>
 </body>
 </html>

@@ -2099,5 +2099,2005 @@
         "New eBPF System Design": "Rearchitects GPU management as a programmable OS subsystem."
       }
     }
+  },
+  {
+    "id": "virtualizing-ebpf-with-late-binding-2026",
+    "title": "Virtualizing eBPF with Late-Binding",
+    "authors": [
+      "J. Zhang",
+      "X. Song",
+      "D. Du",
+      "Y. Xia",
+      "B. Zang",
+      "H. Chen"
+    ],
+    "venue": "OSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://www.usenix.org/conference/osdi26/presentation/zhang-jing"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "While eBPF has become the de facto standard for kernel customization in cloud-native systems, its design implicitly assumes a single trust domain. Allowing multiple tenants to deploy their own eBPF programs breaks this assumption, making the system both insecure and inefficient. We identify the root cause as eBPF\u2019s static-binding model, which rigidly couples logical eBPF programs to physical kernel hooks, forcing tenants to contend for shared execution contexts. We propose vBPF, a virtualization layer that shifts to a late-binding model. By repurposing physical hooks as generic interposition points and deferring the binding until the event is attributed at runtime, vBPF decouples tenant context from the underlying kernel. vBPF achieves this via three key mechanisms: (1) a Sniffer that accurately attributes interrupt-driven events to tenants, (2) a Dispatcher that replaces linear traversal with scalable O(1) program lookup, and (3) a compiler-assisted framework for state isolation. Implemented on Linux 6.12, vBPF enables the secure coexistence of multi-tenant workloads. Our evaluation shows that vBPF reduces latency by up to 3.9\u00d7 (lmbench) and improves throughput by 29% (PostgreSQL) compared to native contention.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "peer-first-class-scheduling-for-latency-critical-ebpf-applications-2026",
+    "title": "PeeR: First-Class Scheduling for Latency Critical eBPF Applications",
+    "authors": [
+      "J. Carin",
+      "B. Holmes",
+      "W. Wang",
+      "A. Bhardwaj",
+      "M. Ghobadi"
+    ],
+    "venue": "OSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://www.usenix.org/conference/osdi26/presentation/carin"
+    },
+    "primary_categories": [
+      "improving",
+      "misc"
+    ],
+    "summary": "We present PeeR, a novel eBPF runtime that makes latency-critical eBPF programs preemptable and schedulable while maintaining low overhead. As eBPF programs grow more complex, they expose a fundamental gap: performance-critical hooks execute in a non-preemptable softirq context, which is invisible to the scheduler. These programs bypass resource controls, break isolation, and cause head-of-line blocking, degrading tail latency. PeeR exploits two key properties of eBPF: the verifier enforces clean program state at helper function boundaries, making these sites natural preemption points, and non-trivial programs frequently call helpers, ensuring fine-grained preemption opportunities. Building on these properties, PeeR brings cooperative preemption to eBPF: lightweight budget checks, inserted at each helper call, force programs exceeding their budget to yield and resume later on per-CPU kernel threads. To handle a wide variety of workloads, PeeR uses a two-level scheduling model that integrates with sched e xt, where the outer level controls aggregate CPU time for eBPF workloads, while an inner micro-scheduler orders individual tasks according to an operator-defined policy. Our evaluation on Redis, Memcached, echo-server, and TPC-C workloads shows that PeeR reduces p99 latency for latency-sensitive requests by 3\u00d7 to 19.8\u00d7 over the current eBPF runtime, without starving competing long-running requests.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving."
+      }
+    }
+  },
+  {
+    "id": "beeqos-a-cloud-native-qos-system-for-adaptive-and-scalable-multi-priority-bandwidth-guarantees-2026",
+    "title": "BeeQoS: A Cloud-Native QoS System for Adaptive and Scalable Multi-Priority Bandwidth Guarantees",
+    "authors": [
+      "J. Liu",
+      "S. Wu",
+      "H. Ma",
+      "C. Li",
+      "H. Yu",
+      "D. Jia",
+      "F. Li",
+      "P. Hu"
+    ],
+    "venue": "WWW",
+    "year": 2026,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3774904.3792487"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Introduces BeeQoS, a cloud-native Quality of Service framework designed to provide scalable and adaptive bandwidth guarantees across multiple traffic priorities using programmable data planes and eBPF in cloud environments.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "xkernel-rethinking-performance-tunability-of-operating-system-kernels-2026",
+    "title": "Xkernel: Rethinking Performance Tunability of Operating System Kernels",
+    "authors": [
+      "Z. Chen",
+      "W. Zhang",
+      "Y. Tang",
+      "R. Shu",
+      "F. Ren",
+      "T. Xu",
+      "J. Liu"
+    ],
+    "venue": "OSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2512.12530"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "The Linux kernel is permeated with constant values that are critical to system performance. Many of these constants, referred to as perf-consts, are magic numbers with brittle assumptions on hardware and workloads. Unfortunately, there is no capability of in-situ tuning of perf-const values on deployed kernels. This paper rethinks OS performance tunability. We present Xkernel, a system that offers a safe, efficient, and programmable interface for in-situ tuning of any perf-consts directly on a running kernel. Xkernel transforms any perf-const into a tunable knob on demand using a novel approach called Scoped Indirect Execution (SIE). SIE captures precise binary boundaries where a perf-const enters system state and redirects control to synthesized instructions that update the state as if new values were used. Xkernel goes beyond version atomicity when updating perf-consts to guarantee side-effect safety, a property notably absent in existing kernel update mechanisms. Case studies on various OS subsystems demonstrate significant performance benefits of tuning perf-consts which is made possible by Xkernel.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "hybridmesh-a-hardware-software-hybrid-approach-for-accelerating-service-mesh-ingress-2026",
+    "title": "HybridMesh: A Hardware-software Hybrid Approach for Accelerating Service Mesh Ingress",
+    "authors": [
+      "M. You",
+      "J. Nam",
+      "M. Seo",
+      "T. Park",
+      "S. Shin"
+    ],
+    "venue": "NSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi26-you.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Proposes HybridMesh, a hybrid architecture that offloads critical service mesh ingress processing to SmartNIC hardware while maintaining flexibility via software eBPF pipelines, significantly accelerating RPC throughput and reducing latency.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "remote-tcp-connection-offload-and-applications-2026",
+    "title": "Remote TCP Connection Offload and Applications",
+    "authors": [
+      "S. Li",
+      "S. W. D. Chien",
+      "T. Gao",
+      "M. Honda"
+    ],
+    "venue": "NSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://micchie.net/files/xo-nsdi26.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Explores a novel architecture for offloading entire remote TCP connections to programmable NICs and data processing units (DPUs), leveraging eBPF to manage state synchronization and protocol handling efficiently.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "krakenguard-towards-fine-grained-ebpf-isolation-2026",
+    "title": "KRAKENGUARD: Towards Fine-Grained eBPF Isolation",
+    "authors": [
+      "J. Patel",
+      "L. G. Buhl-Nielsen",
+      "A. Ghosn",
+      "M. Kogias"
+    ],
+    "venue": "NSDI",
+    "year": 2026,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi26-patel.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "security"
+    ],
+    "summary": "Presents KRAKENGUARD, a security framework that introduces fine-grained, compartmentalized isolation for eBPF programs, ensuring that individual extensions cannot leak state or interfere with one another even within the kernel.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "tux-efficient-drop-in-networking-for-database-systems-2025",
+    "title": "Tux: Efficient Drop-in Networking for Database Systems",
+    "authors": [
+      "X. Zhou",
+      "V. Leis",
+      "X. Yu",
+      "M. Stonebraker"
+    ],
+    "venue": "VLDB",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.vldb.org/pvldb/vol19/p334-zhou.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking",
+      "misc"
+    ],
+    "summary": "Introduces Tux, an efficient drop-in networking library for database systems. It uses eBPF to optimize socket operations and network buffering, reducing CPU overhead and improving query latency without modifying DBMS source code.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "bpf-db-a-kernel-embedded-transactional-database-management-system-for-ebpf-applications-2025",
+    "title": "BPF-DB: A Kernel-Embedded Transactional Database Management System For eBPF Applications",
+    "authors": [
+      "M. Butrovich",
+      "S. Arch",
+      "W. S. Lim",
+      "W. Zhang",
+      "J. M. Patel",
+      "A. Pavlo"
+    ],
+    "venue": "SIGMOD",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3725272"
+    },
+    "primary_categories": [
+      "improving",
+      "misc",
+      "storage"
+    ],
+    "summary": "Developers rely on the eBPF framework to augment operating system (OS) behavior for the betterment of database management system (DBMS) without having to modify kernel code. But eBPF's verifier limits program complexity and data management functionality. As a result eBPF's storage options are limited to kernel-resident, non-durable data structures that lack transactional guarantees. Inspired by embedded DBMSs for user-space applications, this paper present BPF-DB, an OS-embedded DBMS that offers transactional data management for eBPF applications. We explore the storage management and concurrency control challenges associated with DBMS design in eBPF's restrictive execution environment. We demonstrate BPF-DB's capabilities with two applications based on real-world systems. The first is a Redis-compatible in-memory DBMS that uses BPF-DB as its transactional storage engine. This system matches the performance of state-of-the-art implementations while offering stronger transactional guarantees. The second application implements a stored procedure-based DBMS that provides serializable multi-statement transactions. We compare this application against VoltDB, with BPF-DB achieving 43% higher throughput. BPF-DB's robust and high-performance transactional semantics enable emerging kernel-space applications.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
+        "Storage": "The paper's primary focus aligns with storage based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "approximation-enforced-execution-of-untrusted-linux-kernel-extensions-2025",
+    "title": "Approximation Enforced Execution of Untrusted Linux Kernel Extensions",
+    "authors": [
+      "H. Sun",
+      "Z. Su"
+    ],
+    "venue": "Sec",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/usenixsecurity25-sun-hao.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Proposes a mechanism for safely executing untrusted kernel extensions by enforcing execution approximations\u2014trading off exact semantic fidelity for guaranteed bounded runtime and strict safety properties, verified via eBPF.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "deprivileging-low-level-gpu-drivers-efficiently-with-user-space-processes-and-cheri-compartments-2025",
+    "title": "Deprivileging Low-Level GPU Drivers Efficiently with User-Space Processes and CHERI Compartments",
+    "authors": [
+      "P. Metzger",
+      "A. T. Markettos",
+      "E. T. Napiera\u0142a",
+      "M. Naylor",
+      "R. N. M. Watson",
+      "T. M. Jones"
+    ],
+    "venue": "CCS",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3719027.3765036"
+    },
+    "primary_categories": [
+      "using",
+      "security",
+      "misc"
+    ],
+    "summary": "Explores techniques to deprivilege monolithic GPU kernel drivers by moving their core components into user-space processes and hardware-enforced CHERI compartments, communicating safely via eBPF boundaries.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "rethinking-tamper-evident-logging-a-high-performance-co-designed-auditing-system-2025",
+    "title": "Rethinking Tamper-Evident Logging: A High-Performance, Co-Designed Auditing System",
+    "authors": [
+      "R. Zhao",
+      "M. Shoaib",
+      "V. T. Hoang",
+      "W. U. Hassan"
+    ],
+    "venue": "CCS",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3719027.3765024"
+    },
+    "primary_categories": [
+      "using",
+      "security"
+    ],
+    "summary": "Presents a high-performance auditing system that co-designs the kernel data collection (using eBPF) and user-space storage to guarantee tamper-evident logging with minimal impact on production workloads.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "intent-aware-fuzzing-for-android-hardened-application-2025",
+    "title": "Intent-aware Fuzzing for Android Hardened Application",
+    "authors": [
+      "S Jeong",
+      "M. Choi",
+      "H. Cho",
+      "S. Choi",
+      "H. Kim",
+      "Y. Jeon"
+    ],
+    "venue": "CCS",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3719027.3744858"
+    },
+    "primary_categories": [
+      "using",
+      "security",
+      "tracing",
+      "misc"
+    ],
+    "summary": "Describes an intent-aware fuzzing framework tailored for hardened Android applications, which utilizes eBPF probes to instrument and monitor inter-process communications (IPC) and internal state transitions dynamically.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization.",
+        "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "aeolia-a-fast-and-secure-userspace-interrupt-based-storage-stack-2025",
+    "title": "Aeolia: A Fast and Secure Userspace Interrupt-Based Storage Stack",
+    "authors": [
+      "C. Li",
+      "R. Yi",
+      "Z. Zhang",
+      "J. Liu",
+      "C. Min",
+      "J. Zhang",
+      "Y. Luo",
+      "X. Wang",
+      "Z. Wang",
+      "D. Zhou"
+    ],
+    "venue": "SOSP",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3731569.3764816"
+    },
+    "primary_categories": [
+      "using",
+      "storage",
+      "misc"
+    ],
+    "summary": "Introduces Aeolia, a fast and secure storage stack that leverages user-space interrupts and eBPF-based I/O policing to bypass the traditional kernel storage path, drastically reducing overhead for NVMe devices.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Storage": "The paper's primary focus aligns with storage based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "prove-it-to-the-kernel-precise-extension-analysis-via-proof-guided-abstraction-refinement-2025",
+    "title": "Prove It to the Kernel: Precise Extension Analysis via Proof-Guided Abstraction Refinement",
+    "authors": [
+      "H. Sun",
+      "Z. Su"
+    ],
+    "venue": "SOSP",
+    "year": 2025,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3731569.3764796"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Proposes a novel proof-guided abstraction refinement (PGAR) approach to improve the precision of the eBPF verifier. By dynamically adjusting the level of abstraction based on verification failures, it aims to reduce false positives and allow more complex, safe programs to be accepted by the kernel.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "sok-challenges-and-paths-toward-memory-safety-for-ebpf-2025",
+    "title": "SoK: Challenges and Paths Toward Memory Safety for eBPF",
+    "authors": [
+      "K. Huang",
+      "J. Sampson",
+      "M. Payer",
+      "G. Tan",
+      "Z. Qian",
+      "T. Jaeger"
+    ],
+    "venue": "S&P",
+    "year": 2025,
+    "links": {
+      "paper": "https://nebelwelt.net/files/25Oakland.pdf"
+    },
+    "primary_categories": [
+      "analysis",
+      "security",
+      "verifier"
+    ],
+    "summary": "A Systematization of Knowledge (SoK) detailing the unique memory safety challenges inherent to the eBPF ecosystem. It evaluates current verifier mechanisms, highlights known vulnerabilities, and proposes future directions for achieving robust memory safety in kernel extensions.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization.",
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "swiftsweeper-defeating-use-after-free-bugs-using-memory-sweeper-without-stop-the-world-2025",
+    "title": "SwiftSweeper: Defeating Use-After-Free Bugs Using Memory Sweeper Without Stop-the-World",
+    "authors": [
+      "J. Ahn",
+      "K. Lee",
+      "C. Park",
+      "H. Moon",
+      "Y. Kwon"
+    ],
+    "venue": "S&P",
+    "year": 2025,
+    "links": {
+      "paper": "https://drive.junhoahn.kr/index.php/s/rSitKKfcz79PX5t"
+    },
+    "primary_categories": [
+      "using",
+      "misc",
+      "security"
+    ],
+    "summary": "Introduces SwiftSweeper, a memory sweeping mechanism designed to mitigate use-after-free vulnerabilities without imposing a stop-the-world penalty, providing an efficient and secure memory management strategy applicable to eBPF environments.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "ebpf-misbehavior-detection-fuzzing-with-a-specification-based-oracle-2025",
+    "title": "eBPF Misbehavior Detection: Fuzzing with a Specification-Based Oracle",
+    "authors": [
+      "T. Lyu",
+      "K. K. Dwivedi",
+      "T. Bourgeat",
+      "M. Payer",
+      "M. Xu",
+      "S. Kashyap"
+    ],
+    "venue": "SOSP",
+    "year": 2025,
+    "links": {
+      "paper": "https://cs.uwaterloo.ca/~m285xu/assets/publication/ebpf_smt_fuzz-paper.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Presents a novel fuzzing framework tailored for eBPF runtimes. It leverages specification-based oracles to effectively detect semantic misbehaviors and implementation flaws within the eBPF verifier and JIT compiler.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "flexguard-fast-mutual-exclusion-independent-of-subscription-2025",
+    "title": "FlexGuard: Fast Mutual Exclusion Independent of Subscription",
+    "authors": [
+      "V. Laforet",
+      "S. Kashyap",
+      "C. Iorgulescu",
+      "J. Lawall",
+      "J.-P. Lozi"
+    ],
+    "venue": "SOSP",
+    "year": 2025,
+    "links": {
+      "paper": "https://hal.science/hal-05241781v1/document"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Proposes FlexGuard, a high-performance mutual exclusion synchronization primitive that maintains fast execution times regardless of the number of subscribing threads, optimizing concurrent kernel extensions.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "cache-ext-customizing-the-page-cache-with-ebpf-2025",
+    "title": "cache_ext: Customizing the Page Cache with eBPF",
+    "authors": [
+      "T. Zussman",
+      "I. Zarkadas",
+      "J. Carin",
+      "A. Cheng",
+      "H. Franke",
+      "J. Pfefferle",
+      "A. Cidon"
+    ],
+    "venue": "SOSP",
+    "year": 2025,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2502.02750"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "The page cache is a central part of an OS. It reduces repeated accesses to storage by deciding which pages to retain in memory. As a result, the page cache has a significant impact on the performance of many applications. However, its one-size-fits-all eviction policy performs poorly in many workloads. While the systems community has experimented with a plethora of new and adaptive eviction policies in non-OS settings (e.g., key-value stores, CDNs), it is very difficult to implement such policies in the page cache, due to the complexity of modifying kernel code. To address these shortcomings, we design a novel eBPF-based framework for the Linux page cache, called $\\texttt{cachebpf}$, that allows developers to customize the page cache without modifying the kernel. $\\texttt{cachebpf}$ enables applications to customize the page cache policy for their specific needs, while also ensuring that different applications' policies do not interfere with each other and preserving the page cache's ability to share memory across different processes. We demonstrate the flexibility of $\\texttt{cachebpf}$'s interface by using it to implement several eviction policies. Our evaluation shows that it is indeed beneficial for applications to customize the page cache to match their workloads' unique properties, and that they can achieve up to 70% higher throughput and 58% lower tail latency.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "hermes-enhancing-layer-7-cloud-load-balancers-with-userspace-directed-i-o-event-notification-2025",
+    "title": "Hermes: Enhancing Layer-7 Cloud Load Balancers with Userspace-Directed I/O Event Notification",
+    "authors": [
+      "T. Pan",
+      "E. Song",
+      "Y. Zuo",
+      "S. Zhang",
+      "Y. Song",
+      "J. Zhao",
+      "W. Hou",
+      "J. Lu",
+      "X. Sun",
+      "S. Zhang",
+      "Y. Yang",
+      "J. Zhang",
+      "T. Huang",
+      "B. Lyu",
+      "X. Li",
+      "R. Wen",
+      "Z. Zong",
+      "S. Zhu"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2025,
+    "links": {
+      "paper": "https://ng-95.github.io/files/Hermes_SIGCOMM25.pdf",
+      "talk": "https://www.youtube.com/watch?v=J22-2PSf04M"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Describes Hermes, an optimization for L7 cloud load balancers that leverages userspace-directed I/O event notifications to bypass traditional kernel overheads, significantly improving connection handling throughput and latency.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "extending-applications-safely-and-efficiently-2025",
+    "title": "Extending Applications Safely and Efficiently",
+    "authors": [
+      "Y. Zheng",
+      "T. Yu",
+      "Y. Yang",
+      "Y. Hu",
+      "X. Lai",
+      "D. Williams",
+      "A. Quinn"
+    ],
+    "venue": "OSDI",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/osdi25-zheng-yusheng.pdf",
+      "talk": "https://www.youtube.com/watch?v=vhvFW_e_4I8"
+    },
+    "primary_categories": [
+      "using",
+      "tracing",
+      "misc"
+    ],
+    "summary": "Explores methodologies for safely and efficiently extending user-space applications using eBPF-like mechanisms, bringing kernel-level observability and extensibility concepts into application boundaries.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "rex-closing-the-language-verifier-gap-with-safe-and-usable-kernel-extensions-2025",
+    "title": "Rex: Closing the language-verifier gap with safe and usable kernel extensions",
+    "authors": [
+      "J. Jia",
+      "R. Qin",
+      "M. Craun",
+      "E. Lukiyanov",
+      "A. Bansal",
+      "M. Phan",
+      "M. V. Le",
+      "H. Franke",
+      "H. Jamjoom",
+      "T. Xu",
+      "D. Williams"
+    ],
+    "venue": "ATC",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc25-jia.pdf",
+      "talk": "https://www.youtube.com/watch?v=phJ-fb5lEA8"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Introduces Rex, a framework aimed at bridging the gap between high-level programming languages and the eBPF verifier, allowing developers to write safe kernel extensions with more expressive language features.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "accelerating-nested-virtualization-with-hyperturtle-2025",
+    "title": "Accelerating Nested Virtualization with HyperTurtle",
+    "authors": [
+      "O. B. Zur",
+      "J. Krebs",
+      "S. A. Bergman",
+      "M. Silberstein"
+    ],
+    "venue": "ATC",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc25-zur.pdf",
+      "talk": "https://www.youtube.com/watch?v=78g1bG3BOFs"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Presents HyperTurtle, a system designed to accelerate nested virtualization performance by offloading specific hypervisor intercepts and state management tasks.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "pageflex-flexible-and-efficient-user-space-delegation-of-linux-paging-policies-with-ebpf-2025",
+    "title": "PageFlex: Flexible and Efficient User-space Delegation of Linux Paging Policies with eBPF",
+    "authors": [
+      "A. Yelam",
+      "K. Wu",
+      "Z. Guo",
+      "S. Yang",
+      "R. Shashidhara",
+      "W. Xu",
+      "S. Novakovic",
+      "A. C. Snoeren",
+      "K. Keeton"
+    ],
+    "venue": "ATC",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc25-yelam.pdf",
+      "talk": "https://www.youtube.com/watch?v=ZyT1cB_8trw"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Introduces PageFlex, which delegates Linux kernel paging policies to user-space applications using eBPF. This allows applications to define custom, highly efficient memory management strategies without modifying kernel code.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "vep-a-two-stage-verification-toolchain-for-full-ebpf-programmability-2025",
+    "title": "VEP: A Two-stage Verification Toolchain for Full eBPF Programmability",
+    "authors": [
+      "X. Wu",
+      "Y. Feng",
+      "T. Huang",
+      "X. Lu",
+      "S. Lin",
+      "L. Xie",
+      "S. Zhao",
+      "Q. Cao"
+    ],
+    "venue": "NSDI",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi25-wu-xiwei.pdf",
+      "talk": "https://www.youtube.com/watch?v=5xA6BIEWjeM"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Presents VEP, a novel two-stage verification toolchain that splits eBPF verification into an offline formal analysis phase and a lightweight online check, expanding the complexity of programs that can be safely loaded.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "etran-extensible-kernel-transport-with-ebpf-2025",
+    "title": "eTran: Extensible Kernel Transport with eBPF",
+    "authors": [
+      "Z. Chen",
+      "Q. Meng",
+      "C. Lao",
+      "Y. Liu",
+      "F. Ren",
+      "M. Yu",
+      "Y. Zhou"
+    ],
+    "venue": "NSDI",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi25-chen-zhongjie.pdf",
+      "talk": "https://www.youtube.com/watch?v=zb1lNTPxlrc"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Proposes eTran, an extensible kernel transport architecture that utilizes eBPF to allow rapid prototyping and deployment of new transport layer protocols directly within the Linux kernel.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "state-compute-replication-parallelizing-high-speed-stateful-packet-processing-2025",
+    "title": "State-Compute Replication: Parallelizing High-Speed Stateful Packet Processing",
+    "authors": [
+      "Q. Xu",
+      "S. Miano",
+      "X. Gao",
+      "T. Wang",
+      "A. Murugadass",
+      "S. Zhang",
+      "A. Sivaraman",
+      "G. Antichi",
+      "S. Narayana"
+    ],
+    "venue": "NSDI",
+    "year": 2025,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi25-xu-qiongwen.pdf",
+      "talk": "https://www.youtube.com/watch?v=FgSEmeqM0s8"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Explores state-compute replication techniques to parallelize stateful packet processing tasks at high speeds, using programmable data planes and eBPF to distribute state safely across CPU cores.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "p4control-line-rate-cross-host-attack-prevention-via-in-network-information-flow-control-enabled-by-programmable-switches-and-ebpf-2024",
+    "title": "P4Control: Line-Rate Cross-Host Attack Prevention via In-Network Information Flow Control Enabled by Programmable Switches and eBPF",
+    "authors": [
+      "O. Bajaber",
+      "B. Ji",
+      "P. Gao"
+    ],
+    "venue": "S&P",
+    "year": 2024,
+    "links": {
+      "paper": "https://people.cs.vt.edu/penggao/papers/p4control-sp24.pdf",
+      "talk": "https://www.youtube.com/watch?v=5Q4pIojkLy4"
+    },
+    "primary_categories": [
+      "using",
+      "networking",
+      "security"
+    ],
+    "summary": "Introduces P4Control, a system combining programmable switches and eBPF to enforce in-network information flow control. It detects and prevents cross-host attacks at line rate with minimal host overhead.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "budalloc-defeating-use-after-free-bugs-by-decoupling-virtual-address-management-from-kernel-2024",
+    "title": "BUDAlloc: Defeating Use-After-Free Bugs by Decoupling Virtual Address Management from Kernel",
+    "authors": [
+      "J. Ahn",
+      "J. Lee",
+      "K. Lee",
+      "W. Gwak",
+      "M. Hwang",
+      "Y. Kwon"
+    ],
+    "venue": "Sec",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/usenixsecurity24-ahn.pdf",
+      "talk": "https://www.youtube.com/watch?v=Y21_QmmIcI0"
+    },
+    "primary_categories": [
+      "using",
+      "misc",
+      "security"
+    ],
+    "summary": "Presents BUDAlloc, an allocator that decouples virtual address management from the kernel to effectively defeat Use-After-Free (UAF) vulnerabilities by preventing address reuse during the vulnerable window.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "beebox-hardening-bpf-against-transient-execution-attacks-2024",
+    "title": "BeeBox: Hardening BPF Against Transient Execution Attacks",
+    "authors": [
+      "D. Jin",
+      "A. J. Gaidis",
+      "V. P. Kemerlis"
+    ],
+    "venue": "Sec",
+    "year": 2024,
+    "links": {
+      "paper": "https://cs.brown.edu/~vpk/papers/beebox.sec24.pdf",
+      "talk": "https://www.youtube.com/watch?v=rZ47dOX2snI"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier",
+      "security"
+    ],
+    "summary": "Describes BeeBox, a hardening framework that secures the BPF subsystem against transient execution attacks (like Spectre) by employing precise masking and bounds-checking optimizations within the JIT compiler.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "eaudit-a-fast-scalable-and-deployable-audit-data-collection-system-2024",
+    "title": "eAudit: A Fast, Scalable and Deployable Audit Data Collection System",
+    "authors": [
+      "R. Sekar",
+      "H. Kimm",
+      "R. Aich"
+    ],
+    "venue": "S&P",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.seclab.cs.sunysb.edu/seclab/pubs/eaudit.pdf",
+      "talk": "https://www.youtube.com/watch?v=nxBhIxIRI9w"
+    },
+    "primary_categories": [
+      "using",
+      "security"
+    ],
+    "summary": "Introduces eAudit, a high-performance system for collecting audit data from the Linux kernel using eBPF. It addresses the scalability and performance bottlenecks of traditional Auditd.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "toss-a-fault-to-bpfchecker-revealing-implementation-flaws-for-ebpf-runtimes-with-differential-fuzzing-2024",
+    "title": "Toss a Fault to BpfChecker: Revealing Implementation Flaws for eBPF runtimes with Differential Fuzzing",
+    "authors": [
+      "C. Peng",
+      "M. Jiang",
+      "L. Wu",
+      "Y. Zhou"
+    ],
+    "venue": "CCS",
+    "year": 2024,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3658644.3690237"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier",
+      "jit"
+    ],
+    "summary": "Presents BpfChecker, a differential fuzzing tool designed to reveal implementation flaws in eBPF runtimes by comparing the execution behavior of the kernel interpreter against the JIT-compiled output.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
+      }
+    }
+  },
+  {
+    "id": "netedit-an-orchestration-platform-for-ebpf-network-functions-at-scale-2024",
+    "title": "NetEdit: An Orchestration Platform for eBPF Network Functions at Scale",
+    "authors": [
+      "T. A. Benson",
+      "P. Kannan",
+      "P. Gupta",
+      "B. Madhavan",
+      "K. S. Arora",
+      "J. Meng",
+      "M. Lau",
+      "A. Dhamija",
+      "R. Krishnamurthy",
+      "S. Sundaresan",
+      "N. Spring",
+      "Y. Zhang"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2024,
+    "links": {
+      "paper": "https://cs.stanford.edu/~keithw/sigcomm2024/sigcomm24-final159-acmpaginated.pdf",
+      "talk": "https://www.youtube.com/watch?v=y-SFpf8hnYU"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Proposes NetEdit, a large-scale orchestration platform that simplifies the deployment, lifecycle management, and chaining of eBPF-based network functions across distributed cloud environments.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "merlin-multi-tier-optimization-of-ebpf-code-for-performance-and-compactness-2024",
+    "title": "Merlin: Multi-tier Optimization of eBPF Code for Performance and Compactness",
+    "authors": [
+      "J. Mao",
+      "H. Ding",
+      "J. Zhai",
+      "S. Ma"
+    ],
+    "venue": "ASPLOS",
+    "year": 2024,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3620666.3651387",
+      "talk": "https://youtu.be/YHvfHZaHkwY?t=1903"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Introduces Merlin, a multi-tier compiler optimization framework for eBPF that generates highly compact and performant bytecode, reducing instruction counts and improving execution speed.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "dint-fast-in-kernel-distributed-transactions-with-ebpf-2024",
+    "title": "DINT: Fast In-Kernel Distributed Transactions with eBPF",
+    "authors": [
+      "Y. Zhou",
+      "X. Xiang",
+      "M. Kiley",
+      "S. Dharanipragada",
+      "M. Yu"
+    ],
+    "venue": "NSDI",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi24-zhou-yang.pdf",
+      "talk": "https://www.youtube.com/watch?v=EgdXrjwBdBA"
+    },
+    "primary_categories": [
+      "using",
+      "networking",
+      "offload"
+    ],
+    "summary": "Presents DINT, an in-kernel distributed transaction processing system using eBPF. By bypassing user-space context switches for transaction coordination, DINT significantly accelerates distributed database performance.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "blueswat-a-lightweight-state-aware-security-framework-for-bluetooth-low-energy-2024",
+    "title": "BlueSWAT: A Lightweight State-Aware Security Framework for Bluetooth Low Energy",
+    "authors": [
+      "X. Che",
+      "Y. He",
+      "X. Feng",
+      "K. Sun",
+      "K. Xu",
+      "Q. Li"
+    ],
+    "venue": "CCS",
+    "year": 2024,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3658644.3670397"
+    },
+    "primary_categories": [
+      "using",
+      "security",
+      "misc"
+    ],
+    "summary": "Describes BlueSWAT, a state-aware security framework leveraging eBPF to monitor and protect Bluetooth Low Energy (BLE) stacks from malicious state-transition attacks and protocol anomalies.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "seak-rethinking-the-design-of-a-secure-allocator-for-os-kernel-2024",
+    "title": "SeaK: Rethinking the Design of a Secure Allocator for OS Kernel",
+    "authors": [
+      "Z. Wang",
+      "Y. Guang",
+      "Y. Chen",
+      "Z. Lin",
+      "M. Le",
+      "D. K Le",
+      "D. Williams",
+      "X. Xing",
+      "Z. Gu",
+      "H. Jamjoom"
+    ],
+    "venue": "Sec",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/sec24fall-prepub-1504-wang-zicheng.pdf",
+      "talk": "https://www.youtube.com/watch?v=8P1IbL8L4oY"
+    },
+    "primary_categories": [
+      "using",
+      "security",
+      "misc"
+    ],
+    "summary": "Introduces SeaK, a redesigned secure memory allocator for the OS kernel that defends against advanced heap exploitation techniques while maintaining low allocation overhead.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "rethinking-process-management-for-interactive-mobile-systems-2024",
+    "title": "Rethinking Process Management for Interactive Mobile Systems",
+    "authors": [
+      "J. Zheng",
+      "Z. Li",
+      "F. Qian",
+      "W. Liu",
+      "H. Lin",
+      "Y. Liu",
+      "T. Xu",
+      "N. Zhang",
+      "J. Wang",
+      "C. Zhang"
+    ],
+    "venue": "MobiCom",
+    "year": 2024,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3636534.3649357"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Proposes a new process management and scheduling framework tailored for interactive mobile systems, utilizing eBPF to rapidly adjust priorities based on UI events and user interaction.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "megate-extending-wan-traffic-engineering-to-millions-of-endpoints-in-virtualized-cloud-2024",
+    "title": "MegaTE: Extending WAN Traffic Engineering to Millions of Endpoints in Virtualized Cloud",
+    "authors": [
+      "C. Miao",
+      "Z. Zhong",
+      "Y. Xiao",
+      "F. Yang",
+      "S. Zhang",
+      "Y. Jiang",
+      "Z. Bai",
+      "C. Lu",
+      "J. Geng",
+      "Z. He",
+      "Y. Wang",
+      "X. Zou",
+      "C. Yang"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2024,
+    "links": {
+      "paper": "https://cs.stanford.edu/~keithw/sigcomm2024/sigcomm24-final406-acmpaginated.pdf",
+      "talk": "https://www.youtube.com/watch?v=rVhATFzqJ4Q"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Presents MegaTE, a massively scalable Traffic Engineering (TE) system that uses eBPF at the edge to enforce TE policies for millions of virtualized endpoints across a Wide Area Network.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "fetchbpf-customizable-prefetching-policies-in-linux-with-ebpf-2024",
+    "title": "FetchBPF: Customizable Prefetching Policies in Linux with eBPF",
+    "authors": [
+      "X. Cao",
+      "S. Patel",
+      "S. Y. Lim",
+      "X. Han",
+      "T. Pasquier"
+    ],
+    "venue": "ATC",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc24-cao.pdf",
+      "talk": "https://www.youtube.com/watch?v=0lo-7dDVFB0"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Introduces FetchBPF, allowing developers to inject custom file prefetching policies into the Linux kernel page cache via eBPF, tailoring I/O patterns to specific application workloads.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "validating-the-ebpf-verifier-via-state-embedding-2024",
+    "title": "Validating the eBPF Verifier via State Embedding",
+    "authors": [
+      "H. Sun",
+      "Z. Su"
+    ],
+    "venue": "OSDI",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/osdi24-sun-hao.pdf",
+      "talk": "https://www.youtube.com/watch?v=sASFr_9uZ7Y"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Proposes a state-embedding approach to validate the correctness of the eBPF verifier. By mapping abstract verifier states to concrete executions, it systematically uncovers edge-case bugs in the verifier's logic.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "hive-a-hardware-assisted-isolated-execution-environment-for-ebpf-on-aarch64-2024",
+    "title": "Hive: A Hardware-assisted Isolated Execution Environment for eBPF on AArch64",
+    "authors": [
+      "P. Zhang",
+      "C. Wu",
+      "X. Meng",
+      "Y. Zhang",
+      "M. Peng",
+      "S. Zhang",
+      "B. Hu",
+      "M. Xie",
+      "Y. Lai",
+      "Y. Kang",
+      "Z. Wang"
+    ],
+    "venue": "Sec",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/usenixsecurity24-zhang-peihua.pdf",
+      "talk": "https://www.youtube.com/watch?v=8jhFEv_wK0A"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier",
+      "security"
+    ],
+    "summary": "Describes Hive, a hardware-assisted execution environment on AArch64 that isolates eBPF programs. It prevents malicious or compromised eBPF bytecode from interfering with the core kernel state.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "end-to-end-mechanized-proof-of-a-jit-accelerated-ebpf-virtual-machine-for-iot-2024",
+    "title": "End-to-End Mechanized Proof of a JIT-Accelerated eBPF Virtual Machine for IoT",
+    "authors": [
+      "S. Yuan",
+      "F. Besson",
+      "J.-P. Talpin"
+    ],
+    "venue": "CAV",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.irisa.fr/prive/talpin/papers/cav24.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "jit"
+    ],
+    "summary": "Presents an end-to-end mechanized proof using formal methods for a JIT-accelerated eBPF virtual machine, ensuring absolute execution correctness specifically tailored for constrained IoT devices.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
+      }
+    }
+  },
+  {
+    "id": "fast-flexible-and-practical-kernel-extensions-2024",
+    "title": "Fast, Flexible, and Practical Kernel Extensions",
+    "authors": [
+      "K. K. Dwivedi",
+      "R. Iyer",
+      "S. Kashyap"
+    ],
+    "venue": "SOSP",
+    "year": 2024,
+    "links": {
+      "paper": "https://rs3lab.github.io/assets/papers/2024/dwivedi:kflex.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Explores the evolution of modern kernel extensions, showcasing how eBPF achieves a practical balance between the performance of native kernel modules and the safety of user-space execution.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "moat-towards-safe-bpf-kernel-extension-2024",
+    "title": "MOAT: Towards Safe BPF Kernel Extension",
+    "authors": [
+      "H. Lu",
+      "S. Wang",
+      "Y. Wu",
+      "W. He",
+      "F. Zhang"
+    ],
+    "venue": "Sec",
+    "year": 2024,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/usenixsecurity24-lu-hongyi.pdf",
+      "talk": "https://www.youtube.com/watch?v=__2WUqcTJjg"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier",
+      "security"
+    ],
+    "summary": "Introduces MOAT, a comprehensive framework focused on securing the BPF kernel extension ecosystem by combining strict static analysis with lightweight runtime memory isolation.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "ehdl-turning-ebpf-xdp-programs-into-hardware-designs-for-the-nic-2023",
+    "title": "eHDL: Turning eBPF/XDP Programs into Hardware Designs for the NIC",
+    "authors": [
+      "A. Rivitti",
+      "R. Bifulco",
+      "A. Tulumello",
+      "M. Bonola",
+      "S. Pontarelli"
+    ],
+    "venue": "ASPLOS",
+    "year": 2023,
+    "links": {
+      "paper": "https://pontarelli.di.uniroma1.it/publication/asplos23/asplos23.pdf",
+      "talk": "https://www.youtube.com/watch?v=35OAuR1NbxA"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Presents eHDL, a toolchain that directly compiles eBPF/XDP network programs into hardware description languages (HDL), enabling the execution of BPF logic directly on FPGA-based SmartNICs.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "fuzz-on-the-beach-fuzzing-solana-smart-contracts-2023",
+    "title": "Fuzz on the Beach: Fuzzing Solana Smart Contracts",
+    "authors": [
+      "S. Smolka",
+      "J.-R. Giesen",
+      "P. Winkler",
+      "O. Draissi",
+      "L. Davi",
+      "G. Karame",
+      "K. Pohl"
+    ],
+    "venue": "CCS",
+    "year": 2023,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2309.03006"
+    },
+    "primary_categories": [
+      "improving",
+      "security",
+      "misc"
+    ],
+    "summary": "Solana has quickly emerged as a popular platform for building decentralized applications (DApps), such as marketplaces for non-fungible tokens (NFTs). A key reason for its success are Solana's low transaction fees and high performance, which is achieved in part due to its stateless programming model. Although the literature features extensive tooling support for smart contract security, current solutions are largely tailored for the Ethereum Virtual Machine. Unfortunately, the very stateless nature of Solana's execution environment introduces novel attack patterns specific to Solana requiring a rethinking for building vulnerability analysis methods. In this paper, we address this gap and propose FuzzDelSol, the first binary-only coverage-guided fuzzing architecture for Solana smart contracts. FuzzDelSol faithfully models runtime specifics such as smart contract interactions. Moreover, since source code is not available for the large majority of Solana contracts, FuzzDelSol operates on the contract's binary code. Hence, due to the lack of semantic information, we carefully extracted low-level program and state information to develop a diverse set of bug oracles covering all major bug classes in Solana. Our extensive evaluation on 6049 smart contracts shows that FuzzDelSol's bug oracles find bugs with a high precision and recall. To the best of our knowledge, this is the largest evaluation of the security landscape on the Solana mainnet.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "xbgp-faster-innovation-in-routing-protocols-2023",
+    "title": "xBGP: Faster Innovation in Routing Protocols",
+    "authors": [
+      "T. Wirtgen",
+      "T. Rousseaux",
+      "Q. De Coninck",
+      "N. Rybowski",
+      "R. Bush",
+      "L. Vanbever",
+      "A. Legay",
+      "O. Bonaventure"
+    ],
+    "venue": "NSDI",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/nsdi23-wirtgen.pdf",
+      "talk": "https://www.youtube.com/watch?v=d9azXXp-_O4"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Introduces xBGP, an extensible BGP router implementation that uses eBPF plugins to quickly deploy new routing algorithms and protocol modifications without requiring vendor firmware updates.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "taking-5g-ran-analytics-and-control-to-a-new-level-2023",
+    "title": "Taking 5G RAN Analytics and Control to a New Level",
+    "authors": [
+      "X. Foukas",
+      "B. Radunovic",
+      "M. Balkwill",
+      "Z. Lai"
+    ],
+    "venue": "MobiCom",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.microsoft.com/en-us/research/uploads/prod/2022/12/JanusTechnicalReport.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Explores the use of eBPF and programmable data planes to extract granular analytics and enforce real-time control policies within 5G Radio Access Networks (RAN).",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "tigger-a-database-proxy-that-bounces-with-user-bypass-2023",
+    "title": "Tigger: A Database Proxy That Bounces with User-Bypass",
+    "authors": [
+      "M. Butrovich",
+      "K. Ramanathan",
+      "J. Rollinson",
+      "W. S. Lim",
+      "W. Zhang",
+      "J. Sherry",
+      "A. Pavlo"
+    ],
+    "venue": "VLDB",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.vldb.org/pvldb/vol16/p3335-butrovich.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking",
+      "offload"
+    ],
+    "summary": "Presents Tigger, a high-performance database proxy that uses eBPF-based user-bypass techniques to route and filter database queries entirely within the kernel, drastically reducing latency.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "verifying-the-verifier-ebpf-range-analysis-verification-2023",
+    "title": "Verifying the Verifier: eBPF Range Analysis Verification",
+    "authors": [
+      "H. Vishwanathan",
+      "M. Shachnai",
+      "S. Narayana",
+      "S. Nagarakatte"
+    ],
+    "venue": "CAV",
+    "year": 2023,
+    "links": {
+      "paper": "https://people.cs.rutgers.edu/~sn349/papers/agni-cav2023.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Details a formal verification effort targeting the value range analysis component of the Linux eBPF verifier, uncovering several integer arithmetic bugs that could lead to privilege escalation.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "epf-evil-packet-filter-2023",
+    "title": "EPF: Evil Packet Filter",
+    "authors": [
+      "D. Jin",
+      "V. Atlidakis",
+      "V. P. Kemerlis"
+    ],
+    "venue": "ATC",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc23-jin.pdf",
+      "talk": "https://www.youtube.com/watch?v=pkR5kJkFGkc"
+    },
+    "primary_categories": [
+      "analysis",
+      "security"
+    ],
+    "summary": "Analyzes the offensive capabilities of eBPF. The paper demonstrates how attackers can weaponize eBPF to create 'Evil Packet Filters' for stealthy rootkits, network backdoors, and data exfiltration.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "tastes-great-less-filling-high-performance-and-accurate-training-data-collection-for-self-driving-database-management-systems-2022",
+    "title": "Tastes Great! Less Filling! High Performance and Accurate Training Data Collection for Self-Driving Database Management Systems",
+    "authors": [
+      "M. Butrovich",
+      "W. S. Lim",
+      "L. Ma",
+      "J. Rollinson",
+      "W. Zhang",
+      "Y. Xia",
+      "A. Pavlo"
+    ],
+    "venue": "SIGMOD",
+    "year": 2022,
+    "links": {
+      "paper": "https://dl.acm.org/doi/pdf/10.1145/3514221.3517845"
+    },
+    "primary_categories": [
+      "using",
+      "tracing",
+      "misc"
+    ],
+    "summary": "Leverages eBPF to collect high-fidelity, low-overhead training data from database management systems. This data is used to train machine learning models for autonomous, self-driving DBMS tuning.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "domain-specific-run-time-optimization-for-software-data-planes-2022",
+    "title": "Domain Specific Run Time Optimization for Software Data Planes",
+    "authors": [
+      "S. Miano",
+      "A. Sanaee",
+      "F. Risso",
+      "G. R\u00e9tv\u00e1ri",
+      "G. Antichi"
+    ],
+    "venue": "ASPLOS",
+    "year": 2022,
+    "links": {
+      "paper": "https://sebymiano.github.io/publication/2022-morpheus/2022-morpheus_abstract.pdf",
+      "talk": "https://www.youtube.com/watch?v=PDUVUv39CUQ"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Proposes a domain-specific JIT compilation and runtime optimization framework for software data planes, using eBPF to specialize packet processing pipelines on the fly.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "end-to-end-mechanized-proof-of-an-ebpf-virtual-machine-for-micro-controllers-2022",
+    "title": "End-to-end Mechanized Proof of an eBPF Virtual Machine for Micro-controllers",
+    "authors": [
+      "S. Yuan",
+      "F. Besson",
+      "J.-P. Talpin",
+      "S. Hym",
+      "K. Zandberg",
+      "E. Baccelli"
+    ],
+    "venue": "CAV",
+    "year": 2022,
+    "links": {
+      "paper": "https://www.irisa.fr/prive/talpin/papers/cav22.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Describes a formally verified eBPF virtual machine designed specifically for resource-constrained micro-controllers, ensuring safety and correctness without the overhead of runtime checks.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "application-informed-kernel-synchronization-primitives-2022",
+    "title": "Application-Informed Kernel Synchronization Primitives",
+    "authors": [
+      "S. Park",
+      "D. Zhou",
+      "Y. Qian",
+      "I. Calciu",
+      "T. Kim",
+      "S. Kashyap"
+    ],
+    "venue": "OSDI",
+    "year": 2022,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/osdi22-park.pdf",
+      "talk": "https://www.youtube.com/watch?v=R25mDERjYWI"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Introduces a mechanism allowing applications to inform the kernel about their synchronization state using eBPF, enabling the OS to make smarter scheduling decisions and avoid lock-holder preemption.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "rapidpatch-firmware-hotpatching-for-real-time-embedded-devices-2022",
+    "title": "RapidPatch: Firmware Hotpatching for Real-Time Embedded Devices",
+    "authors": [
+      "Y. He",
+      "Z. Zou",
+      "K. Sun",
+      "Z. Liu",
+      "K. Xu",
+      "Q. Wang",
+      "C. Shen",
+      "Z. Wang",
+      "Q. Li"
+    ],
+    "venue": "Sec",
+    "year": 2022,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/sec22-he-yi.pdf",
+      "talk": "https://www.youtube.com/watch?v=rrGBBDGicSo"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Presents RapidPatch, a system utilizing eBPF to safely and predictably deploy hotpatches to the firmware of real-time embedded devices without requiring system reboots.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "faster-software-packet-processing-on-fpga-nics-with-ebpf-program-warping-2022",
+    "title": "Faster Software Packet Processing on FPGA NICs with eBPF Program Warping",
+    "authors": [
+      "M. Bonola",
+      "G. Belocchi",
+      "A. Tulumello",
+      "M. Spaziani Brunella",
+      "G. Siracusano",
+      "G. Bianchi",
+      "R. Bifulco"
+    ],
+    "venue": "ATC",
+    "year": 2022,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/atc22-bonola.pdf",
+      "talk": "https://www.youtube.com/watch?v=ooWoaay4R-Q"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Proposes 'program warping', a technique that splits eBPF packet processing programs between the host CPU and FPGA NICs, dynamically shifting execution to maximize throughput.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "sound-precise-and-fast-abstract-interpretation-with-tristate-numbers-2022",
+    "title": "Sound, Precise, and Fast Abstract Interpretation with Tristate Numbers",
+    "authors": [
+      "H. Vishwanathan",
+      "M. Shachnai",
+      "S. Narayana",
+      "S. Nagarakatte"
+    ],
+    "venue": "CGO",
+    "year": 2022,
+    "links": {
+      "paper": "https://people.cs.rutgers.edu/~sn349/papers/cgo-2022.pdf",
+      "talk": "https://www.youtube.com/watch?v=RVMMtGJLOVw"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Introduces the use of tristate numbers (tnums) in abstract interpretation. This paper formalizes the tnum arithmetic used in the eBPF verifier to achieve fast and sound bounds checking.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "synthesizing-safe-and-efficient-kernel-extensions-for-packet-processing-2021",
+    "title": "Synthesizing Safe and Efficient Kernel Extensions for Packet Processing",
+    "authors": [
+      "Q. Xu",
+      "M. D. Wong",
+      "T. Wagle",
+      "S. Narayana",
+      "A. Sivaraman"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2021,
+    "links": {
+      "paper": "https://conferences.sigcomm.org/sigcomm/2021/files/papers/3452296.3472929.pdf",
+      "talk": "https://www.youtube.com/watch?v=8R7rHZw6V2o"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Presents a synthesis framework that automatically generates safe and efficient eBPF kernel extensions for packet processing from high-level, declarative network specifications.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "an-analysis-of-speculative-type-confusion-vulnerabilities-in-the-wild-2021",
+    "title": "An Analysis of Speculative Type Confusion Vulnerabilities in the Wild",
+    "authors": [
+      "O. Kirzner",
+      "A. Morrison"
+    ],
+    "venue": "Sec",
+    "year": 2021,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/sec21-kirzner.pdf",
+      "talk": "https://www.youtube.com/watch?v=Gxv6LcabKrg"
+    },
+    "primary_categories": [
+      "analysis",
+      "security"
+    ],
+    "summary": "Analyzes speculative type confusion vulnerabilities (like Spectre v1) in production systems, highlighting how the eBPF verifier can be tricked into generating unsafe, exploitable speculative execution paths.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "The paper's primary focus aligns with security based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "syrup-user-defined-scheduling-across-the-stack-2021",
+    "title": "Syrup: User-Defined Scheduling Across the Stack",
+    "authors": [
+      "K. Kaffes",
+      "J. Humphries",
+      "D. Mazi\u00e8res",
+      "C. Kozyrakis"
+    ],
+    "venue": "SOSP",
+    "year": 2021,
+    "links": {
+      "paper": "https://www.scs.stanford.edu/~dm/home/papers/kaffes:syrup.pdf",
+      "talk": "https://www.youtube.com/watch?v=v21FN6_uhv0"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Introduces Syrup, a framework that uses eBPF to allow developers to deploy user-defined scheduling policies across the entire software stack, coordinating networking, storage, and CPU scheduling.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "revisiting-the-open-vswitch-dataplane-ten-years-later-2021",
+    "title": "Revisiting the Open vSwitch Dataplane Ten Years Later",
+    "authors": [
+      "W. Tu",
+      "Y.-H. Wei",
+      "G. Antichi",
+      "B. Pfaff"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2021,
+    "links": {
+      "paper": "https://conferences.sigcomm.org/sigcomm/2021/files/papers/3452296.3472914.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Evaluates the architecture of the Open vSwitch (OVS) dataplane ten years after its inception, exploring how modern kernel features like eBPF and AF_XDP can address its evolving performance bottlenecks.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "synthesizing-jit-compilers-for-in-kernel-dsls-2020",
+    "title": "Synthesizing JIT Compilers for In-Kernel DSLs",
+    "authors": [
+      "J. Van Geffen",
+      "L. Nelson",
+      "I. Dillig",
+      "X. Wang",
+      "E. Torlak"
+    ],
+    "venue": "CAV",
+    "year": 2020,
+    "links": {
+      "paper": "https://unsat.cs.washington.edu/papers/geffen-jitsynth.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "jit"
+    ],
+    "summary": "Proposes a system for automatically synthesizing Just-In-Time (JIT) compilers for in-kernel Domain Specific Languages (like eBPF), ensuring that the resulting JIT is mathematically proven correct.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
+      }
+    }
+  },
+  {
+    "id": "scaling-symbolic-evaluation-for-automated-verification-of-systems-code-with-serval-2019",
+    "title": "Scaling Symbolic Evaluation for Automated Verification of Systems Code with Serval",
+    "authors": [
+      "L. Nelson",
+      "J. Bornholt",
+      "R. Gu",
+      "A. Baumann",
+      "E. Torlak",
+      "X. Wang"
+    ],
+    "venue": "SOSP",
+    "year": 2019,
+    "links": {
+      "paper": "https://unsat.cs.washington.edu/papers/nelson-serval.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Presents Serval, a framework for scaling symbolic evaluation. Serval enables automated verification of systems code, and is notably applied to formally verify properties of the eBPF JIT compiler.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "pluginizing-quic-2019",
+    "title": "Pluginizing QUIC",
+    "authors": [
+      "Q. De Coninck",
+      "F. Michel",
+      "M. Piraux",
+      "F. Rochet",
+      "T. Given-Wilson",
+      "A. Legay",
+      "O. Pereira",
+      "O. Bonaventure"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2019,
+    "links": {
+      "paper": "https://dial.uclouvain.be/pr/boreal/object/boreal:218857/datastream/PDF_01/view"
+    },
+    "primary_categories": [
+      "using",
+      "networking"
+    ],
+    "summary": "Explores the use of eBPF to 'pluginize' the QUIC protocol. By allowing custom congestion control and protocol features to be injected safely into the kernel implementation, it vastly improves flexibility.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
+  },
+  {
+    "id": "simple-and-precise-static-analysis-of-untrusted-linux-kernel-extensions-2019",
+    "title": "Simple and Precise Static Analysis of Untrusted Linux Kernel Extensions",
+    "authors": [
+      "E. Gershuni",
+      "N. Amit",
+      "A. Gurfinkel",
+      "N. Narodytska",
+      "J. A. Navas",
+      "N. Rinetzky",
+      "L. Ryzhyk",
+      "M. Sagiv"
+    ],
+    "venue": "PLDI",
+    "year": 2019,
+    "links": {
+      "paper": "https://seahorn.github.io/papers/ebpf-pldi19.pdf",
+      "talk": "https://www.youtube.com/watch?v=MHqKJaQouu8"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "Introduces PREVAIL, a new static analyzer for eBPF that uses an abstract interpretation framework based on relational domains. PREVAIL handles loops and complex logic much better than the standard kernel verifier.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "the-design-and-implementation-of-hyperupcalls-2018",
+    "title": "The Design and Implementation of Hyperupcalls",
+    "authors": [
+      "N. Amit",
+      "M. Wei"
+    ],
+    "venue": "ATC",
+    "year": 2018,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/conference/atc18/atc18-amit.pdf"
+    },
+    "primary_categories": [
+      "using",
+      "misc"
+    ],
+    "summary": "Presents hyperupcalls, a fast virtualization communication mechanism. It leverages eBPF to securely inject guest logic into the hypervisor, avoiding expensive VM exits during frequent operations like network I/O.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Systems": "Addresses general systems research using eBPF."
+      }
+    }
+  },
+  {
+    "id": "jitk-a-trustworthy-in-kernel-interpreter-infrastructure-2014",
+    "title": "Jitk: A Trustworthy In-Kernel Interpreter Infrastructure",
+    "authors": [
+      "X. Wang",
+      "D. Lazar",
+      "N. Zeldovich",
+      "A. Chlipala",
+      "Z. Tatlock"
+    ],
+    "venue": "OSDI",
+    "year": 2014,
+    "links": {
+      "paper": "https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-wang_xi.pdf",
+      "talk": "https://www.youtube.com/watch?v=aOl-skWkzf0"
+    },
+    "primary_categories": [
+      "improving",
+      "jit"
+    ],
+    "summary": "Introduces Jitk, a trustworthy in-kernel infrastructure that formally verifies the correctness of translating BPF rules down to machine code, ensuring that the JIT compiler does not introduce security vulnerabilities.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
+      }
+    }
+  },
+  {
+    "id": "safe-kernel-extensions-without-run-time-checking-2096",
+    "title": "Safe Kernel Extensions Without Run-Time Checking",
+    "authors": [
+      "G. C. Necula",
+      "P. Lee"
+    ],
+    "venue": "OSDI",
+    "year": 1996,
+    "links": {
+      "paper": "http://www.cs.cmu.edu/~15712/papers//necula96.pdf"
+    },
+    "primary_categories": [
+      "improving",
+      "verifier"
+    ],
+    "summary": "A seminal 1996 OSDI paper introducing Proof-Carrying Code (PCC). It demonstrated that kernel extensions can run safely and at native speed if they carry a machine-checkable proof of safety, inspiring modern verifiers.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
+      }
+    }
+  },
+  {
+    "id": "the-bsd-packet-filter-a-new-architecture-for-user-level-packet-capture-2093",
+    "title": "The BSD Packet Filter: A New Architecture for User-level Packet Capture",
+    "authors": [
+      "S. McCanne",
+      "V. Jacobson"
+    ],
+    "venue": "USENIX Winter",
+    "year": 1993,
+    "links": {
+      "paper": "https://www.tcpdump.org/papers/bpf-usenix93.pdf"
+    },
+    "primary_categories": [
+      "foundation",
+      "networking"
+    ],
+    "summary": "The foundational 1993 USENIX paper introducing the BSD Packet Filter (BPF). It proposed a register-based VM and a CFG filtering approach that significantly accelerated network packet capture compared to older stack-based models.",
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "The paper's primary focus aligns with networking based on its categorization."
+      }
+    }
   }
 ]

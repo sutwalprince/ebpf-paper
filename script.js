@@ -30,6 +30,7 @@ const state = {
   search: "",
   filters: Object.fromEntries(FACET_FIELDS.map(f => [f.key, new Set()])),
   sort: "year-desc",
+  page: 1,
 };
 
 let allPapers = [];
@@ -162,6 +163,7 @@ function resetFiltersAndSearch() {
   for (const f of FACET_FIELDS) state.filters[f.key].clear();
   state.search = "";
   document.getElementById("search-input").value = "";
+  state.page = 1;
 }
 
 // ---------------------------------------------------------------------
@@ -231,6 +233,7 @@ function onFacetToggle(e) {
   const set = state.filters[facet];
   if (e.target.checked) set.add(value);
   else set.delete(value);
+  state.page = 1;
   render();
 }
 
@@ -270,6 +273,7 @@ function renderActiveFilters() {
         state.filters[f.key].delete(value);
         const cb = document.getElementById(`facet-${f.key}-${slug(value)}`);
         if (cb) cb.checked = false;
+        state.page = 1;
         render();
       });
       chip.appendChild(btn);
@@ -403,7 +407,26 @@ function render() {
     `<span class="num">${filtered.length}</span> paper${filtered.length === 1 ? "" : "s"}`;
   renderActiveFilters();
   updateFacetCounts();
-  renderCards(filtered);
+
+  const pageSize = 10;
+  const totalPages = Math.ceil(filtered.length / pageSize) || 1;
+  if (state.page > totalPages) state.page = totalPages;
+  if (state.page < 1) state.page = 1;
+  
+  const startIndex = (state.page - 1) * pageSize;
+  const pagedPapers = filtered.slice(startIndex, startIndex + pageSize);
+  
+  renderCards(pagedPapers);
+
+  const pagination = document.getElementById("pagination");
+  if (filtered.length > pageSize) {
+    pagination.style.display = "block";
+    document.getElementById("page-info").textContent = `Page ${state.page} of ${totalPages}`;
+    document.getElementById("prev-page").disabled = state.page === 1;
+    document.getElementById("next-page").disabled = state.page === totalPages;
+  } else {
+    pagination.style.display = "none";
+  }
 }
 
 function focusCard(id) {
@@ -620,22 +643,39 @@ function updateDirtyIndicator() {
 function attachGlobalListeners() {
   document.getElementById("search-input").addEventListener("input", e => {
     state.search = e.target.value;
+    state.page = 1;
     render();
   });
 
   document.getElementById("sort-select").addEventListener("change", e => {
     state.sort = e.target.value;
+    state.page = 1;
     render();
   });
 
   const clearAll = () => {
     resetFiltersAndSearch();
     document.querySelectorAll('.facet-option input[type="checkbox"]').forEach(cb => cb.checked = false);
+    state.page = 1;
     render();
     closeSidebar(); // close drawer on mobile
   };
   document.getElementById("clear-all").addEventListener("click", clearAll);
   document.getElementById("empty-clear").addEventListener("click", clearAll);
+
+  document.getElementById("prev-page").addEventListener("click", () => {
+    if (state.page > 1) {
+      state.page--;
+      render();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  });
+
+  document.getElementById("next-page").addEventListener("click", () => {
+    state.page++;
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   // --- Mobile sidebar drawer ---
   const sidebar = document.getElementById("sidebar");
