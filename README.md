@@ -1,34 +1,58 @@
-# ebpf_papers
+# eBPF Papers Catalog
 
-A small, static, data-driven catalog for eBPF / kernel-extension research papers. No build step — it's just `index.html` + `style.css` + `script.js` reading `papers.json`.
+A small, lightweight, data-driven catalog for eBPF and kernel-extension research papers. 
 
-## Running it locally
+This project uses a simple frontend (`index.html`, `style.css`, `script.js`) that reads from a `papers.json` database. It features a custom Python server that enables an "Admin Mode" for auto-saving edits directly from the web interface back to the JSON file.
 
-The site uses a custom Python server to enable auto-saving to disk.
+## Features
+- **Fast & Static**: Instant loading with no frontend build steps.
+- **Rich Filtering & Search**: Case-insensitive search across all fields (title, authors, summary, tags) and multi-select faceted filtering.
+- **Admin Dashboard**: A hidden authenticated mode that lets you add, edit, and delete papers directly from the UI.
+- **Docker Ready**: Easy to deploy anywhere.
 
-1. Open `.env` and set your `ADMIN_TOKEN` (it defaults to `prince`).
-2. Run the server:
-```bash
-cd ebpf_papers
-python3 server.py 8080
-```
-3. The site will be available at `http://localhost:8080` (or `http://<your-network-ip>:8080` on your LAN).
+---
 
-## Adding / editing papers (Admin Mode)
+## 🚀 How to Run Locally
 
-By default, the site is **read-only** for everyone who visits it. To add, edit, or delete papers, you must access the site using your admin token in the URL:
+### Using Docker (Recommended)
+1. Build the image:
+   ```bash
+   docker build -t ebpf-papers .
+   ```
+2. Run the container:
+   ```bash
+   docker run -d -p 8080:8080 -v $(pwd)/papers.json:/app/papers.json -v $(pwd)/.env:/app/.env --name ebpf-website ebpf-papers
+   ```
+3. Visit `http://localhost:8080` in your browser.
 
-**`http://localhost:8080/?admin=prince`** (Replace `prince` with whatever is in your `.env`)
+### Using Python Natively
+1. Open `.env` and set your `ADMIN_TOKEN` (e.g., `ADMIN_TOKEN=my_secret_password`).
+2. Start the server:
+   ```bash
+   python3 server.py 8080
+   ```
+3. Visit `http://localhost:8080`.
 
-When you visit with the correct token:
-- The **+ add paper** and **{ } import JSON** buttons will appear.
-- Every card will have **edit** and **delete** buttons.
-- All changes you make are instantly and automatically saved to `papers.json` on disk! No need to manually export.
+---
 
-## Adding a paper by hand
+## 📝 How to Add or Edit Papers
 
-Open `papers.json` and append an object to the array. Every field is optional except `title` — the site degrades gracefully if you leave things out, so you can add a bare-bones entry today and fill in classification later.
+By default, the site is **read-only** to protect your data. There are two ways to add new papers:
 
+### Method 1: Using the Web Admin UI (Easiest)
+1. Go to your live website and add your admin token to the URL like this:
+   **`http://localhost:8080/?admin=YOUR_ADMIN_TOKEN`**
+2. The UI will unlock! You will now see:
+   - A **"+ Add Paper"** button at the top.
+   - An **"Import JSON"** button.
+   - **Edit** and **Delete** buttons on every single paper card.
+3. Simply click "+ Add Paper", fill out the form, and click Save. 
+*Note: The Python server will automatically write your changes permanently to `papers.json`.*
+
+### Method 2: Manually via JSON
+You can bypass the UI and add papers directly by opening `papers.json` in a text editor and appending a new JSON object to the array. 
+
+Here is a template:
 ```json
 {
   "id": "unique-slug-2025",
@@ -38,82 +62,35 @@ Open `papers.json` and append an object to the array. Every field is optional ex
   "year": 2025,
   "links": {
     "paper": "https://...",
-    "code": "https://...",
-    "talk": "https://..."
+    "code": "https://..."
   },
-  "summary": "One or two sentences, in your own words, on what the paper does.",
-
-  "primary_categories": ["Storage", "Operating Systems"],
-  "secondary_categories": ["Filesystems"],
-  "supporting_categories": ["Systems"],
-  "application_domain": ["Storage"],
-  "ebpf_mechanisms": ["kprobe", "struct_ops"],
-  "system_layers": ["Kernel Subsystem"],
-  "research_areas": ["Storage Systems"],
-  "goals": ["Performance Optimization"],
-  "deployment_type": ["In-Kernel"],
-  "innovation_type": ["New eBPF Framework"],
-  "kernel_subsystems": ["ext4"],
-  "target_workloads": ["Key-value stores"],
-  "target_resources": ["NVMe SSDs"],
-  "performance_objectives": ["Lower latency"],
-
-  "classification_reasoning": {
-    "primary_categories": {
-      "Storage": "why this tag applies, one sentence"
-    }
-  }
+  "summary": "One or two sentences on what the paper does.",
+  "primary_categories": ["Storage", "Networking"],
+  "ebpf_mechanisms": ["kprobe"]
 }
 ```
+*Note: Every field except `title` is optional. The site degrades gracefully if you leave fields out.*
 
-Notes:
-- All the classification fields are arrays of short tag strings. Leave any of them out (or set to `[]`) if you haven't classified that paper yet.
-- `classification_reasoning` is optional. If present, it's shown in each card's "more detail" panel, keyed by field name → tag value → one-sentence justification (matches the shape you get if you run a paper through an LLM classifier with these categories).
-- Every field — including ones not used as sidebar filters — is indexed for full-text search, so it's still worth filling in even if it never becomes a clickable filter.
+---
 
-## Changing which fields are filterable
-
-At the top of `script.js`:
-
+## ⚙️ Customizing the Filters
+If you want to change which tags appear in the left-hand sidebar filters, open `script.js` and modify the `FACET_FIELDS` array at the top of the file:
 ```js
 const FACET_FIELDS = [
   { key: "primary_categories", label: "Category" },
-  { key: "research_areas", label: "Research Area" },
-  { key: "application_domain", label: "Application Domain" },
   { key: "ebpf_mechanisms", label: "eBPF Mechanism" },
-  { key: "deployment_type", label: "Deployment" },
-  { key: "innovation_type", label: "Innovation Type" },
 ];
 ```
+Any field not listed here will still show up as a tag on the paper cards and remain searchable, but it won't clutter the sidebar.
 
-This is the sidebar's set of filter groups, kept short on purpose so the UI doesn't get overwhelming. Fields not listed here (`secondary_categories`, `goals`, `kernel_subsystems`, `target_workloads`, etc., listed in `DETAIL_FIELDS` right below) still show up as read-only tags in each card and are searchable — move a key from `DETAIL_FIELDS` to `FACET_FIELDS` (or vice versa) to change what's clickable in the sidebar. Facet option lists and counts are generated from whatever is actually in `papers.json`, so there's nothing else to update by hand.
+---
 
-## How filtering works
+## ☁️ Deployment
 
-- Search is a plain case-insensitive substring match across title, authors, venue, year, summary, every tag field, and the reasoning text.
-- Checking multiple boxes *within* one filter group is OR ("Storage" or "Networking").
-- Checking boxes *across* groups is AND (must match the Category filter *and* the Deployment filter).
-- The number next to each checkbox reflects how many papers would match if you added that filter on top of whatever else is currently selected — the same pattern you'd see on a shopping site's faceted search.
+### 1. AWS EC2 (Best for Admin UI)
+You can deploy this as a Docker container on a free-tier AWS EC2 instance. Because `papers.json` is mapped to the EC2 hard drive, all edits made via the web UI will be saved safely.
 
-## Deploying
-
-It's fully static, so any static host works — GitHub Pages is the obvious one, same as the reference site this was modeled after:
-
-```bash
-git init
-git add .
-git commit -m "eBPF papers catalog"
-git branch -M main
-git remote add origin git@github.com:<you>/ebpf-papers.git
-git push -u origin main
-# then enable Pages on the repo, serving from main
-```
-
-## Files
-
-| File | Purpose |
-|---|---|
-| `index.html` | Page structure |
-| `style.css` | All styling (design tokens as CSS variables at the top) |
-| `script.js` | Loads `papers.json`, renders filters/search/cards — no dependencies |
-| `papers.json` | The data. This is the only file you'll usually touch. |
+### 2. GitHub Pages (Read-Only)
+If you just want a free public catalog and don't care about the web Admin UI, you can host the repository on GitHub Pages. 
+* Because GitHub Pages only hosts static files, the Python server won't run.
+* Visitors can view and filter papers, but the `+ Add Paper` button will not work. You must edit `papers.json` manually and `git push` to update the site.

@@ -132,57 +132,1252 @@
     }
   },
   {
-    "id": "hi",
-    "title": "Hi",
-    "authors": [],
-    "links": {},
-    "primary_categories": [],
-    "research_areas": [],
-    "application_domain": [],
-    "ebpf_mechanisms": [],
-    "deployment_type": [],
-    "innovation_type": [],
-    "secondary_categories": [],
-    "supporting_categories": [],
-    "system_layers": [],
-    "goals": [],
-    "kernel_subsystems": [],
-    "target_workloads": [],
-    "target_resources": [],
-    "performance_objectives": []
-  },
-  {
-    "paper_title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
+    "id": "jitterbug-osdi20",
+    "title": "Specification and verification in the field: Applying formal methods to BPF just-in-time compilers in the Linux kernel",
+    "authors": [
+      "Luke Nelson",
+      "Jacob Van Geffen",
+      "Emina Torlak",
+      "Xi Wang"
+    ],
+    "venue": "OSDI",
+    "year": 2020,
+    "links": {
+      "paper": "https://www.usenix.org/conference/osdi20/presentation/nelson"
+    },
+    "summary": "The paper applies formal verification to BPF just-in-time compilers inside the Linux kernel. It introduces Jitterbug, the first framework with a precise JIT correctness specification capable of ruling out real-world bugs. Using Jitterbug, the authors designed and verified a new BPF JIT for 32-bit RISC-V, uncovered and fixed 16 bugs in five deployed JITs, and developed new JIT optimizations\u2014all upstreamed to Linux. The work demonstrates that verified components can coexist within large unverified systems given careful specification and proof strategy.",
+    "paper_title": "Specification and verification in the field: Applying formal methods to BPF just-in-time compilers in the Linux kernel",
     "primary_categories": [
-      "Networking",
-      "Caching"
+      "Operating Systems",
+      "Security"
     ],
     "secondary_categories": [
-      "Key-Value Stores"
-    ],
-    "supporting_categories": [
       "Systems"
     ],
+    "supporting_categories": [
+      "Performance Engineering"
+    ],
     "application_domain": [
-      "Networking",
-      "Caching"
+      "Operating Systems",
+      "Security"
     ],
-    "ebpf_mechanisms": [
-      "XDP"
-    ],
+    "ebpf_mechanisms": [],
     "system_layers": [
-      "Application Layer",
-      "Kernel Subsystem",
-      "Network Stack"
+      "Kernel Subsystem"
     ],
     "research_areas": [
       "Systems",
-      "Networking",
+      "Operating Systems",
+      "Program Analysis",
+      "Security"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Reliability"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Runtime"
+    ],
+    "kernel_subsystems": [
+      "BPF JIT Compiler",
+      "RISC-V JIT",
+      "x86 JIT",
+      "ARM64 JIT"
+    ],
+    "target_workloads": [
+      "BPF program execution",
+      "JIT compilation"
+    ],
+    "target_resources": [
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Improved reliability",
+      "Correctness guarantees"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Targets the BPF JIT compilers embedded in the Linux kernel.",
+        "Security": "Formal verification ensures JIT correctness and eliminates real-world security bugs."
+      },
+      "ebpf_mechanisms": {},
+      "system_layers": {
+        "Kernel Subsystem": "Jitterbug operates on the BPF JIT compilers which are core Linux kernel components."
+      },
+      "research_areas": {
+        "Systems": "Addresses a core systems component (JIT) within the Linux kernel.",
+        "Operating Systems": "Extends and verifies OS infrastructure.",
+        "Program Analysis": "Uses symbolic execution and automated proof strategies for verification.",
+        "Security": "Finds and eliminates bugs that could compromise kernel correctness."
+      },
+      "goals": {
+        "Security Enforcement": "Verified JIT removes classes of correctness bugs that could be exploited.",
+        "Reliability": "Proven correctness guarantees for JIT-compiled BPF programs."
+      },
+      "deployment_type": {
+        "In-Kernel": "The JIT compilers run entirely inside the Linux kernel."
+      },
+      "innovation_type": {
+        "New eBPF Runtime": "Introduces Jitterbug, a verified BPF JIT framework and a new verified JIT for RISC-V."
+      }
+    }
+  },
+  {
+    "id": "lambda-io-fast23",
+    "title": "\u03bb-IO: A Unified IO Stack for Computational Storage",
+    "authors": [
+      "Zhe Yang",
+      "Tao Yue",
+      "Zhiwei Liu",
+      "Yanfei Xu",
+      "Zili Shao"
+    ],
+    "venue": "FAST",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.usenix.org/conference/fast23/presentation/yang-zhe"
+    },
+    "summary": "\u03bb-IO addresses the overhead of data movement between host and computational storage devices by presenting a unified IO stack that manages both compute and storage resources across host and device. The authors design a co-designed interface, runtime, and scheduler to tackle in-storage computing challenges. eBPF is leveraged to safely offload user-defined compute functions to the storage device. Evaluation against Linux IO shows up to 5.12x performance improvement on synthetic and real workloads.",
+    "paper_title": "\u03bb-IO: A Unified IO Stack for Computational Storage",
+    "primary_categories": [
+      "Storage",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Filesystems"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Storage",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Storage Stack",
+      "Hardware Interface"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Storage Systems",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Resource Management"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "User-Kernel Cooperative"
+    ],
+    "innovation_type": [
+      "New eBPF System Design",
+      "New eBPF Framework"
+    ],
+    "kernel_subsystems": [
+      "Block Layer",
+      "NVMe Driver",
+      "IO Scheduler"
+    ],
+    "target_workloads": [
+      "Data-intensive applications",
+      "Analytical queries",
+      "Scan workloads"
+    ],
+    "target_resources": [
+      "Computational storage devices",
+      "NVMe SSDs",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Lower latency",
+      "Higher throughput",
+      "Reduced data movement overhead"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Storage": "Targets computational storage devices and the host IO stack.",
+        "Operating Systems": "Implements a unified IO stack spanning host OS and device firmware."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "eBPF programs are used to safely offload compute functions into the storage path, closest to kernel-level probe attachment."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Modifies Linux kernel IO stack for computation offload.",
+        "Storage Stack": "Directly targets the host storage stack and device IO path.",
+        "Hardware Interface": "Runs logic on the computational storage device hardware."
+      },
+      "research_areas": {
+        "Systems": "Designs a full-stack framework for computational storage.",
+        "Operating Systems": "Extends Linux IO stack with unified compute/storage management.",
+        "Storage Systems": "Focuses on NVMe and computational storage devices.",
+        "Performance Engineering": "Primary metric is IO performance improvement."
+      },
+      "goals": {
+        "Performance Optimization": "Achieves up to 5.12x speedup over Linux IO.",
+        "Resource Management": "Manages both CPU and storage compute resources across host and device."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF compute functions execute in the kernel IO path.",
+        "User-Kernel Cooperative": "Applications submit eBPF programs via a user-facing interface."
+      },
+      "innovation_type": {
+        "New eBPF System Design": "Unified host-device IO stack with eBPF-based compute offload.",
+        "New eBPF Framework": "Introduces \u03bb-IO interface, runtime, and scheduler for computational storage."
+      }
+    }
+  },
+  {
+    "id": "extfuse-atc19",
+    "title": "Extension Framework for File Systems in User space",
+    "authors": [
+      "Ashish Bijlani",
+      "Umakishore Ramachandran"
+    ],
+    "venue": "ATC",
+    "year": 2019,
+    "links": {
+      "paper": "https://www.usenix.org/conference/atc19/presentation/bijlani"
+    },
+    "summary": "ExtFUSE addresses the heavy performance penalty of user-space file systems (FUSE) caused by frequent kernel-user context switching. It introduces a framework that lets applications register thin, specialized eBPF request handlers in the kernel to serve common-case operations, while retaining complex logic in user space. This hybrid approach avoids context switches for hot paths while preserving the flexibility of user-space development. Evaluation shows significant performance improvements with only a few hundred lines of extension code per file system.",
+    "paper_title": "Extension Framework for File Systems in User space",
+    "primary_categories": [
+      "Filesystems",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Storage"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Filesystems",
+      "Operating Systems",
+      "Storage"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Filesystem Layer",
+      "Userspace Runtime"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Storage Systems",
       "Performance Engineering"
     ],
     "goals": [
       "Performance Optimization",
       "Scalability"
+    ],
+    "deployment_type": [
+      "User-Kernel Cooperative",
+      "Hybrid"
+    ],
+    "innovation_type": [
+      "New eBPF Framework",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "FUSE",
+      "VFS",
+      "ext4"
+    ],
+    "target_workloads": [
+      "FUSE file systems",
+      "Stackfs",
+      "Passthrough file systems"
+    ],
+    "target_resources": [
+      "CPU cores",
+      "Storage I/O path"
+    ],
+    "performance_objectives": [
+      "Lower latency",
+      "Reduced kernel-user context switch overhead",
+      "Higher throughput"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Filesystems": "Directly targets FUSE-based user-space file systems.",
+        "Operating Systems": "Extends Linux VFS and FUSE kernel module with eBPF handlers.",
+        "Storage": "Impacts storage access performance via file system optimizations."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "eBPF programs are attached as thin handlers at kernel FUSE request processing points."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Thin eBPF handlers are installed in the kernel FUSE module.",
+        "Filesystem Layer": "Targets the FUSE/VFS file system layer directly.",
+        "Userspace Runtime": "Complex file system logic remains in user space."
+      },
+      "research_areas": {
+        "Systems": "Designs a hybrid kernel-user file system extension framework.",
+        "Operating Systems": "Modifies Linux kernel FUSE infrastructure.",
+        "Storage Systems": "Improves file system I/O performance.",
+        "Performance Engineering": "Reduces context switching overhead as primary contribution."
+      },
+      "goals": {
+        "Performance Optimization": "Eliminates redundant kernel-user crossings for hot-path requests.",
+        "Scalability": "Allows more concurrent file system operations without context-switch bottlenecks."
+      },
+      "deployment_type": {
+        "User-Kernel Cooperative": "eBPF handlers in kernel cooperate with user-space file system logic.",
+        "Hybrid": "Hot paths handled in kernel, complex paths handled in user space."
+      },
+      "innovation_type": {
+        "New eBPF Framework": "ExtFUSE is a new framework for extensible user file systems using eBPF.",
+        "New eBPF System Design": "Introduces the concept of thin kernel handlers registered by user-space file systems."
+      }
+    }
+  },
+  {
+    "id": "electrode-nsdi23",
+    "title": "Electrode: Accelerating Distributed Protocols with eBPF",
+    "authors": [
+      "Yang Zhou",
+      "Zezhou Wang",
+      "Sowmya Dharanipragada",
+      "Minlan Yu"
+    ],
+    "venue": "NSDI",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.usenix.org/conference/nsdi23/presentation/zhou"
+    },
+    "summary": "Electrode addresses the high cost of user-kernel crossings and kernel networking stack traversal in distributed protocols running on Linux. It implements a set of eBPF-based optimizations\u2014such as message broadcasting and quorum acknowledgment collection\u2014that execute in the kernel before the networking stack, achieving equivalent functionality to user-space code with far less overhead. Applied to Multi-Paxos state machine replication, Electrode improves throughput by up to 128.4% and reduces latency by up to 41.7%.",
+    "paper_title": "Electrode: Accelerating Distributed Protocols with eBPF",
+    "primary_categories": [
+      "Networking",
+      "Distributed Systems"
+    ],
+    "secondary_categories": [
+      "Operating Systems"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Distributed Systems",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "XDP",
+      "TC"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Distributed Systems",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Scalability",
+      "Load Balancing"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "User-Kernel Cooperative"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "Network Stack",
+      "Socket Layer",
+      "TC subsystem"
+    ],
+    "target_workloads": [
+      "Multi-Paxos replication",
+      "Consensus protocols",
+      "Message broadcasting"
+    ],
+    "target_resources": [
+      "Network I/O",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Higher throughput",
+      "Lower latency",
+      "Reduced user-kernel crossing overhead"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Optimizations run in the kernel network path before the full networking stack.",
+        "Distributed Systems": "Targets distributed consensus protocols such as Multi-Paxos.",
+        "Operating Systems": "Leverages kernel eBPF infrastructure to bypass networking stack overhead."
+      },
+      "ebpf_mechanisms": {
+        "XDP": "Used for early packet interception before the networking stack.",
+        "TC": "Used for traffic control hooks to implement protocol-level optimizations."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "eBPF programs run inside the Linux kernel network path.",
+        "Network Stack": "Optimizations bypass or run before the full kernel network stack.",
+        "Application Layer": "Distributed protocol logic at the application level benefits from kernel offload."
+      },
+      "research_areas": {
+        "Systems": "Full system design for distributed protocol acceleration.",
+        "Computer Networks": "Works within the Linux kernel networking stack.",
+        "Distributed Systems": "Applied to consensus and replication protocols.",
+        "Performance Engineering": "Primary contribution is throughput and latency improvement."
+      },
+      "goals": {
+        "Performance Optimization": "Up to 128.4% throughput and 41.7% latency improvement.",
+        "Scalability": "Reduces per-message overhead enabling better scaling.",
+        "Load Balancing": "Broadcasting and quorum collection spread work efficiently."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF programs execute inside the kernel before the network stack.",
+        "User-Kernel Cooperative": "Application-level protocol logic cooperates with kernel eBPF optimizations."
+      },
+      "innovation_type": {
+        "New eBPF Application": "Novel use of eBPF for distributed protocol acceleration.",
+        "New eBPF System Design": "System design that moves protocol primitives into the kernel network path."
+      }
+    }
+  },
+  {
+    "id": "bmc-nsdi21",
+    "title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
+    "authors": [
+      "Yoann Ghigoff",
+      "Julien Sopena",
+      "Kahina Lazri",
+      "Antoine Blin",
+      "Gilles Muller"
+    ],
+    "venue": "NSDI",
+    "year": 2021,
+    "links": {
+      "paper": "https://www.usenix.org/conference/nsdi21/presentation/ghigoff"
+    },
+    "summary": "BMC introduces an in-kernel cache for Memcached implemented entirely in eBPF using XDP, serving requests before the Linux network stack executes. Requests are handled within NIC interrupt context, allowing throughput to scale with the number of cores serving NIC queues. Because BMC requires no kernel or Memcached modifications, it deploys on commodity hardware. On Facebook-like small-request workloads, BMC improves throughput by up to 18x over vanilla Memcached and 6x over SO_REUSEPORT-optimized Memcached.",
+    "paper_title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
+    "primary_categories": [
+      "Networking",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Databases"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Databases",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "XDP"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Hardware Interface"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Caching",
+      "Scalability"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "XDP",
+      "NIC Driver",
+      "Network Stack"
+    ],
+    "target_workloads": [
+      "Memcached",
+      "Key-value GET/SET requests",
+      "Facebook-like small-size requests"
+    ],
+    "target_resources": [
+      "Network I/O",
+      "CPU cores",
+      "NIC queues"
+    ],
+    "performance_objectives": [
+      "Higher throughput",
+      "Lower latency",
+      "Reduced network stack overhead"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "BMC intercepts network packets at the XDP layer before the Linux network stack.",
+        "Databases": "Accelerates Memcached, a widely used in-memory key-value store.",
+        "Operating Systems": "Implemented as an eBPF/XDP program running inside the Linux kernel."
+      },
+      "ebpf_mechanisms": {
+        "XDP": "BMC is implemented as an XDP program, processing packets at the earliest kernel hook point."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "eBPF/XDP programs run inside the Linux kernel.",
+        "Network Stack": "Bypasses the full Linux network stack for cached requests.",
+        "Hardware Interface": "Requests are handled within NIC interrupt context."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete in-kernel caching system.",
+        "Computer Networks": "Operates at the XDP/NIC layer of the network stack.",
+        "Performance Engineering": "Primary goal is throughput and latency improvement."
+      },
+      "goals": {
+        "Performance Optimization": "Up to 18x throughput improvement over vanilla Memcached.",
+        "Caching": "Implements a full in-kernel cache for Memcached requests.",
+        "Scalability": "Throughput scales with the number of NIC interrupt cores."
+      },
+      "deployment_type": {
+        "In-Kernel": "The cache runs entirely as an eBPF/XDP program inside the Linux kernel."
+      },
+      "innovation_type": {
+        "New eBPF Application": "First complex in-kernel cache for a key-value store using eBPF.",
+        "New eBPF System Design": "Pre-stack request serving architecture using XDP."
+      }
+    }
+  },
+  {
+    "id": "hxdp-osdi20",
+    "title": "hXDP: Efficient Software Packet Processing on FPGA NICs",
+    "authors": [
+      "Marco Brunella",
+      "Giacomo Belocchi",
+      "Marco Bonola",
+      "Salvatore Pontarelli",
+      "Giuseppe Siracusano",
+      "Giuseppe Bianchi",
+      "Aniello Cammarano",
+      "Alessandro Palumbo",
+      "Luca Petrucci",
+      "Roberto Bifulco"
+    ],
+    "venue": "OSDI",
+    "year": 2020,
+    "links": {
+      "paper": "https://www.usenix.org/conference/osdi20/presentation/brunella"
+    },
+    "summary": "hXDP runs Linux XDP/eBPF programs on FPGA NICs by compressing, parallelizing, and removing redundant eBPF instructions to fit the iterative eBPF execution model onto FPGA hardware. It comprises an optimizing compiler that translates eBPF bytecode to an extended ISA, a soft-processor to execute it on FPGA, and FPGA-based XDP map/helper infrastructure. Clocked at 156.25 MHz and using only ~15% of FPGA resources, hXDP matches the packet processing throughput of a high-end CPU core while delivering 10x lower packet forwarding latency.",
+    "paper_title": "hXDP: Efficient Software Packet Processing on FPGA NICs",
+    "primary_categories": [
+      "Networking",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Observability"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "XDP"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Hardware Interface"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Scalability",
+      "Resource Management"
+    ],
+    "deployment_type": [
+      "Hybrid",
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Runtime",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "XDP",
+      "NIC Driver",
+      "BPF Maps"
+    ],
+    "target_workloads": [
+      "Packet forwarding",
+      "Packet filtering",
+      "XDP programs"
+    ],
+    "target_resources": [
+      "FPGA NIC",
+      "Network I/O",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Lower latency",
+      "Higher throughput",
+      "Reduced CPU usage"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Targets high-speed packet processing on FPGA-based NICs.",
+        "Operating Systems": "Runs unmodified Linux XDP/eBPF programs via a hardware soft-processor."
+      },
+      "ebpf_mechanisms": {
+        "XDP": "hXDP executes XDP eBPF programs on FPGA hardware using a purpose-built executor."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Interfaces with Linux XDP kernel infrastructure for map and helper functions.",
+        "Network Stack": "Operates at the earliest point in the network stack (XDP).",
+        "Hardware Interface": "Runs entirely on FPGA NIC hardware."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete hardware-software co-design for eBPF execution.",
+        "Computer Networks": "Targets high-performance packet processing pipelines.",
+        "Performance Engineering": "Achieves CPU-level throughput at 10x lower latency."
+      },
+      "goals": {
+        "Performance Optimization": "Matches CPU throughput with 10x lower forwarding latency.",
+        "Scalability": "Uses only 15% of FPGA resources, leaving headroom for other applications.",
+        "Resource Management": "Shares FPGA resources among diverse applications."
+      },
+      "deployment_type": {
+        "Hybrid": "eBPF programs compiled to FPGA ISA, with Linux kernel providing map/helper infrastructure.",
+        "In-Kernel": "XDP programs are loaded via standard Linux eBPF infrastructure."
+      },
+      "innovation_type": {
+        "New eBPF Runtime": "First FPGA-based runtime for executing unmodified XDP/eBPF programs.",
+        "New eBPF System Design": "Introduces an optimizing compiler and soft-processor for eBPF on FPGA."
+      }
+    }
+  },
+  {
+    "id": "deepflow-sigcomm23",
+    "title": "Network-Centric Distributed Tracing with DeepFlow: Troubleshooting Your Microservices in Zero Code",
+    "authors": [
+      "Junxian Shen",
+      "Han Zhang",
+      "Yang Guo",
+      "Yuan Shi",
+      "Xingang Shi"
+    ],
+    "venue": "SIGCOMM",
+    "year": 2023,
+    "links": {
+      "paper": "https://dl.acm.org/doi/10.1145/3603269.3604823"
+    },
+    "summary": "DeepFlow is a network-centric distributed tracing framework for microservices that requires zero application instrumentation. It uses eBPF to automatically capture network metrics, trace context, and application-layer requests across the full infrastructure stack. By providing implicit context propagation and eliminating network blind spots, DeepFlow correlates data across components with negligible overhead. In production it has identified over 71 critical performance anomalies across more than 26 companies, reducing troubleshooting time from hours to minutes.",
+    "paper_title": "Network-Centric Distributed Tracing with DeepFlow: Troubleshooting Your Microservices in Zero Code",
+    "primary_categories": [
+      "Networking",
+      "Observability"
+    ],
+    "secondary_categories": [
+      "Distributed Systems",
+      "Monitoring"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Observability",
+      "Monitoring",
+      "Distributed Systems"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe",
+      "Tracepoint",
+      "Socket hooks",
+      "Uprobe"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Distributed Systems",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Observability",
+      "Monitoring",
+      "Fault Detection"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "User-Kernel Cooperative"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "Network Stack",
+      "Socket Layer",
+      "BPF Maps"
+    ],
+    "target_workloads": [
+      "Microservices",
+      "HTTP/RPC traffic",
+      "Containerized workloads"
+    ],
+    "target_resources": [
+      "Network I/O",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Reduced CPU overhead",
+      "Lower troubleshooting latency"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Captures network-layer metrics and traces across the full infrastructure stack.",
+        "Observability": "Provides out-of-the-box distributed tracing without code changes.",
+        "Monitoring": "Continuously monitors microservice performance anomalies in production.",
+        "Distributed Systems": "Targets microservice architectures with implicit context propagation."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "Used to intercept kernel functions for network and syscall tracing.",
+        "Tracepoint": "Used to capture structured kernel events for metrics collection.",
+        "Socket hooks": "Used to trace application-layer protocols at the socket level.",
+        "Uprobe": "Used to trace user-space application internals without code modification."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "eBPF programs run inside the Linux kernel to capture events.",
+        "Network Stack": "Traces network-layer metrics and packet flows.",
+        "Application Layer": "Reconstructs application-level request traces from kernel observations."
+      },
+      "research_areas": {
+        "Systems": "Builds a production distributed tracing system.",
+        "Computer Networks": "Captures network-layer performance data across microservice hops.",
+        "Distributed Systems": "Enables end-to-end distributed tracing across microservice meshes.",
+        "Performance Engineering": "Reduces troubleshooting time from hours to minutes."
+      },
+      "goals": {
+        "Observability": "Core contribution is zero-instrumentation observability for microservices.",
+        "Monitoring": "Continuously monitors and correlates performance data in production.",
+        "Fault Detection": "Identified 71+ critical anomalies across 26+ companies."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF programs collect data inside the Linux kernel.",
+        "User-Kernel Cooperative": "User-space DeepFlow agent processes and correlates kernel-collected data."
+      },
+      "innovation_type": {
+        "New eBPF Application": "Novel zero-code distributed tracing via eBPF for microservices.",
+        "New eBPF System Design": "Network-centric tracing plane with implicit context propagation."
+      }
+    }
+  },
+  {
+    "id": "nitrosketch-ebpf-sigcomm23",
+    "title": "Fast In-kernel Traffic Sketching in eBPF",
+    "authors": [],
+    "venue": "SIGCOMM",
+    "year": 2023,
+    "links": {
+      "paper": "https://dl.acm.org/doi/abs/10.1145/3594255.3594256"
+    },
+    "summary": "This paper studies how to build high-performance network measurement applications in eBPF, using traffic sketches as a case study. It implements NitroSketch, the state-of-the-art user-space sketch, in eBPF and shows that best practices from user-space networking cannot be directly ported due to eBPF's different performance characteristics. Through lessons learned, the authors improve NitroSketch's eBPF performance by 40% over a naive port, enabling accurate, low-memory network measurement directly in the kernel.",
+    "paper_title": "Fast In-kernel Traffic Sketching in eBPF",
+    "primary_categories": [
+      "Networking",
+      "Observability"
+    ],
+    "secondary_categories": [
+      "Monitoring"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Observability",
+      "Monitoring"
+    ],
+    "ebpf_mechanisms": [
+      "XDP",
+      "TC"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Observability",
+      "Monitoring",
+      "Performance Optimization"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF Optimization"
+    ],
+    "kernel_subsystems": [
+      "XDP",
+      "TC subsystem",
+      "BPF Maps"
+    ],
+    "target_workloads": [
+      "Network traffic measurement",
+      "Traffic sketching",
+      "Flow statistics"
+    ],
+    "target_resources": [
+      "Network I/O",
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Higher throughput",
+      "Reduced memory usage",
+      "Lower measurement overhead"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Implements in-kernel network traffic measurement for packet streams.",
+        "Observability": "Provides accurate network flow statistics with low memory footprint.",
+        "Monitoring": "Enables continuous in-kernel traffic monitoring via sketches."
+      },
+      "ebpf_mechanisms": {
+        "XDP": "Used for early-stage per-packet processing to feed sketch data structures.",
+        "TC": "Used for traffic control hook attachment for sketch updates."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Sketch logic runs inside the Linux kernel via eBPF.",
+        "Network Stack": "Intercepts packets at the network stack for measurement."
+      },
+      "research_areas": {
+        "Systems": "Designs and optimizes an in-kernel measurement system.",
+        "Computer Networks": "Focuses on network traffic measurement and sketching algorithms.",
+        "Performance Engineering": "40% performance improvement over naive eBPF implementation."
+      },
+      "goals": {
+        "Observability": "Enables kernel-level network traffic visibility via sketches.",
+        "Monitoring": "Supports wide-range network monitoring tasks with accuracy guarantees.",
+        "Performance Optimization": "Optimizes eBPF sketch implementation for kernel performance characteristics."
+      },
+      "deployment_type": {
+        "In-Kernel": "Sketch data structures and update logic run entirely inside the Linux kernel."
+      },
+      "innovation_type": {
+        "New eBPF Application": "First high-performance sketch implementation natively in eBPF.",
+        "New eBPF Optimization": "Identifies and applies eBPF-specific optimizations that differ from user-space networking."
+      }
+    }
+  },
+  {
+    "id": "spright-sigcomm22",
+    "title": "SPRIGHT: extracting the server from serverless computing! high-performance eBPF-based event-driven, shared-memory processing",
+    "authors": [],
+    "venue": "SIGCOMM",
+    "year": 2022,
+    "links": {
+      "paper": "https://dl.acm.org/doi/10.1145/3544216.3544259"
+    },
+    "summary": "SPRIGHT is a lightweight serverless framework that uses eBPF to replace heavyweight serverless components and enable shared-memory processing between functions. It leverages eBPF socket message mechanisms for shared-memory data passing and event-driven processing, eliminating unnecessary protocol processing and serialization overhead. Compared to polling-based DPDK, SPRIGHT achieves equivalent dataplane performance with 10x less CPU usage, and delivers an order-of-magnitude improvement in throughput and latency over Knative while eliminating cold-start penalties.",
+    "paper_title": "SPRIGHT: extracting the server from serverless computing! high-performance eBPF-based event-driven, shared-memory processing",
+    "primary_categories": [
+      "Networking",
+      "Cloud Systems"
+    ],
+    "secondary_categories": [
+      "Distributed Systems",
+      "Operating Systems"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Networking",
+      "Cloud Systems",
+      "Distributed Systems"
+    ],
+    "ebpf_mechanisms": [
+      "Socket hooks"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Application Layer",
+      "Userspace Runtime"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Cloud Computing",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Resource Management",
+      "Scalability"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "User-Kernel Cooperative"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "Socket Layer",
+      "BPF Maps",
+      "Network Stack"
+    ],
+    "target_workloads": [
+      "Serverless functions",
+      "Microservices",
+      "Function chaining"
+    ],
+    "target_resources": [
+      "CPU cores",
+      "Network I/O"
+    ],
+    "performance_objectives": [
+      "Higher throughput",
+      "Lower latency",
+      "Reduced CPU usage"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Networking": "Uses eBPF socket message mechanism for shared-memory network data passing.",
+        "Cloud Systems": "Targets serverless and microservice function chaining in cloud environments.",
+        "Distributed Systems": "Designed for distributed function chains in serverless platforms."
+      },
+      "ebpf_mechanisms": {
+        "Socket hooks": "Uses eBPF socket message (sockmap) mechanism for shared-memory processing between functions."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "eBPF programs manage data movement inside the Linux kernel.",
+        "Network Stack": "Bypasses redundant network protocol processing via eBPF socket redirection.",
+        "Application Layer": "Serverless functions communicate via shared memory managed by eBPF.",
+        "Userspace Runtime": "User-space serverless runtime is simplified by eBPF handling of data movement."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete serverless dataplane using eBPF.",
+        "Computer Networks": "Eliminates protocol processing overhead via kernel socket hooks.",
+        "Cloud Computing": "Addresses serverless computing scalability and cold-start problems.",
+        "Performance Engineering": "10x CPU reduction and order-of-magnitude throughput improvement."
+      },
+      "goals": {
+        "Performance Optimization": "Order-of-magnitude throughput/latency improvement over Knative.",
+        "Resource Management": "10x less CPU than DPDK under realistic workloads.",
+        "Scalability": "Eliminates cold-start and scales function chains efficiently."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF socket programs execute inside the Linux kernel for data movement.",
+        "User-Kernel Cooperative": "User-space serverless functions cooperate with kernel eBPF for shared memory."
+      },
+      "innovation_type": {
+        "New eBPF Application": "Novel use of eBPF socket mechanisms for serverless shared-memory processing.",
+        "New eBPF System Design": "Replaces heavyweight serverless components with eBPF-based event-driven processing."
+      }
+    }
+  },
+  {
+    "id": "ken-ebpf24",
+    "title": "KEN: Kernel Extensions using Natural Language",
+    "authors": [],
+    "venue": "eBPF'24",
+    "year": 2024,
+    "links": {
+      "paper": "https://dl.acm.org/doi/10.1145/3672197.3673434"
+    },
+    "summary": "KEN allows developers to write eBPF kernel extensions by describing them in English, using large language models (LLMs) to synthesize the corresponding eBPF program. To ensure semantic equivalence between the natural language prompt and the generated code, KEN combines LLM-powered program comprehension, symbolic execution, and feedback loops. Evaluated on a new benchmark of natural language eBPF prompts, KEN correctly generates eBPF programs 80% of the time\u2014a 2.67x improvement over a baseline LLM synthesis approach.",
+    "paper_title": "KEN: Kernel Extensions using Natural Language",
+    "primary_categories": [
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Security"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Program Analysis"
+    ],
+    "application_domain": [
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe",
+      "Tracepoint"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Program Analysis",
+      "Runtime Systems"
+    ],
+    "goals": [
+      "Observability",
+      "Security Enforcement"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "Standalone eBPF"
+    ],
+    "innovation_type": [
+      "New eBPF Programming Model",
+      "New eBPF Framework"
+    ],
+    "kernel_subsystems": [
+      "BPF Verifier",
+      "BPF JIT Compiler"
+    ],
+    "target_workloads": [
+      "Kernel extension development",
+      "eBPF program synthesis"
+    ],
+    "target_resources": [
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Improved developer productivity"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Operating Systems": "Targets the Linux kernel extension mechanism (eBPF) and its programming model."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "Generated eBPF programs commonly use kprobe hooks for kernel function tracing.",
+        "Tracepoint": "Generated programs also target tracepoint hooks for structured kernel events."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Generated eBPF programs execute inside the Linux kernel.",
+        "Application Layer": "Developers interact via natural language prompts at the application layer."
+      },
+      "research_areas": {
+        "Systems": "Addresses the difficulty of writing kernel extension programs.",
+        "Operating Systems": "Targets the eBPF kernel extension ecosystem.",
+        "Program Analysis": "Uses symbolic execution to verify semantic equivalence of generated programs.",
+        "Runtime Systems": "Considers eBPF verifier constraints in program synthesis."
+      },
+      "goals": {
+        "Observability": "Generated programs can implement observability and tracing extensions.",
+        "Security Enforcement": "Can synthesize security policy extensions for the kernel."
+      },
+      "deployment_type": {
+        "In-Kernel": "Synthesized eBPF programs run inside the Linux kernel.",
+        "Standalone eBPF": "Programs are self-contained eBPF modules generated from prompts."
+      },
+      "innovation_type": {
+        "New eBPF Programming Model": "Introduces natural language as the interface for writing eBPF programs.",
+        "New eBPF Framework": "KEN is a framework combining LLMs, symbolic execution, and feedback loops for eBPF synthesis."
+      }
+    }
+  },
+  {
+    "id": "prog-syscall-sec-arxiv23",
+    "title": "Programmable System Call Security with eBPF",
+    "authors": [],
+    "venue": "arXiv",
+    "year": 2023,
+    "links": {
+      "paper": "https://arxiv.org/abs/2302.10366"
+    },
+    "summary": "This paper introduces a programmable system call filtering mechanism that extends Linux Seccomp with eBPF to express stateful and advanced security policies. It creates a new Seccomp eBPF program type with new and modified helper functions for filter state management, kernel/user state access, and synchronization. Unprivileged users can safely install advanced filters through integration with existing kernel privilege mechanisms. Evaluation shows the system reduces the attack surface of early execution phases by up to 55.4% for temporal specialization and successfully mitigates real-world vulnerabilities.",
+    "paper_title": "Programmable System Call Security with eBPF",
+    "primary_categories": [
+      "Security",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Containers"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Security",
+      "Operating Systems",
+      "Containers"
+    ],
+    "ebpf_mechanisms": [
+      "LSM"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Security Layer",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Security",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Isolation",
+      "Performance Optimization"
+    ],
+    "deployment_type": [
+      "In-Kernel",
+      "Standalone eBPF"
+    ],
+    "innovation_type": [
+      "New eBPF Application",
+      "New eBPF Programming Model"
+    ],
+    "kernel_subsystems": [
+      "Seccomp",
+      "BPF Verifier",
+      "Syscall Interface"
+    ],
+    "target_workloads": [
+      "Container workloads",
+      "System call filtering",
+      "Privilege separation"
+    ],
+    "target_resources": [
+      "CPU cores"
+    ],
+    "performance_objectives": [
+      "Reduced attack surface",
+      "Accelerated filter evaluation"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "Core contribution is a more expressive and stateful syscall security filtering mechanism.",
+        "Operating Systems": "Extends the Linux Seccomp kernel module with eBPF program types.",
+        "Containers": "Seccomp filtering is widely used by container technologies like Docker and Kubernetes."
+      },
+      "ebpf_mechanisms": {
+        "LSM": "Introduces a new Seccomp eBPF program type tightly integrated with kernel security and privilege mechanisms."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Runs eBPF filters inside the Linux kernel Seccomp subsystem.",
+        "Security Layer": "Implements a programmable security enforcement layer for syscall filtering.",
+        "Application Layer": "Applications and container runtimes install filters via the new Seccomp eBPF interface."
+      },
+      "research_areas": {
+        "Systems": "Extends a core OS security mechanism.",
+        "Operating Systems": "Modifies the Linux Seccomp module and BPF infrastructure.",
+        "Security": "Primary focus is reducing attack surface and enforcing advanced security policies.",
+        "Performance Engineering": "Accelerates filter execution compared to user-space agents."
+      },
+      "goals": {
+        "Security Enforcement": "Enables stateful, advanced security policies for system call filtering.",
+        "Isolation": "Improves isolation by reducing syscall attack surface during execution phases.",
+        "Performance Optimization": "eBPF filters run in-kernel, avoiding context-switch overhead of user-space agents."
+      },
+      "deployment_type": {
+        "In-Kernel": "Seccomp eBPF filters execute inside the Linux kernel.",
+        "Standalone eBPF": "Filters are standalone eBPF programs loaded via a new Seccomp program type."
+      },
+      "innovation_type": {
+        "New eBPF Application": "Applies eBPF to stateful system call security filtering.",
+        "New eBPF Programming Model": "Introduces a new Seccomp eBPF program type with custom helper functions."
+      }
+    }
+  },
+  {
+    "id": "cross-container-usenixsec23",
+    "title": "Cross Container Attacks: The Bewildered eBPF on Clouds",
+    "authors": [
+      "Yi He",
+      "Roland Majumdar",
+      "Shan Lu",
+      "Tianyin Xu"
+    ],
+    "venue": "USENIX Security",
+    "year": 2023,
+    "links": {
+      "paper": "https://www.usenix.org/conference/usenixsecurity23/presentation/he"
+    },
+    "summary": "This paper reveals that eBPF's powerful tracing features, while beneficial on bare-metal Linux hosts, introduce new attack surfaces in shared-kernel container environments on clouds. Using eBPF, attackers can break container isolation to steal sensitive data, launch DoS attacks, and escape containers. The authors demonstrate successful compromise of five online Jupyter services and Google Cloud Shell, and show cross-node attacks on Kubernetes clusters from three major cloud vendors. They propose a new eBPF permission model to confine eBPF usage in shared-kernel environments.",
+    "paper_title": "Cross Container Attacks: The Bewildered eBPF on Clouds",
+    "primary_categories": [
+      "Security",
+      "Containers"
+    ],
+    "secondary_categories": [
+      "Cloud Systems",
+      "Operating Systems"
+    ],
+    "supporting_categories": [
+      "Systems"
+    ],
+    "application_domain": [
+      "Security",
+      "Containers",
+      "Cloud Systems",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "kprobe",
+      "Tracepoint",
+      "Uprobe"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Security Layer",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Security"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Isolation",
+      "Observability"
     ],
     "deployment_type": [
       "In-Kernel"
@@ -191,51 +1386,681 @@
       "New eBPF Application"
     ],
     "kernel_subsystems": [
-      "Network Stack",
-      "Socket Layer"
+      "BPF Verifier",
+      "cgroup subsystem",
+      "Namespace subsystem"
     ],
     "target_workloads": [
-      "Memcached",
-      "Key-value lookups"
+      "Container workloads",
+      "Kubernetes clusters",
+      "Cloud shell environments"
+    ],
+    "target_resources": [
+      "CPU cores",
+      "Kernel memory"
+    ],
+    "performance_objectives": [],
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "Exposes eBPF as an attack vector and proposes a new permission model to mitigate it.",
+        "Containers": "Attacks exploit the shared-kernel container model used by Docker and Kubernetes.",
+        "Cloud Systems": "Demonstrated attacks on Google Cloud Shell and Kubernetes services from three cloud vendors.",
+        "Operating Systems": "Exploits Linux kernel eBPF tracing capabilities from within containers."
+      },
+      "ebpf_mechanisms": {
+        "kprobe": "Attackers use kprobe-based eBPF tracing to intercept kernel function calls and steal data.",
+        "Tracepoint": "Tracepoint hooks are used to monitor host-level events from within a container.",
+        "Uprobe": "Uprobe-based tracing enables user-space process surveillance across container boundaries."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "eBPF programs run in the shared Linux kernel, breaking container isolation.",
+        "Security Layer": "Proposes a new eBPF permission model as a security countermeasure.",
+        "Application Layer": "Cloud shell and Jupyter services are targeted at the application level."
+      },
+      "research_areas": {
+        "Systems": "Analyzes the security implications of eBPF in multi-tenant cloud environments.",
+        "Operating Systems": "Examines Linux kernel eBPF permission and isolation mechanisms.",
+        "Security": "Core contribution is the discovery and disclosure of eBPF-based container attack vectors."
+      },
+      "goals": {
+        "Security Enforcement": "Proposes a new eBPF permission model to prevent cross-container attacks.",
+        "Isolation": "Identifies failures in container isolation due to shared-kernel eBPF capabilities.",
+        "Observability": "Shows how eBPF observability features can be weaponized across container boundaries."
+      },
+      "deployment_type": {
+        "In-Kernel": "Attack eBPF programs run inside the Linux kernel, bypassing container namespaces."
+      },
+      "innovation_type": {
+        "New eBPF Application": "Demonstrates offensive use of eBPF tracing for cross-container attacks in cloud environments."
+      }
+    }
+  },
+  {
+    "id": "ebpf-wasm-security-ebpf23",
+    "title": "Comparing Security in eBPF and WebAssembly",
+    "authors": [],
+    "venue": "eBPF'23",
+    "year": 2023,
+    "links": {
+      "paper": "https://dl.acm.org/doi/abs/10.1145/3609021.3609306"
+    },
+    "summary": "This paper conducts a comparative security analysis of eBPF and WebAssembly (Wasm), two sandboxing technologies with growing adoption. It examines their security goals, community evolution, memory models, and execution models, then assesses memory safety, control flow integrity, API access, and side-channel resistance. The authors find that eBPF historically prioritizes performance over security while Wasm emphasizes security at the cost of runtime overhead, and suggest language-based restrictions and an improved API access model as future directions for eBPF.",
+    "paper_title": "Comparing Security in eBPF and WebAssembly",
+    "primary_categories": [
+      "Security",
+      "Operating Systems"
+    ],
+    "secondary_categories": [
+      "Virtualization"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Program Analysis"
+    ],
+    "application_domain": [
+      "Security",
+      "Operating Systems",
+      "Virtualization"
+    ],
+    "ebpf_mechanisms": [],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Security Layer",
+      "Userspace Runtime"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Security",
+      "Program Analysis"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Isolation"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "BPF Verifier",
+      "BPF JIT Compiler"
+    ],
+    "target_workloads": [
+      "Kernel extensions",
+      "WebAssembly runtimes",
+      "Sandboxed execution"
+    ],
+    "target_resources": [
+      "CPU cores",
+      "Kernel memory"
+    ],
+    "performance_objectives": [],
+    "classification_reasoning": {
+      "application_domain": {
+        "Security": "Core contribution is a comparative security assessment of eBPF and Wasm sandboxing.",
+        "Operating Systems": "eBPF operates inside the Linux kernel as a sandboxed extension mechanism.",
+        "Virtualization": "Both eBPF and Wasm act as lightweight virtualization/sandboxing runtimes."
+      },
+      "ebpf_mechanisms": {},
+      "system_layers": {
+        "Kernel Subsystem": "eBPF programs execute inside the Linux kernel under verifier constraints.",
+        "Security Layer": "Analysis covers memory safety, CFI, API access control, and side-channels.",
+        "Userspace Runtime": "Wasm executes in user-space runtimes, contrasted with eBPF's kernel execution."
+      },
+      "research_areas": {
+        "Systems": "Analyzes two widely adopted systems-level sandboxing technologies.",
+        "Operating Systems": "Covers eBPF's kernel integration and verifier-based safety model.",
+        "Security": "Primary contribution is a structured security comparison and gap analysis.",
+        "Program Analysis": "Examines control flow integrity and memory safety enforcement mechanisms."
+      },
+      "goals": {
+        "Security Enforcement": "Analyzes and compares enforcement mechanisms of both technologies.",
+        "Isolation": "Evaluates isolation guarantees provided by eBPF and Wasm sandboxing."
+      },
+      "deployment_type": {
+        "In-Kernel": "eBPF runs inside the Linux kernel; analysis covers its in-kernel security properties."
+      },
+      "innovation_type": {
+        "New eBPF System Design": "Proposes language-based restrictions and improved API access model for future eBPF security."
+      }
+    }
+  },
+  {
+    "id": "flow-ids-ebpf-arxiv21",
+    "title": "A flow-based IDS using Machine Learning in eBPF",
+    "authors": [],
+    "venue": "arXiv",
+    "year": 2021,
+    "links": {
+      "paper": "https://arxiv.org/abs/2102.09980"
+    },
+    "summary": "This paper presents a flow-based network intrusion detection system (IDS) implemented entirely in eBPF using a decision tree classifier. Rather than simple stateless packet filtering, it maintains per-flow context across packets to classify traffic as malicious or benign. The implementation achieves a performance improvement of over 20% compared to the equivalent user-space solution by eliminating kernel-user data transfer overhead. It demonstrates that complex machine learning inference is feasible directly inside the Linux kernel via eBPF.",
+    "paper_title": "A flow-based IDS using Machine Learning in eBPF",
+    "primary_categories": [
+      "Security",
+      "Networking"
+    ],
+    "secondary_categories": [
+      "Observability"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "application_domain": [
+      "Security",
+      "Networking",
+      "Observability"
+    ],
+    "ebpf_mechanisms": [
+      "XDP",
+      "TC"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Network Stack",
+      "Security Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Computer Networks",
+      "Security",
+      "Performance Engineering"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Monitoring",
+      "Fault Detection",
+      "Performance Optimization"
+    ],
+    "deployment_type": [
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Application"
+    ],
+    "kernel_subsystems": [
+      "XDP",
+      "TC subsystem",
+      "BPF Maps"
+    ],
+    "target_workloads": [
+      "Network intrusion detection",
+      "Flow classification",
+      "Malicious traffic detection"
     ],
     "target_resources": [
       "Network I/O",
       "CPU cores"
     ],
     "performance_objectives": [
-      "Lower latency",
-      "Higher throughput"
+      "Higher throughput",
+      "Reduced CPU overhead",
+      "Lower detection latency"
     ],
     "classification_reasoning": {
       "application_domain": {
-        "Networking": "Accelerates network packet processing for memcached.",
-        "Caching": "Implements in-kernel cache for key-value lookups."
+        "Security": "Implements an intrusion detection system to classify malicious network flows.",
+        "Networking": "Processes network packets at the kernel level for flow-based classification.",
+        "Observability": "Observes per-flow network state to detect anomalous traffic patterns."
+      },
+      "ebpf_mechanisms": {
+        "XDP": "Used for early packet interception to feed the flow-based classifier.",
+        "TC": "Used for traffic control hooks where per-flow state is maintained and classified."
+      },
+      "system_layers": {
+        "Kernel Subsystem": "Decision tree inference runs inside the Linux kernel via eBPF.",
+        "Network Stack": "Intercepts and classifies packets within the kernel network path.",
+        "Security Layer": "Enforces intrusion detection policy entirely in-kernel."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete in-kernel ML inference and IDS pipeline.",
+        "Computer Networks": "Targets network traffic classification at the packet and flow level.",
+        "Security": "Primary application is network intrusion detection.",
+        "Performance Engineering": "20%+ improvement over user-space IDS by eliminating kernel-user crossing."
+      },
+      "goals": {
+        "Security Enforcement": "Detects and flags malicious network flows in real time.",
+        "Monitoring": "Continuously monitors network flows for intrusion patterns.",
+        "Fault Detection": "Identifies malicious or anomalous traffic flows.",
+        "Performance Optimization": "Over 20% throughput improvement versus user-space equivalent."
+      },
+      "deployment_type": {
+        "In-Kernel": "The entire decision tree IDS runs as an eBPF program inside the Linux kernel."
+      },
+      "innovation_type": {
+        "New eBPF Application": "First flow-based ML intrusion detection system implemented entirely in eBPF."
       }
-    },
-    "title": "BMC: Accelerating Memcached using Safe In-kernel Caching and Pre-stack Processing",
-    "id": "bmc-accelerating-memcached-using-safe-in-kernel-caching-and-pre-stack-processing"
+    }
   },
   {
-    "title": "Test Paper",
+    "id": "femto-containers-middleware22",
+    "title": "Femto-containers: lightweight virtualization and fault isolation for small software functions on low-power IoT microcontrollers",
+    "authors": [],
+    "venue": "Middleware",
+    "year": 2022,
+    "links": {
+      "paper": "https://dl.acm.org/doi/abs/10.1145/3528535.3565242"
+    },
+    "summary": "Femto-Containers is a middleware runtime that enables secure deployment, execution, and isolation of small virtual software functions on low-power IoT microcontrollers over the network. It uses eBPF as the sandboxed execution model and is integrated into RIOT, a popular open-source IoT operating system. The runtime is formally verified for fault isolation, guaranteeing RIOT is shielded from functions running inside a Femto-Container. Experiments on Arm Cortex-M, ESP32, and RISC-V show an attractive trade-off in memory footprint, energy consumption, and security.",
+    "paper_title": "Femto-containers: lightweight virtualization and fault isolation for small software functions on low-power IoT microcontrollers",
     "primary_categories": [
-      "Storage",
+      "Embedded Systems",
       "Operating Systems"
     ],
-    "research_areas": [
+    "secondary_categories": [
+      "Security",
+      "Virtualization"
+    ],
+    "supporting_categories": [
       "Systems"
     ],
-    "id": "test-paper",
-    "application_domain": [],
+    "application_domain": [
+      "Embedded Systems",
+      "Operating Systems",
+      "Security"
+    ],
     "ebpf_mechanisms": [],
-    "deployment_type": [],
-    "innovation_type": [],
-    "secondary_categories": [],
-    "supporting_categories": [],
-    "system_layers": [],
-    "goals": [],
-    "kernel_subsystems": [],
-    "target_workloads": [],
-    "target_resources": [],
-    "performance_objectives": []
+    "system_layers": [
+      "Userspace Runtime",
+      "Kernel Subsystem",
+      "Security Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Security",
+      "Runtime Systems"
+    ],
+    "goals": [
+      "Security Enforcement",
+      "Isolation",
+      "Reliability"
+    ],
+    "deployment_type": [
+      "Userspace Assisted",
+      "Standalone eBPF"
+    ],
+    "innovation_type": [
+      "New eBPF Runtime",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "RIOT OS",
+      "eBPF VM"
+    ],
+    "target_workloads": [
+      "IoT functions",
+      "Serverless IoT workloads",
+      "Firmware updates"
+    ],
+    "target_resources": [
+      "Arm Cortex-M MCUs",
+      "ESP32",
+      "RISC-V microcontrollers"
+    ],
+    "performance_objectives": [
+      "Reduced memory footprint",
+      "Reduced energy consumption"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Embedded Systems": "Targets low-power IoT microcontrollers such as Cortex-M, ESP32, and RISC-V.",
+        "Operating Systems": "Integrated into RIOT, a full open-source IoT operating system.",
+        "Security": "Formally verified fault isolation ensures RIOT is protected from sandboxed functions."
+      },
+      "ebpf_mechanisms": {},
+      "system_layers": {
+        "Userspace Runtime": "Femto-Container runtime manages lifecycle of eBPF-based virtual functions.",
+        "Kernel Subsystem": "eBPF VM is embedded within the RIOT OS kernel layer.",
+        "Security Layer": "Formally verified fault isolation prevents escapes from Femto-Containers."
+      },
+      "research_areas": {
+        "Systems": "Designs a complete middleware runtime for IoT function deployment.",
+        "Operating Systems": "Extends RIOT OS with a sandboxed execution environment.",
+        "Security": "Formal verification provides strong fault-isolation guarantees.",
+        "Runtime Systems": "Implements an eBPF-based virtual machine runtime for constrained hardware."
+      },
+      "goals": {
+        "Security Enforcement": "Formally verified isolation prevents sandboxed functions from corrupting RIOT.",
+        "Isolation": "Each Femto-Container is fault-isolated from the host OS and other containers.",
+        "Reliability": "Formal verification ensures runtime correctness on resource-constrained hardware."
+      },
+      "deployment_type": {
+        "Userspace Assisted": "Functions are deployed and managed via network-based middleware in RIOT.",
+        "Standalone eBPF": "eBPF programs run as self-contained virtual functions inside Femto-Containers."
+      },
+      "innovation_type": {
+        "New eBPF Runtime": "First formally verified eBPF-based runtime for low-power IoT microcontrollers.",
+        "New eBPF System Design": "Integrates eBPF sandboxing into an IoT OS for secure over-the-network function deployment."
+      }
+    }
+  },
+  {
+    "id": "bpftime-arxiv23",
+    "title": "bpftime: userspace eBPF Runtime for Uprobe, Syscall and Kernel-User Interactions",
+    "authors": [
+      "Yusheng Zheng",
+      "Tong Yu",
+      "Yiwei Yang",
+      "Yanpeng Hu",
+      "Xiaozheng Lai",
+      "Andrew Quinn"
+    ],
+    "venue": "arXiv",
+    "year": 2023,
+    "links": {
+      "paper": "https://arxiv.org/pdf/2311.07923"
+    },
+    "summary": "This paper addresses the performance and security limitations of kernel-resident eBPF, particularly the context-switch overheads associated with uprobes and syscall tracing. It introduces bpftime, a userspace eBPF runtime that supports kernel-compatible eBPF programs using binary rewriting, dynamic runtime injection, shared-memory eBPF maps, and LLVM-based JIT execution. The system provides userspace implementations of uprobes and syscall hooks, integrates with existing eBPF toolchains such as clang and libbpf, and supports cooperation with kernel eBPF components. Evaluation shows approximately 10x lower uprobe latency than kernel uprobes while maintaining compatibility with real-world eBPF applications and improving deployment flexibility without requiring process restarts or kernel privileges.",
+    "paper_title": "bpftime: userspace eBPF Runtime for Uprobe, Syscall and Kernel-User Interactions",
+    "primary_categories": [
+      "Operating Systems",
+      "Observability"
+    ],
+    "secondary_categories": [
+      "Tracing",
+      "Monitoring",
+      "Security"
+    ],
+    "supporting_categories": [
+      "Cloud Systems"
+    ],
+    "application_domain": [
+      "Observability",
+      "Tracing",
+      "Monitoring",
+      "Security",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "Uprobe",
+      "Tracepoint",
+      "kprobe"
+    ],
+    "system_layers": [
+      "Userspace Runtime",
+      "Application Layer",
+      "Kernel Subsystem",
+      "Security Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Performance Engineering",
+      "Runtime Systems",
+      "Security"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Observability",
+      "Monitoring",
+      "Security Enforcement",
+      "Reliability"
+    ],
+    "deployment_type": [
+      "Userspace Assisted",
+      "User-Kernel Cooperative",
+      "Hybrid"
+    ],
+    "innovation_type": [
+      "New eBPF Runtime",
+      "New eBPF System Design",
+      "New eBPF Optimization"
+    ],
+    "kernel_subsystems": [
+      "eBPF",
+      "uprobes",
+      "syscall tracepoints",
+      "kprobes",
+      "BPFFS",
+      "eBPF verifier",
+      "eBPF maps"
+    ],
+    "target_workloads": [
+      "bcc tools",
+      "Prometheus eBPF exporter",
+      "userspace function tracing",
+      "syscall tracing",
+      "dynamic tracing",
+      "monitoring daemons"
+    ],
+    "target_resources": [
+      "CPU",
+      "process address space",
+      "shared memory",
+      "kernel eBPF maps",
+      "syscall interface"
+    ],
+    "performance_objectives": [
+      "lower latency",
+      "reduced CPU overhead",
+      "improved scalability",
+      "higher throughput"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Observability": "The runtime targets dynamic instrumentation and runtime visibility through eBPF tracing.",
+        "Tracing": "Its primary functionality includes userspace uprobes, uretprobes, and syscall tracing.",
+        "Monitoring": "The system supports monitoring applications and existing eBPF observability tools.",
+        "Security": "The paper includes security architecture, verifier-based safety, and secure map access mechanisms.",
+        "Operating Systems": "The work extends eBPF execution and interaction mechanisms across kernel and userspace."
+      },
+      "ebpf_mechanisms": {
+        "Uprobe": "bpftime provides userspace uprobe and uretprobe support through binary rewriting.",
+        "Tracepoint": "The runtime supports syscall tracepoints for interception and monitoring.",
+        "kprobe": "Kernel compatibility and integration with existing eBPF attachment models include kprobe-related support."
+      },
+      "system_layers": {
+        "Userspace Runtime": "The core contribution is a userspace eBPF execution environment.",
+        "Application Layer": "The runtime injects into and instruments running user applications.",
+        "Kernel Subsystem": "It interoperates with kernel eBPF infrastructure, maps, and verification mechanisms.",
+        "Security Layer": "Security controls, verification, and protected map access are central design components."
+      },
+      "research_areas": {
+        "Systems": "The paper presents a complete runtime system design and implementation.",
+        "Operating Systems": "It modifies how eBPF functionality is deployed across kernel and userspace boundaries.",
+        "Performance Engineering": "A major focus is reducing tracing overhead and improving execution efficiency.",
+        "Runtime Systems": "The contribution is a new execution runtime for eBPF programs.",
+        "Security": "The work evaluates security implications and mitigation strategies."
+      },
+      "goals": {
+        "Performance Optimization": "A key goal is eliminating context-switch overheads and accelerating uprobes.",
+        "Observability": "The runtime enables tracing and visibility into application behavior.",
+        "Monitoring": "It supports monitoring workloads using existing eBPF tooling.",
+        "Security Enforcement": "The design leverages verification and controlled access to improve security.",
+        "Reliability": "Isolation, verification, and controlled runtime behavior improve operational robustness."
+      },
+      "deployment_type": {
+        "Userspace Assisted": "eBPF programs execute in userspace and interact with user processes.",
+        "User-Kernel Cooperative": "The runtime cooperates with kernel eBPF maps and kernel infrastructure.",
+        "Hybrid": "The design combines userspace execution with kernel eBPF interoperability."
+      },
+      "innovation_type": {
+        "New eBPF Runtime": "bpftime is introduced as a new userspace eBPF runtime.",
+        "New eBPF System Design": "The work presents a new architecture combining injection, shared memory, and hooking.",
+        "New eBPF Optimization": "Binary rewriting and userspace execution significantly reduce uprobe overhead."
+      }
+    }
+  },
+  {
+    "id": "gpu-ext-arxiv2025",
+    "title": "gpu_ext: Extensible OS Policies for GPUs via eBPF",
+    "authors": [
+      "Yusheng Zheng",
+      "Tong Yu",
+      "Yiwei Yang",
+      "Minghui Jiang",
+      "Xiangyu Gao",
+      "Jianchang Su",
+      "Yanpeng Hu",
+      "Wenan Mao",
+      "Wei Zhang",
+      "Dan Williams",
+      "Andi Quinn"
+    ],
+    "venue": "arXiv",
+    "year": 2025,
+    "links": {
+      "paper": ""
+    },
+    "summary": "This paper addresses the lack of safe, programmable, and workload-aware resource management policies in GPU systems. It introduces gpu_ext, an eBPF-based runtime that extends GPU drivers and devices with programmable policy hooks for memory management, scheduling, and observability, while enforcing safety through SIMT-aware verification. gpu_ext executes verified eBPF policies across both host drivers and GPU kernels, using cross-layer eBPF maps to coordinate state between CPU and GPU. The system enables adaptive memory placement, prefetching, scheduling, and instrumentation policies without modifying applications, achieving up to 4.8x throughput improvement and up to 2x tail-latency reduction across inference, training, vector search, and multi-tenant workloads.",
+    "paper_title": "gpu_ext: Extensible OS Policies for GPUs via eBPF",
+    "primary_categories": [
+      "Scheduling",
+      "Memory Management",
+      "Observability"
+    ],
+    "secondary_categories": [
+      "AI/ML Systems",
+      "Operating Systems",
+      "Monitoring"
+    ],
+    "supporting_categories": [
+      "Cloud Systems",
+      "Distributed Systems"
+    ],
+    "application_domain": [
+      "Scheduling",
+      "Memory Management",
+      "Observability",
+      "Monitoring",
+      "AI/ML Systems",
+      "Cloud Systems",
+      "Operating Systems"
+    ],
+    "ebpf_mechanisms": [
+      "Struct Ops",
+      "Uprobe"
+    ],
+    "system_layers": [
+      "Userspace Runtime",
+      "Kernel Subsystem",
+      "Memory Subsystem",
+      "Scheduler",
+      "Hardware Interface",
+      "Application Layer"
+    ],
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Performance Engineering",
+      "Cloud Computing",
+      "Runtime Systems"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Resource Management",
+      "Scheduling",
+      "Observability",
+      "Monitoring",
+      "Scalability",
+      "Reliability"
+    ],
+    "deployment_type": [
+      "Hybrid",
+      "User-Kernel Cooperative",
+      "In-Kernel"
+    ],
+    "innovation_type": [
+      "New eBPF Framework",
+      "New eBPF Runtime",
+      "New eBPF Programming Model",
+      "New eBPF System Design"
+    ],
+    "kernel_subsystems": [
+      "NVIDIA Open GPU Kernel Modules",
+      "Unified Virtual Memory (UVM)",
+      "GPU scheduler",
+      "Heterogeneous Memory Management (HMM)",
+      "eBPF verifier",
+      "eBPF maps",
+      "struct_ops",
+      "GPU page fault handler",
+      "GPU memory manager"
+    ],
+    "target_workloads": [
+      "LLM inference",
+      "LLM KV-cache offloading",
+      "Mixture-of-Experts inference",
+      "Graph Neural Network training",
+      "PyTorch training",
+      "Faiss vector search",
+      "Multi-tenant GPU workloads",
+      "GPU memory oversubscription"
+    ],
+    "target_resources": [
+      "GPU memory",
+      "Unified Virtual Memory",
+      "GPU SMs",
+      "GPU thread blocks",
+      "GPU warps",
+      "PCIe bandwidth",
+      "GPU hardware queues",
+      "GPU kernels",
+      "Host DRAM",
+      "GPU global memory"
+    ],
+    "performance_objectives": [
+      "higher throughput",
+      "lower latency",
+      "reduced tail latency",
+      "improved scalability",
+      "reduced memory management overhead",
+      "improved resource utilization"
+    ],
+    "classification_reasoning": {
+      "application_domain": {
+        "Scheduling": "The paper exposes programmable GPU scheduling policies at both host-driver and device levels, including preemption, timeslicing, and work stealing.",
+        "Memory Management": "A major contribution is programmable GPU memory placement, prefetching, eviction, and UVM management.",
+        "Observability": "gpu_ext provides low-overhead GPU instrumentation and tracing through device-side eBPF handlers.",
+        "Monitoring": "The framework supports runtime visibility into GPU memory access patterns, scheduling behavior, and execution statistics.",
+        "AI/ML Systems": "Evaluated extensively on LLM inference, GNN training, MoE models, and vector search workloads.",
+        "Cloud Systems": "Targets multi-tenant GPU environments and resource sharing in datacenter deployments.",
+        "Operating Systems": "Treats GPU drivers and devices as programmable OS subsystems with policy-mechanism separation."
+      },
+      "ebpf_mechanisms": {
+        "Struct Ops": "Driver-side policy interfaces are implemented through struct_ops-style scheduling and memory-management hooks.",
+        "Uprobe": "The system uses uprobes and runtime instrumentation to trace application behavior and guide memory policies."
+      },
+      "system_layers": {
+        "Userspace Runtime": "Includes policy loaders, control plane, JIT infrastructure, and runtime configuration.",
+        "Kernel Subsystem": "Extends GPU kernel drivers with programmable eBPF policy hooks.",
+        "Memory Subsystem": "Provides programmable memory placement, eviction, migration, and prefetching policies.",
+        "Scheduler": "Implements programmable host and device scheduling mechanisms.",
+        "Hardware Interface": "Directly manages GPU hardware queues, thread blocks, memory hierarchies, and execution resources.",
+        "Application Layer": "Policies operate transparently on unmodified frameworks such as PyTorch, vLLM, llama.cpp, and Faiss."
+      },
+      "research_areas": {
+        "Systems": "Presents a complete cross-layer GPU systems architecture.",
+        "Operating Systems": "Introduces OS-style extensibility and policy interfaces for GPU resource management.",
+        "Performance Engineering": "Focuses on throughput, latency, oversubscription, and scheduling optimization.",
+        "Cloud Computing": "Addresses multi-tenant GPU sharing and datacenter resource management.",
+        "Runtime Systems": "Provides a new runtime spanning CPU drivers and GPU devices."
+      },
+      "goals": {
+        "Performance Optimization": "Policies are designed to improve throughput and reduce latency.",
+        "Resource Management": "Core focus is programmable management of GPU memory and compute resources.",
+        "Scheduling": "Introduces programmable scheduling at queue and thread-block levels.",
+        "Observability": "Supports dynamic instrumentation and execution visibility.",
+        "Monitoring": "Provides runtime telemetry and state collection through eBPF maps and probes.",
+        "Scalability": "Improves performance under oversubscription and multi-tenant workloads.",
+        "Reliability": "Uses verifier-backed execution and constrained policy interfaces for safety."
+      },
+      "deployment_type": {
+        "Hybrid": "Policy execution spans host drivers and GPU devices.",
+        "User-Kernel Cooperative": "Combines userspace control planes with kernel-driver enforcement.",
+        "In-Kernel": "Host-side eBPF policies execute inside privileged driver and kernel contexts."
+      },
+      "innovation_type": {
+        "New eBPF Framework": "Introduces a GPU-specific eBPF framework for policy extensibility.",
+        "New eBPF Runtime": "Provides a runtime executing verified eBPF on both host and GPU devices.",
+        "New eBPF Programming Model": "Defines cross-layer policy abstractions, SIMT-aware execution, and hierarchical maps.",
+        "New eBPF System Design": "Rearchitects GPU management as a programmable OS subsystem."
+      }
+    }
   }
 ]
