@@ -21,18 +21,17 @@
       "paper": "https://www.usenix.org/conference/osdi22/presentation/zhong"
     },
     "summary": "Lets applications ship lookup and aggregation logic as eBPF programs that run inside the NVMe driver's completion path, cutting storage-stack overhead while preserving filesystem semantics.",
-    "paper_title": "XRP: In-Kernel Storage Functions with eBPF",
+    "categories": [
+      "Storage & Filesystems"
+    ],
     "primary_categories": [
       "Storage",
       "Operating Systems"
     ],
-    "secondary_categories": [
-      "Filesystems",
-      "Databases",
-      "Observability"
-    ],
-    "supporting_categories": [
+    "research_areas": [
       "Systems",
+      "Operating Systems",
+      "Storage Systems",
       "Performance Engineering"
     ],
     "application_domain": [
@@ -44,23 +43,6 @@
     "ebpf_mechanisms": [
       "kprobe"
     ],
-    "system_layers": [
-      "Application Layer",
-      "Kernel Subsystem",
-      "Storage Stack",
-      "Filesystem Layer",
-      "Hardware Interface"
-    ],
-    "research_areas": [
-      "Systems",
-      "Operating Systems",
-      "Storage Systems",
-      "Performance Engineering"
-    ],
-    "goals": [
-      "Performance Optimization",
-      "Scalability"
-    ],
     "deployment_type": [
       "In-Kernel",
       "User-Kernel Cooperative"
@@ -69,6 +51,26 @@
       "New eBPF Framework",
       "New eBPF Application",
       "New eBPF System Design"
+    ],
+    "secondary_categories": [
+      "Filesystems",
+      "Databases",
+      "Observability"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "system_layers": [
+      "Application Layer",
+      "Kernel Subsystem",
+      "Storage Stack",
+      "Filesystem Layer",
+      "Hardware Interface"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Scalability"
     ],
     "kernel_subsystems": [
       "NVMe Driver",
@@ -129,7 +131,9 @@
         "New eBPF Application": "Applies eBPF to storage/data-structure traversal and database operations.",
         "New eBPF System Design": "Creates a new storage datapath with metadata digest, NVMe-driver hooks, and resubmission logic."
       }
-    }
+    },
+    "_publicSearchIndex": "xrp: in-kernel storage functions with ebpf yuhong zhong haoyu li yu jian wu ioannis zarkadas jeffrey tao evan mesterhazy michael makris junfeng yang amy tai ryan stutsman asaf cidon osdi 2022",
+    "_adminSearchIndex": "xrp: in-kernel storage functions with ebpf yuhong zhong haoyu li yu jian wu ioannis zarkadas jeffrey tao evan mesterhazy michael makris junfeng yang amy tai ryan stutsman asaf cidon osdi 2022 lets applications ship lookup and aggregation logic as ebpf programs that run inside the nvme driver's completion path, cutting storage-stack overhead while preserving filesystem semantics. storage & filesystems storage operating systems systems operating systems storage systems performance engineering storage filesystems databases operating systems kprobe in-kernel user-kernel cooperative new ebpf framework new ebpf application new ebpf system design filesystems databases observability systems performance engineering application layer kernel subsystem storage stack filesystem layer hardware interface performance optimization scalability nvme driver block layer ext4 key-value stores b+-tree lookups lsm-tree lookups range queries aggregations nvme ssds storage i/o path cpu cores lower latency higher throughput reduced storage-stack overhead efficient core sharing the system offloads storage functions and accelerates nvme i/o operations. it propagates filesystem metadata and integrates with ext4 for logical-to-physical mapping. evaluated with bpf-kv and wiredtiger storage engines. implements kernel modifications and new ebpf support inside linux. the paper introduces a custom ebpf hook in the nvme driver interrupt/completion path; among the provided categories, kernel-level probe-style attachment is the closest match. database and key-value store logic invokes xrp and supplies ebpf programs. core functionality is implemented inside linux kernel components. the work targets and bypasses major portions of the storage stack. uses filesystem metadata digests and ext4 extent mappings. hooks are placed near the nvme device driver and hardware queues. designs a complete storage data path framework. extends linux kernel and ebpf infrastructure. focuses on storage access paths, nvme devices, and database storage engines. primary contribution is reducing latency and increasing throughput. reduces storage-stack overhead and accelerates lookups. improves throughput and behavior under many threads compared with kernel bypass approaches. ebpf programs execute inside the kernel nvme completion path. applications load ebpf programs and cooperate with kernel execution through read_xrp and shared context. introduces xrp as a framework for storage-function execution using ebpf. applies ebpf to storage/data-structure traversal and database operations. creates a new storage datapath with metadata digest, nvme-driver hooks, and resubmission logic."
   },
   {
     "id": "jitterbug-osdi20",
@@ -145,7 +149,7 @@
     "links": {
       "paper": "https://www.usenix.org/conference/osdi20/presentation/nelson"
     },
-    "summary": "The paper applies formal verification to BPF just-in-time compilers inside the Linux kernel. It introduces Jitterbug, the first framework with a precise JIT correctness specification capable of ruling out real-world bugs. Using Jitterbug, the authors designed and verified a new BPF JIT for 32-bit RISC-V, uncovered and fixed 16 bugs in five deployed JITs, and developed new JIT optimizations\u2014all upstreamed to Linux. The work demonstrates that verified components can coexist within large unverified systems given careful specification and proof strategy.",
+    "summary": "The paper applies formal verification to BPF just-in-time compilers inside the Linux kernel. It introduces Jitterbug, the first framework with a precise JIT correctness specification capable of ruling out real-world bugs. Using Jitterbug, the authors designed and verified a new BPF JIT for 32-bit RISC-V, uncovered and fixed 16 bugs in five deployed JITs, and developed new JIT optimizations—all upstreamed to Linux. The work demonstrates that verified components can coexist within large unverified systems given careful specification and proof strategy.",
     "paper_title": "Specification and verification in the field: Applying formal methods to BPF just-in-time compilers in the Linux kernel",
     "primary_categories": [
       "Operating Systems",
@@ -223,11 +227,14 @@
       "innovation_type": {
         "New eBPF Runtime": "Introduces Jitterbug, a verified BPF JIT framework and a new verified JIT for RISC-V."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "specification and verification in the field: applying formal methods to bpf just-in-time compilers in the linux kernel luke nelson jacob van geffen emina torlak xi wang osdi 2020",
+    "_adminSearchIndex": "specification and verification in the field: applying formal methods to bpf just-in-time compilers in the linux kernel luke nelson jacob van geffen emina torlak xi wang osdi 2020 the paper applies formal verification to bpf just-in-time compilers inside the linux kernel. it introduces jitterbug, the first framework with a precise jit correctness specification capable of ruling out real-world bugs. using jitterbug, the authors designed and verified a new bpf jit for 32-bit risc-v, uncovered and fixed 16 bugs in five deployed jits, and developed new jit optimizations—all upstreamed to linux. the work demonstrates that verified components can coexist within large unverified systems given careful specification and proof strategy. operating systems security systems operating systems program analysis security operating systems security in-kernel new ebpf runtime systems performance engineering kernel subsystem security enforcement reliability bpf jit compiler risc-v jit x86 jit arm64 jit bpf program execution jit compilation cpu cores improved reliability correctness guarantees targets the bpf jit compilers embedded in the linux kernel. formal verification ensures jit correctness and eliminates real-world security bugs. jitterbug operates on the bpf jit compilers which are core linux kernel components. addresses a core systems component (jit) within the linux kernel. extends and verifies os infrastructure. uses symbolic execution and automated proof strategies for verification. finds and eliminates bugs that could compromise kernel correctness. verified jit removes classes of correctness bugs that could be exploited. proven correctness guarantees for jit-compiled bpf programs. the jit compilers run entirely inside the linux kernel. introduces jitterbug, a verified bpf jit framework and a new verified jit for risc-v."
   },
   {
     "id": "lambda-io-fast23",
-    "title": "\u03bb-IO: A Unified IO Stack for Computational Storage",
+    "title": "λ-IO: A Unified IO Stack for Computational Storage",
     "authors": [
       "Zhe Yang",
       "Tao Yue",
@@ -240,17 +247,19 @@
     "links": {
       "paper": "https://www.usenix.org/conference/fast23/presentation/yang-zhe"
     },
-    "summary": "\u03bb-IO addresses the overhead of data movement between host and computational storage devices by presenting a unified IO stack that manages both compute and storage resources across host and device. The authors design a co-designed interface, runtime, and scheduler to tackle in-storage computing challenges. eBPF is leveraged to safely offload user-defined compute functions to the storage device. Evaluation against Linux IO shows up to 5.12x performance improvement on synthetic and real workloads.",
-    "paper_title": "\u03bb-IO: A Unified IO Stack for Computational Storage",
+    "summary": "λ-IO addresses the overhead of data movement between host and computational storage devices by presenting a unified IO stack that manages both compute and storage resources across host and device. The authors design a co-designed interface, runtime, and scheduler to tackle in-storage computing challenges. eBPF is leveraged to safely offload user-defined compute functions to the storage device. Evaluation against Linux IO shows up to 5.12x performance improvement on synthetic and real workloads.",
+    "categories": [
+      "Storage & Filesystems",
+      "Device Offloading"
+    ],
     "primary_categories": [
       "Storage",
       "Operating Systems"
     ],
-    "secondary_categories": [
-      "Filesystems"
-    ],
-    "supporting_categories": [
+    "research_areas": [
       "Systems",
+      "Operating Systems",
+      "Storage Systems",
       "Performance Engineering"
     ],
     "application_domain": [
@@ -260,21 +269,6 @@
     "ebpf_mechanisms": [
       "kprobe"
     ],
-    "system_layers": [
-      "Kernel Subsystem",
-      "Storage Stack",
-      "Hardware Interface"
-    ],
-    "research_areas": [
-      "Systems",
-      "Operating Systems",
-      "Storage Systems",
-      "Performance Engineering"
-    ],
-    "goals": [
-      "Performance Optimization",
-      "Resource Management"
-    ],
     "deployment_type": [
       "In-Kernel",
       "User-Kernel Cooperative"
@@ -282,6 +276,22 @@
     "innovation_type": [
       "New eBPF System Design",
       "New eBPF Framework"
+    ],
+    "secondary_categories": [
+      "Filesystems"
+    ],
+    "supporting_categories": [
+      "Systems",
+      "Performance Engineering"
+    ],
+    "system_layers": [
+      "Kernel Subsystem",
+      "Storage Stack",
+      "Hardware Interface"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Resource Management"
     ],
     "kernel_subsystems": [
       "Block Layer",
@@ -332,9 +342,11 @@
       },
       "innovation_type": {
         "New eBPF System Design": "Unified host-device IO stack with eBPF-based compute offload.",
-        "New eBPF Framework": "Introduces \u03bb-IO interface, runtime, and scheduler for computational storage."
+        "New eBPF Framework": "Introduces λ-IO interface, runtime, and scheduler for computational storage."
       }
-    }
+    },
+    "_publicSearchIndex": "λ-io: a unified io stack for computational storage zhe yang tao yue zhiwei liu yanfei xu zili shao fast 2023",
+    "_adminSearchIndex": "λ-io: a unified io stack for computational storage zhe yang tao yue zhiwei liu yanfei xu zili shao fast 2023 λ-io addresses the overhead of data movement between host and computational storage devices by presenting a unified io stack that manages both compute and storage resources across host and device. the authors design a co-designed interface, runtime, and scheduler to tackle in-storage computing challenges. ebpf is leveraged to safely offload user-defined compute functions to the storage device. evaluation against linux io shows up to 5.12x performance improvement on synthetic and real workloads. storage & filesystems device offloading storage operating systems systems operating systems storage systems performance engineering storage operating systems kprobe in-kernel user-kernel cooperative new ebpf system design new ebpf framework filesystems systems performance engineering kernel subsystem storage stack hardware interface performance optimization resource management block layer nvme driver io scheduler data-intensive applications analytical queries scan workloads computational storage devices nvme ssds cpu cores lower latency higher throughput reduced data movement overhead targets computational storage devices and the host io stack. implements a unified io stack spanning host os and device firmware. ebpf programs are used to safely offload compute functions into the storage path, closest to kernel-level probe attachment. modifies linux kernel io stack for computation offload. directly targets the host storage stack and device io path. runs logic on the computational storage device hardware. designs a full-stack framework for computational storage. extends linux io stack with unified compute/storage management. focuses on nvme and computational storage devices. primary metric is io performance improvement. achieves up to 5.12x speedup over linux io. manages both cpu and storage compute resources across host and device. ebpf compute functions execute in the kernel io path. applications submit ebpf programs via a user-facing interface. unified host-device io stack with ebpf-based compute offload. introduces λ-io interface, runtime, and scheduler for computational storage."
   },
   {
     "id": "extfuse-atc19",
@@ -443,7 +455,10 @@
         "New eBPF Framework": "ExtFUSE is a new framework for extensible user file systems using eBPF.",
         "New eBPF System Design": "Introduces the concept of thin kernel handlers registered by user-space file systems."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "extension framework for file systems in user space ashish bijlani umakishore ramachandran atc 2019",
+    "_adminSearchIndex": "extension framework for file systems in user space ashish bijlani umakishore ramachandran atc 2019 extfuse addresses the heavy performance penalty of user-space file systems (fuse) caused by frequent kernel-user context switching. it introduces a framework that lets applications register thin, specialized ebpf request handlers in the kernel to serve common-case operations, while retaining complex logic in user space. this hybrid approach avoids context switches for hot paths while preserving the flexibility of user-space development. evaluation shows significant performance improvements with only a few hundred lines of extension code per file system. filesystems operating systems systems operating systems storage systems performance engineering filesystems operating systems storage kprobe user-kernel cooperative hybrid new ebpf framework new ebpf system design storage systems performance engineering kernel subsystem filesystem layer userspace runtime performance optimization scalability fuse vfs ext4 fuse file systems stackfs passthrough file systems cpu cores storage i/o path lower latency reduced kernel-user context switch overhead higher throughput directly targets fuse-based user-space file systems. extends linux vfs and fuse kernel module with ebpf handlers. impacts storage access performance via file system optimizations. ebpf programs are attached as thin handlers at kernel fuse request processing points. thin ebpf handlers are installed in the kernel fuse module. targets the fuse/vfs file system layer directly. complex file system logic remains in user space. designs a hybrid kernel-user file system extension framework. modifies linux kernel fuse infrastructure. improves file system i/o performance. reduces context switching overhead as primary contribution. eliminates redundant kernel-user crossings for hot-path requests. allows more concurrent file system operations without context-switch bottlenecks. ebpf handlers in kernel cooperate with user-space file system logic. hot paths handled in kernel, complex paths handled in user space. extfuse is a new framework for extensible user file systems using ebpf. introduces the concept of thin kernel handlers registered by user-space file systems."
   },
   {
     "id": "electrode-nsdi23",
@@ -459,7 +474,7 @@
     "links": {
       "paper": "https://www.usenix.org/conference/nsdi23/presentation/zhou"
     },
-    "summary": "Electrode addresses the high cost of user-kernel crossings and kernel networking stack traversal in distributed protocols running on Linux. It implements a set of eBPF-based optimizations\u2014such as message broadcasting and quorum acknowledgment collection\u2014that execute in the kernel before the networking stack, achieving equivalent functionality to user-space code with far less overhead. Applied to Multi-Paxos state machine replication, Electrode improves throughput by up to 128.4% and reduces latency by up to 41.7%.",
+    "summary": "Electrode addresses the high cost of user-kernel crossings and kernel networking stack traversal in distributed protocols running on Linux. It implements a set of eBPF-based optimizations—such as message broadcasting and quorum acknowledgment collection—that execute in the kernel before the networking stack, achieving equivalent functionality to user-space code with far less overhead. Applied to Multi-Paxos state machine replication, Electrode improves throughput by up to 128.4% and reduces latency by up to 41.7%.",
     "paper_title": "Electrode: Accelerating Distributed Protocols with eBPF",
     "primary_categories": [
       "Networking",
@@ -558,7 +573,10 @@
         "New eBPF Application": "Novel use of eBPF for distributed protocol acceleration.",
         "New eBPF System Design": "System design that moves protocol primitives into the kernel network path."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "electrode: accelerating distributed protocols with ebpf yang zhou zezhou wang sowmya dharanipragada minlan yu nsdi 2023",
+    "_adminSearchIndex": "electrode: accelerating distributed protocols with ebpf yang zhou zezhou wang sowmya dharanipragada minlan yu nsdi 2023 electrode addresses the high cost of user-kernel crossings and kernel networking stack traversal in distributed protocols running on linux. it implements a set of ebpf-based optimizations—such as message broadcasting and quorum acknowledgment collection—that execute in the kernel before the networking stack, achieving equivalent functionality to user-space code with far less overhead. applied to multi-paxos state machine replication, electrode improves throughput by up to 128.4% and reduces latency by up to 41.7%. networking distributed systems systems computer networks distributed systems performance engineering networking distributed systems operating systems xdp tc in-kernel user-kernel cooperative new ebpf application new ebpf system design operating systems systems performance engineering kernel subsystem network stack application layer performance optimization scalability load balancing network stack socket layer tc subsystem multi-paxos replication consensus protocols message broadcasting network i/o cpu cores higher throughput lower latency reduced user-kernel crossing overhead optimizations run in the kernel network path before the full networking stack. targets distributed consensus protocols such as multi-paxos. leverages kernel ebpf infrastructure to bypass networking stack overhead. used for early packet interception before the networking stack. used for traffic control hooks to implement protocol-level optimizations. ebpf programs run inside the linux kernel network path. optimizations bypass or run before the full kernel network stack. distributed protocol logic at the application level benefits from kernel offload. full system design for distributed protocol acceleration. works within the linux kernel networking stack. applied to consensus and replication protocols. primary contribution is throughput and latency improvement. up to 128.4% throughput and 41.7% latency improvement. reduces per-message overhead enabling better scaling. broadcasting and quorum collection spread work efficiently. ebpf programs execute inside the kernel before the network stack. application-level protocol logic cooperates with kernel ebpf optimizations. novel use of ebpf for distributed protocol acceleration. system design that moves protocol primitives into the kernel network path."
   },
   {
     "id": "bmc-nsdi21",
@@ -669,7 +687,10 @@
         "New eBPF Application": "First complex in-kernel cache for a key-value store using eBPF.",
         "New eBPF System Design": "Pre-stack request serving architecture using XDP."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "bmc: accelerating memcached using safe in-kernel caching and pre-stack processing yoann ghigoff julien sopena kahina lazri antoine blin gilles muller nsdi 2021",
+    "_adminSearchIndex": "bmc: accelerating memcached using safe in-kernel caching and pre-stack processing yoann ghigoff julien sopena kahina lazri antoine blin gilles muller nsdi 2021 bmc introduces an in-kernel cache for memcached implemented entirely in ebpf using xdp, serving requests before the linux network stack executes. requests are handled within nic interrupt context, allowing throughput to scale with the number of cores serving nic queues. because bmc requires no kernel or memcached modifications, it deploys on commodity hardware. on facebook-like small-request workloads, bmc improves throughput by up to 18x over vanilla memcached and 6x over so_reuseport-optimized memcached. networking operating systems systems computer networks performance engineering networking databases operating systems xdp in-kernel new ebpf application new ebpf system design databases systems performance engineering kernel subsystem network stack hardware interface performance optimization caching scalability xdp nic driver network stack memcached key-value get/set requests facebook-like small-size requests network i/o cpu cores nic queues higher throughput lower latency reduced network stack overhead bmc intercepts network packets at the xdp layer before the linux network stack. accelerates memcached, a widely used in-memory key-value store. implemented as an ebpf/xdp program running inside the linux kernel. bmc is implemented as an xdp program, processing packets at the earliest kernel hook point. ebpf/xdp programs run inside the linux kernel. bypasses the full linux network stack for cached requests. requests are handled within nic interrupt context. designs a complete in-kernel caching system. operates at the xdp/nic layer of the network stack. primary goal is throughput and latency improvement. up to 18x throughput improvement over vanilla memcached. implements a full in-kernel cache for memcached requests. throughput scales with the number of nic interrupt cores. the cache runs entirely as an ebpf/xdp program inside the linux kernel. first complex in-kernel cache for a key-value store using ebpf. pre-stack request serving architecture using xdp."
   },
   {
     "id": "hxdp-osdi20",
@@ -785,7 +806,10 @@
         "New eBPF Runtime": "First FPGA-based runtime for executing unmodified XDP/eBPF programs.",
         "New eBPF System Design": "Introduces an optimizing compiler and soft-processor for eBPF on FPGA."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "hxdp: efficient software packet processing on fpga nics marco brunella giacomo belocchi marco bonola salvatore pontarelli giuseppe siracusano giuseppe bianchi aniello cammarano alessandro palumbo luca petrucci roberto bifulco osdi 2020",
+    "_adminSearchIndex": "hxdp: efficient software packet processing on fpga nics marco brunella giacomo belocchi marco bonola salvatore pontarelli giuseppe siracusano giuseppe bianchi aniello cammarano alessandro palumbo luca petrucci roberto bifulco osdi 2020 hxdp runs linux xdp/ebpf programs on fpga nics by compressing, parallelizing, and removing redundant ebpf instructions to fit the iterative ebpf execution model onto fpga hardware. it comprises an optimizing compiler that translates ebpf bytecode to an extended isa, a soft-processor to execute it on fpga, and fpga-based xdp map/helper infrastructure. clocked at 156.25 mhz and using only ~15% of fpga resources, hxdp matches the packet processing throughput of a high-end cpu core while delivering 10x lower packet forwarding latency. networking operating systems systems computer networks performance engineering networking operating systems xdp hybrid in-kernel new ebpf runtime new ebpf system design observability systems performance engineering kernel subsystem network stack hardware interface performance optimization scalability resource management xdp nic driver bpf maps packet forwarding packet filtering xdp programs fpga nic network i/o cpu cores lower latency higher throughput reduced cpu usage targets high-speed packet processing on fpga-based nics. runs unmodified linux xdp/ebpf programs via a hardware soft-processor. hxdp executes xdp ebpf programs on fpga hardware using a purpose-built executor. interfaces with linux xdp kernel infrastructure for map and helper functions. operates at the earliest point in the network stack (xdp). runs entirely on fpga nic hardware. designs a complete hardware-software co-design for ebpf execution. targets high-performance packet processing pipelines. achieves cpu-level throughput at 10x lower latency. matches cpu throughput with 10x lower forwarding latency. uses only 15% of fpga resources, leaving headroom for other applications. shares fpga resources among diverse applications. ebpf programs compiled to fpga isa, with linux kernel providing map/helper infrastructure. xdp programs are loaded via standard linux ebpf infrastructure. first fpga-based runtime for executing unmodified xdp/ebpf programs. introduces an optimizing compiler and soft-processor for ebpf on fpga."
   },
   {
     "id": "deepflow-sigcomm23",
@@ -907,13 +931,16 @@
         "New eBPF Application": "Novel zero-code distributed tracing via eBPF for microservices.",
         "New eBPF System Design": "Network-centric tracing plane with implicit context propagation."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "network-centric distributed tracing with deepflow: troubleshooting your microservices in zero code junxian shen han zhang yang guo yuan shi xingang shi sigcomm 2023",
+    "_adminSearchIndex": "network-centric distributed tracing with deepflow: troubleshooting your microservices in zero code junxian shen han zhang yang guo yuan shi xingang shi sigcomm 2023 deepflow is a network-centric distributed tracing framework for microservices that requires zero application instrumentation. it uses ebpf to automatically capture network metrics, trace context, and application-layer requests across the full infrastructure stack. by providing implicit context propagation and eliminating network blind spots, deepflow correlates data across components with negligible overhead. in production it has identified over 71 critical performance anomalies across more than 26 companies, reducing troubleshooting time from hours to minutes. networking observability systems computer networks distributed systems performance engineering networking observability monitoring distributed systems kprobe tracepoint socket hooks uprobe in-kernel user-kernel cooperative new ebpf application new ebpf system design distributed systems monitoring systems performance engineering kernel subsystem network stack application layer observability monitoring fault detection network stack socket layer bpf maps microservices http/rpc traffic containerized workloads network i/o cpu cores reduced cpu overhead lower troubleshooting latency captures network-layer metrics and traces across the full infrastructure stack. provides out-of-the-box distributed tracing without code changes. continuously monitors microservice performance anomalies in production. targets microservice architectures with implicit context propagation. used to intercept kernel functions for network and syscall tracing. used to capture structured kernel events for metrics collection. used to trace application-layer protocols at the socket level. used to trace user-space application internals without code modification. ebpf programs run inside the linux kernel to capture events. traces network-layer metrics and packet flows. reconstructs application-level request traces from kernel observations. builds a production distributed tracing system. captures network-layer performance data across microservice hops. enables end-to-end distributed tracing across microservice meshes. reduces troubleshooting time from hours to minutes. core contribution is zero-instrumentation observability for microservices. continuously monitors and correlates performance data in production. identified 71+ critical anomalies across 26+ companies. ebpf programs collect data inside the linux kernel. user-space deepflow agent processes and correlates kernel-collected data. novel zero-code distributed tracing via ebpf for microservices. network-centric tracing plane with implicit context propagation."
   },
   {
     "id": "nitrosketch-ebpf-sigcomm23",
     "title": "Fast In-kernel Traffic Sketching in eBPF",
     "authors": [
-      "Sebastian Gallenm\u00fcller",
+      "Sebastian Gallenmüller",
       "Florian Wiedner",
       "Johannes Naab",
       "Georg Carle"
@@ -1016,7 +1043,10 @@
         "New eBPF Application": "First high-performance sketch implementation natively in eBPF.",
         "New eBPF Optimization": "Identifies and applies eBPF-specific optimizations that differ from user-space networking."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "fast in-kernel traffic sketching in ebpf sebastian gallenmüller florian wiedner johannes naab georg carle sigcomm 2023",
+    "_adminSearchIndex": "fast in-kernel traffic sketching in ebpf sebastian gallenmüller florian wiedner johannes naab georg carle sigcomm 2023 this paper studies how to build high-performance network measurement applications in ebpf, using traffic sketches as a case study. it implements nitrosketch, the state-of-the-art user-space sketch, in ebpf and shows that best practices from user-space networking cannot be directly ported due to ebpf's different performance characteristics. through lessons learned, the authors improve nitrosketch's ebpf performance by 40% over a naive port, enabling accurate, low-memory network measurement directly in the kernel. networking observability systems computer networks performance engineering networking observability monitoring xdp tc in-kernel new ebpf application new ebpf optimization monitoring systems performance engineering kernel subsystem network stack observability monitoring performance optimization xdp tc subsystem bpf maps network traffic measurement traffic sketching flow statistics network i/o cpu cores higher throughput reduced memory usage lower measurement overhead implements in-kernel network traffic measurement for packet streams. provides accurate network flow statistics with low memory footprint. enables continuous in-kernel traffic monitoring via sketches. used for early-stage per-packet processing to feed sketch data structures. used for traffic control hook attachment for sketch updates. sketch logic runs inside the linux kernel via ebpf. intercepts packets at the network stack for measurement. designs and optimizes an in-kernel measurement system. focuses on network traffic measurement and sketching algorithms. 40% performance improvement over naive ebpf implementation. enables kernel-level network traffic visibility via sketches. supports wide-range network monitoring tasks with accuracy guarantees. optimizes ebpf sketch implementation for kernel performance characteristics. sketch data structures and update logic run entirely inside the linux kernel. first high-performance sketch implementation natively in ebpf. identifies and applies ebpf-specific optimizations that differ from user-space networking."
   },
   {
     "id": "spright-sigcomm22",
@@ -1133,7 +1163,10 @@
         "New eBPF Application": "Novel use of eBPF socket mechanisms for serverless shared-memory processing.",
         "New eBPF System Design": "Replaces heavyweight serverless components with eBPF-based event-driven processing."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "spright: extracting the server from serverless computing! high-performance ebpf-based event-driven, shared-memory processing shixiong qi leslie monis ziteng zeng ian-chin wang k. k. ramakrishnan sigcomm 2022",
+    "_adminSearchIndex": "spright: extracting the server from serverless computing! high-performance ebpf-based event-driven, shared-memory processing shixiong qi leslie monis ziteng zeng ian-chin wang k. k. ramakrishnan sigcomm 2022 spright is a lightweight serverless framework that uses ebpf to replace heavyweight serverless components and enable shared-memory processing between functions. it leverages ebpf socket message mechanisms for shared-memory data passing and event-driven processing, eliminating unnecessary protocol processing and serialization overhead. compared to polling-based dpdk, spright achieves equivalent dataplane performance with 10x less cpu usage, and delivers an order-of-magnitude improvement in throughput and latency over knative while eliminating cold-start penalties. networking cloud systems systems computer networks cloud computing performance engineering networking cloud systems distributed systems socket hooks in-kernel user-kernel cooperative new ebpf application new ebpf system design distributed systems operating systems systems performance engineering kernel subsystem network stack application layer userspace runtime performance optimization resource management scalability socket layer bpf maps network stack serverless functions microservices function chaining cpu cores network i/o higher throughput lower latency reduced cpu usage uses ebpf socket message mechanism for shared-memory network data passing. targets serverless and microservice function chaining in cloud environments. designed for distributed function chains in serverless platforms. uses ebpf socket message (sockmap) mechanism for shared-memory processing between functions. ebpf programs manage data movement inside the linux kernel. bypasses redundant network protocol processing via ebpf socket redirection. serverless functions communicate via shared memory managed by ebpf. user-space serverless runtime is simplified by ebpf handling of data movement. designs a complete serverless dataplane using ebpf. eliminates protocol processing overhead via kernel socket hooks. addresses serverless computing scalability and cold-start problems. 10x cpu reduction and order-of-magnitude throughput improvement. order-of-magnitude throughput/latency improvement over knative. 10x less cpu than dpdk under realistic workloads. eliminates cold-start and scales function chains efficiently. ebpf socket programs execute inside the linux kernel for data movement. user-space serverless functions cooperate with kernel ebpf for shared memory. novel use of ebpf socket mechanisms for serverless shared-memory processing. replaces heavyweight serverless components with ebpf-based event-driven processing."
   },
   {
     "id": "ken-ebpf24",
@@ -1148,7 +1181,7 @@
     "links": {
       "paper": "https://dl.acm.org/doi/10.1145/3672197.3673434"
     },
-    "summary": "KEN allows developers to write eBPF kernel extensions by describing them in English, using large language models (LLMs) to synthesize the corresponding eBPF program. To ensure semantic equivalence between the natural language prompt and the generated code, KEN combines LLM-powered program comprehension, symbolic execution, and feedback loops. Evaluated on a new benchmark of natural language eBPF prompts, KEN correctly generates eBPF programs 80% of the time\u2014a 2.67x improvement over a baseline LLM synthesis approach.",
+    "summary": "KEN allows developers to write eBPF kernel extensions by describing them in English, using large language models (LLMs) to synthesize the corresponding eBPF program. To ensure semantic equivalence between the natural language prompt and the generated code, KEN combines LLM-powered program comprehension, symbolic execution, and feedback loops. Evaluated on a new benchmark of natural language eBPF prompts, KEN correctly generates eBPF programs 80% of the time—a 2.67x improvement over a baseline LLM synthesis approach.",
     "paper_title": "KEN: Kernel Extensions using Natural Language",
     "primary_categories": [
       "Operating Systems"
@@ -1233,7 +1266,10 @@
         "New eBPF Programming Model": "Introduces natural language as the interface for writing eBPF programs.",
         "New eBPF Framework": "KEN is a framework combining LLMs, symbolic execution, and feedback loops for eBPF synthesis."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "ken: kernel extensions using natural language yusheng zheng tong yu andrew quinn ebpf'24 2024",
+    "_adminSearchIndex": "ken: kernel extensions using natural language yusheng zheng tong yu andrew quinn ebpf'24 2024 ken allows developers to write ebpf kernel extensions by describing them in english, using large language models (llms) to synthesize the corresponding ebpf program. to ensure semantic equivalence between the natural language prompt and the generated code, ken combines llm-powered program comprehension, symbolic execution, and feedback loops. evaluated on a new benchmark of natural language ebpf prompts, ken correctly generates ebpf programs 80% of the time—a 2.67x improvement over a baseline llm synthesis approach. operating systems systems operating systems program analysis runtime systems operating systems kprobe tracepoint in-kernel standalone ebpf new ebpf programming model new ebpf framework security systems program analysis kernel subsystem application layer observability security enforcement bpf verifier bpf jit compiler kernel extension development ebpf program synthesis cpu cores improved developer productivity targets the linux kernel extension mechanism (ebpf) and its programming model. generated ebpf programs commonly use kprobe hooks for kernel function tracing. generated programs also target tracepoint hooks for structured kernel events. generated ebpf programs execute inside the linux kernel. developers interact via natural language prompts at the application layer. addresses the difficulty of writing kernel extension programs. targets the ebpf kernel extension ecosystem. uses symbolic execution to verify semantic equivalence of generated programs. considers ebpf verifier constraints in program synthesis. generated programs can implement observability and tracing extensions. can synthesize security policy extensions for the kernel. synthesized ebpf programs run inside the linux kernel. programs are self-contained ebpf modules generated from prompts. introduces natural language as the interface for writing ebpf programs. ken is a framework combining llms, symbolic execution, and feedback loops for ebpf synthesis."
   },
   {
     "id": "prog-syscall-sec-arxiv23",
@@ -1350,7 +1386,10 @@
         "New eBPF Application": "Applies eBPF to stateful system call security filtering.",
         "New eBPF Programming Model": "Introduces a new Seccomp eBPF program type with custom helper functions."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "programmable system call security with ebpf jinghao jia yifei zhu dan williams andrea arcangeli claudio canella hubertus franke tobin feldman-fitzthum dimitrios skarlatos daniel gruss tianyin xu arxiv 2023",
+    "_adminSearchIndex": "programmable system call security with ebpf jinghao jia yifei zhu dan williams andrea arcangeli claudio canella hubertus franke tobin feldman-fitzthum dimitrios skarlatos daniel gruss tianyin xu arxiv 2023 this paper introduces a programmable system call filtering mechanism that extends linux seccomp with ebpf to express stateful and advanced security policies. it creates a new seccomp ebpf program type with new and modified helper functions for filter state management, kernel/user state access, and synchronization. unprivileged users can safely install advanced filters through integration with existing kernel privilege mechanisms. evaluation shows the system reduces the attack surface of early execution phases by up to 55.4% for temporal specialization and successfully mitigates real-world vulnerabilities. security operating systems systems operating systems security performance engineering security operating systems containers lsm in-kernel standalone ebpf new ebpf application new ebpf programming model containers systems performance engineering kernel subsystem security layer application layer security enforcement isolation performance optimization seccomp bpf verifier syscall interface container workloads system call filtering privilege separation cpu cores reduced attack surface accelerated filter evaluation core contribution is a more expressive and stateful syscall security filtering mechanism. extends the linux seccomp kernel module with ebpf program types. seccomp filtering is widely used by container technologies like docker and kubernetes. introduces a new seccomp ebpf program type tightly integrated with kernel security and privilege mechanisms. runs ebpf filters inside the linux kernel seccomp subsystem. implements a programmable security enforcement layer for syscall filtering. applications and container runtimes install filters via the new seccomp ebpf interface. extends a core os security mechanism. modifies the linux seccomp module and bpf infrastructure. primary focus is reducing attack surface and enforcing advanced security policies. accelerates filter execution compared to user-space agents. enables stateful, advanced security policies for system call filtering. improves isolation by reducing syscall attack surface during execution phases. ebpf filters run in-kernel, avoiding context-switch overhead of user-space agents. seccomp ebpf filters execute inside the linux kernel. filters are standalone ebpf programs loaded via a new seccomp program type. applies ebpf to stateful system call security filtering. introduces a new seccomp ebpf program type with custom helper functions."
   },
   {
     "id": "cross-container-usenixsec23",
@@ -1459,7 +1498,10 @@
       "innovation_type": {
         "New eBPF Application": "Demonstrates offensive use of eBPF tracing for cross-container attacks in cloud environments."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "cross container attacks: the bewildered ebpf on clouds yi he roland majumdar shan lu tianyin xu usenix security 2023",
+    "_adminSearchIndex": "cross container attacks: the bewildered ebpf on clouds yi he roland majumdar shan lu tianyin xu usenix security 2023 this paper reveals that ebpf's powerful tracing features, while beneficial on bare-metal linux hosts, introduce new attack surfaces in shared-kernel container environments on clouds. using ebpf, attackers can break container isolation to steal sensitive data, launch dos attacks, and escape containers. the authors demonstrate successful compromise of five online jupyter services and google cloud shell, and show cross-node attacks on kubernetes clusters from three major cloud vendors. they propose a new ebpf permission model to confine ebpf usage in shared-kernel environments. security containers systems operating systems security security containers cloud systems operating systems kprobe tracepoint uprobe in-kernel new ebpf application cloud systems operating systems systems kernel subsystem security layer application layer security enforcement isolation observability bpf verifier cgroup subsystem namespace subsystem container workloads kubernetes clusters cloud shell environments cpu cores kernel memory exposes ebpf as an attack vector and proposes a new permission model to mitigate it. attacks exploit the shared-kernel container model used by docker and kubernetes. demonstrated attacks on google cloud shell and kubernetes services from three cloud vendors. exploits linux kernel ebpf tracing capabilities from within containers. attackers use kprobe-based ebpf tracing to intercept kernel function calls and steal data. tracepoint hooks are used to monitor host-level events from within a container. uprobe-based tracing enables user-space process surveillance across container boundaries. ebpf programs run in the shared linux kernel, breaking container isolation. proposes a new ebpf permission model as a security countermeasure. cloud shell and jupyter services are targeted at the application level. analyzes the security implications of ebpf in multi-tenant cloud environments. examines linux kernel ebpf permission and isolation mechanisms. core contribution is the discovery and disclosure of ebpf-based container attack vectors. proposes a new ebpf permission model to prevent cross-container attacks. identifies failures in container isolation due to shared-kernel ebpf capabilities. shows how ebpf observability features can be weaponized across container boundaries. attack ebpf programs run inside the linux kernel, bypassing container namespaces. demonstrates offensive use of ebpf tracing for cross-container attacks in cloud environments."
   },
   {
     "id": "ebpf-wasm-security-ebpf23",
@@ -1556,7 +1598,10 @@
       "innovation_type": {
         "New eBPF System Design": "Proposes language-based restrictions and improved API access model for future eBPF security."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "comparing security in ebpf and webassembly vandana singh harsh sharma soo-jin moon ebpf'23 2023",
+    "_adminSearchIndex": "comparing security in ebpf and webassembly vandana singh harsh sharma soo-jin moon ebpf'23 2023 this paper conducts a comparative security analysis of ebpf and webassembly (wasm), two sandboxing technologies with growing adoption. it examines their security goals, community evolution, memory models, and execution models, then assesses memory safety, control flow integrity, api access, and side-channel resistance. the authors find that ebpf historically prioritizes performance over security while wasm emphasizes security at the cost of runtime overhead, and suggest language-based restrictions and an improved api access model as future directions for ebpf. security operating systems systems operating systems security program analysis security operating systems virtualization in-kernel new ebpf system design virtualization systems program analysis kernel subsystem security layer userspace runtime security enforcement isolation bpf verifier bpf jit compiler kernel extensions webassembly runtimes sandboxed execution cpu cores kernel memory core contribution is a comparative security assessment of ebpf and wasm sandboxing. ebpf operates inside the linux kernel as a sandboxed extension mechanism. both ebpf and wasm act as lightweight virtualization/sandboxing runtimes. ebpf programs execute inside the linux kernel under verifier constraints. analysis covers memory safety, cfi, api access control, and side-channels. wasm executes in user-space runtimes, contrasted with ebpf's kernel execution. analyzes two widely adopted systems-level sandboxing technologies. covers ebpf's kernel integration and verifier-based safety model. primary contribution is a structured security comparison and gap analysis. examines control flow integrity and memory safety enforcement mechanisms. analyzes and compares enforcement mechanisms of both technologies. evaluates isolation guarantees provided by ebpf and wasm sandboxing. ebpf runs inside the linux kernel; analysis covers its in-kernel security properties. proposes language-based restrictions and improved api access model for future ebpf security."
   },
   {
     "id": "flow-ids-ebpf-arxiv21",
@@ -1668,7 +1713,10 @@
       "innovation_type": {
         "New eBPF Application": "First flow-based ML intrusion detection system implemented entirely in eBPF."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "a flow-based ids using machine learning in ebpf maximilian bachl joachim fabini tanja zseby arxiv 2021",
+    "_adminSearchIndex": "a flow-based ids using machine learning in ebpf maximilian bachl joachim fabini tanja zseby arxiv 2021 this paper presents a flow-based network intrusion detection system (ids) implemented entirely in ebpf using a decision tree classifier. rather than simple stateless packet filtering, it maintains per-flow context across packets to classify traffic as malicious or benign. the implementation achieves a performance improvement of over 20% compared to the equivalent user-space solution by eliminating kernel-user data transfer overhead. it demonstrates that complex machine learning inference is feasible directly inside the linux kernel via ebpf. security networking systems computer networks security performance engineering security networking observability xdp tc in-kernel new ebpf application observability systems performance engineering kernel subsystem network stack security layer security enforcement monitoring fault detection performance optimization xdp tc subsystem bpf maps network intrusion detection flow classification malicious traffic detection network i/o cpu cores higher throughput reduced cpu overhead lower detection latency implements an intrusion detection system to classify malicious network flows. processes network packets at the kernel level for flow-based classification. observes per-flow network state to detect anomalous traffic patterns. used for early packet interception to feed the flow-based classifier. used for traffic control hooks where per-flow state is maintained and classified. decision tree inference runs inside the linux kernel via ebpf. intercepts and classifies packets within the kernel network path. enforces intrusion detection policy entirely in-kernel. designs a complete in-kernel ml inference and ids pipeline. targets network traffic classification at the packet and flow level. primary application is network intrusion detection. 20%+ improvement over user-space ids by eliminating kernel-user crossing. detects and flags malicious network flows in real time. continuously monitors network flows for intrusion patterns. identifies malicious or anomalous traffic flows. over 20% throughput improvement versus user-space equivalent. the entire decision tree ids runs as an ebpf program inside the linux kernel. first flow-based ml intrusion detection system implemented entirely in ebpf."
   },
   {
     "id": "femto-containers-middleware22",
@@ -1774,7 +1822,10 @@
         "New eBPF Runtime": "First formally verified eBPF-based runtime for low-power IoT microcontrollers.",
         "New eBPF System Design": "Integrates eBPF sandboxing into an IoT OS for secure over-the-network function deployment."
       }
-    }
+    },
+    "categories": [],
+    "_publicSearchIndex": "femto-containers: lightweight virtualization and fault isolation for small software functions on low-power iot microcontrollers koen zandberg emmanuel baccelli middleware 2022",
+    "_adminSearchIndex": "femto-containers: lightweight virtualization and fault isolation for small software functions on low-power iot microcontrollers koen zandberg emmanuel baccelli middleware 2022 femto-containers is a middleware runtime that enables secure deployment, execution, and isolation of small virtual software functions on low-power iot microcontrollers over the network. it uses ebpf as the sandboxed execution model and is integrated into riot, a popular open-source iot operating system. the runtime is formally verified for fault isolation, guaranteeing riot is shielded from functions running inside a femto-container. experiments on arm cortex-m, esp32, and risc-v show an attractive trade-off in memory footprint, energy consumption, and security. embedded systems operating systems systems operating systems security runtime systems embedded systems operating systems security userspace assisted standalone ebpf new ebpf runtime new ebpf system design security virtualization systems userspace runtime kernel subsystem security layer security enforcement isolation reliability riot os ebpf vm iot functions serverless iot workloads firmware updates arm cortex-m mcus esp32 risc-v microcontrollers reduced memory footprint reduced energy consumption targets low-power iot microcontrollers such as cortex-m, esp32, and risc-v. integrated into riot, a full open-source iot operating system. formally verified fault isolation ensures riot is protected from sandboxed functions. femto-container runtime manages lifecycle of ebpf-based virtual functions. ebpf vm is embedded within the riot os kernel layer. formally verified fault isolation prevents escapes from femto-containers. designs a complete middleware runtime for iot function deployment. extends riot os with a sandboxed execution environment. formal verification provides strong fault-isolation guarantees. implements an ebpf-based virtual machine runtime for constrained hardware. formally verified isolation prevents sandboxed functions from corrupting riot. each femto-container is fault-isolated from the host os and other containers. formal verification ensures runtime correctness on resource-constrained hardware. functions are deployed and managed via network-based middleware in riot. ebpf programs run as self-contained virtual functions inside femto-containers. first formally verified ebpf-based runtime for low-power iot microcontrollers. integrates ebpf sandboxing into an iot os for secure over-the-network function deployment."
   },
   {
     "id": "bpftime-arxiv23",
@@ -1793,18 +1844,19 @@
       "paper": "https://arxiv.org/pdf/2311.07923"
     },
     "summary": "This paper addresses the performance and security limitations of kernel-resident eBPF, particularly the context-switch overheads associated with uprobes and syscall tracing. It introduces bpftime, a userspace eBPF runtime that supports kernel-compatible eBPF programs using binary rewriting, dynamic runtime injection, shared-memory eBPF maps, and LLVM-based JIT execution. The system provides userspace implementations of uprobes and syscall hooks, integrates with existing eBPF toolchains such as clang and libbpf, and supports cooperation with kernel eBPF components. Evaluation shows approximately 10x lower uprobe latency than kernel uprobes while maintaining compatibility with real-world eBPF applications and improving deployment flexibility without requiring process restarts or kernel privileges.",
-    "paper_title": "bpftime: userspace eBPF Runtime for Uprobe, Syscall and Kernel-User Interactions",
+    "categories": [
+      "Runtime Extension"
+    ],
     "primary_categories": [
       "Operating Systems",
       "Observability"
     ],
-    "secondary_categories": [
-      "Tracing",
-      "Monitoring",
+    "research_areas": [
+      "Systems",
+      "Operating Systems",
+      "Performance Engineering",
+      "Runtime Systems",
       "Security"
-    ],
-    "supporting_categories": [
-      "Cloud Systems"
     ],
     "application_domain": [
       "Observability",
@@ -1818,26 +1870,6 @@
       "Tracepoint",
       "kprobe"
     ],
-    "system_layers": [
-      "Userspace Runtime",
-      "Application Layer",
-      "Kernel Subsystem",
-      "Security Layer"
-    ],
-    "research_areas": [
-      "Systems",
-      "Operating Systems",
-      "Performance Engineering",
-      "Runtime Systems",
-      "Security"
-    ],
-    "goals": [
-      "Performance Optimization",
-      "Observability",
-      "Monitoring",
-      "Security Enforcement",
-      "Reliability"
-    ],
     "deployment_type": [
       "Userspace Assisted",
       "User-Kernel Cooperative",
@@ -1847,6 +1879,27 @@
       "New eBPF Runtime",
       "New eBPF System Design",
       "New eBPF Optimization"
+    ],
+    "secondary_categories": [
+      "Tracing",
+      "Monitoring",
+      "Security"
+    ],
+    "supporting_categories": [
+      "Cloud Systems"
+    ],
+    "system_layers": [
+      "Userspace Runtime",
+      "Application Layer",
+      "Kernel Subsystem",
+      "Security Layer"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Observability",
+      "Monitoring",
+      "Security Enforcement",
+      "Reliability"
     ],
     "kernel_subsystems": [
       "eBPF",
@@ -1921,7 +1974,9 @@
         "New eBPF System Design": "The work presents a new architecture combining injection, shared memory, and hooking.",
         "New eBPF Optimization": "Binary rewriting and userspace execution significantly reduce uprobe overhead."
       }
-    }
+    },
+    "_publicSearchIndex": "bpftime: userspace ebpf runtime for uprobe, syscall and kernel-user interactions yusheng zheng tong yu yiwei yang yanpeng hu xiaozheng lai andrew quinn arxiv 2023",
+    "_adminSearchIndex": "bpftime: userspace ebpf runtime for uprobe, syscall and kernel-user interactions yusheng zheng tong yu yiwei yang yanpeng hu xiaozheng lai andrew quinn arxiv 2023 this paper addresses the performance and security limitations of kernel-resident ebpf, particularly the context-switch overheads associated with uprobes and syscall tracing. it introduces bpftime, a userspace ebpf runtime that supports kernel-compatible ebpf programs using binary rewriting, dynamic runtime injection, shared-memory ebpf maps, and llvm-based jit execution. the system provides userspace implementations of uprobes and syscall hooks, integrates with existing ebpf toolchains such as clang and libbpf, and supports cooperation with kernel ebpf components. evaluation shows approximately 10x lower uprobe latency than kernel uprobes while maintaining compatibility with real-world ebpf applications and improving deployment flexibility without requiring process restarts or kernel privileges. runtime extension operating systems observability systems operating systems performance engineering runtime systems security observability tracing monitoring security operating systems uprobe tracepoint kprobe userspace assisted user-kernel cooperative hybrid new ebpf runtime new ebpf system design new ebpf optimization tracing monitoring security cloud systems userspace runtime application layer kernel subsystem security layer performance optimization observability monitoring security enforcement reliability ebpf uprobes syscall tracepoints kprobes bpffs ebpf verifier ebpf maps bcc tools prometheus ebpf exporter userspace function tracing syscall tracing dynamic tracing monitoring daemons cpu process address space shared memory kernel ebpf maps syscall interface lower latency reduced cpu overhead improved scalability higher throughput the runtime targets dynamic instrumentation and runtime visibility through ebpf tracing. its primary functionality includes userspace uprobes, uretprobes, and syscall tracing. the system supports monitoring applications and existing ebpf observability tools. the paper includes security architecture, verifier-based safety, and secure map access mechanisms. the work extends ebpf execution and interaction mechanisms across kernel and userspace. bpftime provides userspace uprobe and uretprobe support through binary rewriting. the runtime supports syscall tracepoints for interception and monitoring. kernel compatibility and integration with existing ebpf attachment models include kprobe-related support. the core contribution is a userspace ebpf execution environment. the runtime injects into and instruments running user applications. it interoperates with kernel ebpf infrastructure, maps, and verification mechanisms. security controls, verification, and protected map access are central design components. the paper presents a complete runtime system design and implementation. it modifies how ebpf functionality is deployed across kernel and userspace boundaries. a major focus is reducing tracing overhead and improving execution efficiency. the contribution is a new execution runtime for ebpf programs. the work evaluates security implications and mitigation strategies. a key goal is eliminating context-switch overheads and accelerating uprobes. the runtime enables tracing and visibility into application behavior. it supports monitoring workloads using existing ebpf tooling. the design leverages verification and controlled access to improve security. isolation, verification, and controlled runtime behavior improve operational robustness. ebpf programs execute in userspace and interact with user processes. the runtime cooperates with kernel ebpf maps and kernel infrastructure. the design combines userspace execution with kernel ebpf interoperability. bpftime is introduced as a new userspace ebpf runtime. the work presents a new architecture combining injection, shared memory, and hooking. binary rewriting and userspace execution significantly reduce uprobe overhead."
   },
   {
     "id": "gpu-ext-arxiv2025",
@@ -1941,24 +1996,24 @@
     ],
     "venue": "arXiv",
     "year": 2025,
-    "links": {
-      "paper": ""
-    },
+    "links": {},
     "summary": "This paper addresses the lack of safe, programmable, and workload-aware resource management policies in GPU systems. It introduces gpu_ext, an eBPF-based runtime that extends GPU drivers and devices with programmable policy hooks for memory management, scheduling, and observability, while enforcing safety through SIMT-aware verification. gpu_ext executes verified eBPF policies across both host drivers and GPU kernels, using cross-layer eBPF maps to coordinate state between CPU and GPU. The system enables adaptive memory placement, prefetching, scheduling, and instrumentation policies without modifying applications, achieving up to 4.8x throughput improvement and up to 2x tail-latency reduction across inference, training, vector search, and multi-tenant workloads.",
-    "paper_title": "gpu_ext: Extensible OS Policies for GPUs via eBPF",
+    "categories": [
+      "Kernel extension",
+      "Observability and Tracing",
+      "Device Offloading"
+    ],
     "primary_categories": [
       "Scheduling",
       "Memory Management",
       "Observability"
     ],
-    "secondary_categories": [
-      "AI/ML Systems",
+    "research_areas": [
+      "Systems",
       "Operating Systems",
-      "Monitoring"
-    ],
-    "supporting_categories": [
-      "Cloud Systems",
-      "Distributed Systems"
+      "Performance Engineering",
+      "Cloud Computing",
+      "Runtime Systems"
     ],
     "application_domain": [
       "Scheduling",
@@ -1973,30 +2028,6 @@
       "Struct Ops",
       "Uprobe"
     ],
-    "system_layers": [
-      "Userspace Runtime",
-      "Kernel Subsystem",
-      "Memory Subsystem",
-      "Scheduler",
-      "Hardware Interface",
-      "Application Layer"
-    ],
-    "research_areas": [
-      "Systems",
-      "Operating Systems",
-      "Performance Engineering",
-      "Cloud Computing",
-      "Runtime Systems"
-    ],
-    "goals": [
-      "Performance Optimization",
-      "Resource Management",
-      "Scheduling",
-      "Observability",
-      "Monitoring",
-      "Scalability",
-      "Reliability"
-    ],
     "deployment_type": [
       "Hybrid",
       "User-Kernel Cooperative",
@@ -2007,6 +2038,32 @@
       "New eBPF Runtime",
       "New eBPF Programming Model",
       "New eBPF System Design"
+    ],
+    "secondary_categories": [
+      "AI/ML Systems",
+      "Operating Systems",
+      "Monitoring"
+    ],
+    "supporting_categories": [
+      "Cloud Systems",
+      "Distributed Systems"
+    ],
+    "system_layers": [
+      "Userspace Runtime",
+      "Kernel Subsystem",
+      "Memory Subsystem",
+      "Scheduler",
+      "Hardware Interface",
+      "Application Layer"
+    ],
+    "goals": [
+      "Performance Optimization",
+      "Resource Management",
+      "Scheduling",
+      "Observability",
+      "Monitoring",
+      "Scalability",
+      "Reliability"
     ],
     "kernel_subsystems": [
       "NVIDIA Open GPU Kernel Modules",
@@ -2098,7 +2155,9 @@
         "New eBPF Programming Model": "Defines cross-layer policy abstractions, SIMT-aware execution, and hierarchical maps.",
         "New eBPF System Design": "Rearchitects GPU management as a programmable OS subsystem."
       }
-    }
+    },
+    "_publicSearchIndex": "gpu_ext: extensible os policies for gpus via ebpf yusheng zheng tong yu yiwei yang minghui jiang xiangyu gao jianchang su yanpeng hu wenan mao wei zhang dan williams andi quinn arxiv 2025",
+    "_adminSearchIndex": "gpu_ext: extensible os policies for gpus via ebpf yusheng zheng tong yu yiwei yang minghui jiang xiangyu gao jianchang su yanpeng hu wenan mao wei zhang dan williams andi quinn arxiv 2025 this paper addresses the lack of safe, programmable, and workload-aware resource management policies in gpu systems. it introduces gpu_ext, an ebpf-based runtime that extends gpu drivers and devices with programmable policy hooks for memory management, scheduling, and observability, while enforcing safety through simt-aware verification. gpu_ext executes verified ebpf policies across both host drivers and gpu kernels, using cross-layer ebpf maps to coordinate state between cpu and gpu. the system enables adaptive memory placement, prefetching, scheduling, and instrumentation policies without modifying applications, achieving up to 4.8x throughput improvement and up to 2x tail-latency reduction across inference, training, vector search, and multi-tenant workloads. kernel extension observability and tracing device offloading scheduling memory management observability systems operating systems performance engineering cloud computing runtime systems scheduling memory management observability monitoring ai/ml systems cloud systems operating systems struct ops uprobe hybrid user-kernel cooperative in-kernel new ebpf framework new ebpf runtime new ebpf programming model new ebpf system design ai/ml systems operating systems monitoring cloud systems distributed systems userspace runtime kernel subsystem memory subsystem scheduler hardware interface application layer performance optimization resource management scheduling observability monitoring scalability reliability nvidia open gpu kernel modules unified virtual memory (uvm) gpu scheduler heterogeneous memory management (hmm) ebpf verifier ebpf maps struct_ops gpu page fault handler gpu memory manager llm inference llm kv-cache offloading mixture-of-experts inference graph neural network training pytorch training faiss vector search multi-tenant gpu workloads gpu memory oversubscription gpu memory unified virtual memory gpu sms gpu thread blocks gpu warps pcie bandwidth gpu hardware queues gpu kernels host dram gpu global memory higher throughput lower latency reduced tail latency improved scalability reduced memory management overhead improved resource utilization the paper exposes programmable gpu scheduling policies at both host-driver and device levels, including preemption, timeslicing, and work stealing. a major contribution is programmable gpu memory placement, prefetching, eviction, and uvm management. gpu_ext provides low-overhead gpu instrumentation and tracing through device-side ebpf handlers. the framework supports runtime visibility into gpu memory access patterns, scheduling behavior, and execution statistics. evaluated extensively on llm inference, gnn training, moe models, and vector search workloads. targets multi-tenant gpu environments and resource sharing in datacenter deployments. treats gpu drivers and devices as programmable os subsystems with policy-mechanism separation. driver-side policy interfaces are implemented through struct_ops-style scheduling and memory-management hooks. the system uses uprobes and runtime instrumentation to trace application behavior and guide memory policies. includes policy loaders, control plane, jit infrastructure, and runtime configuration. extends gpu kernel drivers with programmable ebpf policy hooks. provides programmable memory placement, eviction, migration, and prefetching policies. implements programmable host and device scheduling mechanisms. directly manages gpu hardware queues, thread blocks, memory hierarchies, and execution resources. policies operate transparently on unmodified frameworks such as pytorch, vllm, llama.cpp, and faiss. presents a complete cross-layer gpu systems architecture. introduces os-style extensibility and policy interfaces for gpu resource management. focuses on throughput, latency, oversubscription, and scheduling optimization. addresses multi-tenant gpu sharing and datacenter resource management. provides a new runtime spanning cpu drivers and gpu devices. policies are designed to improve throughput and reduce latency. core focus is programmable management of gpu memory and compute resources. introduces programmable scheduling at queue and thread-block levels. supports dynamic instrumentation and execution visibility. provides runtime telemetry and state collection through ebpf maps and probes. improves performance under oversubscription and multi-tenant workloads. uses verifier-backed execution and constrained policy interfaces for safety. policy execution spans host drivers and gpu devices. combines userspace control planes with kernel-driver enforcement. host-side ebpf policies execute inside privileged driver and kernel contexts. introduces a gpu-specific ebpf framework for policy extensibility. provides a runtime executing verified ebpf on both host and gpu devices. defines cross-layer policy abstractions, simt-aware execution, and hierarchical maps. rearchitects gpu management as a programmable os subsystem."
   },
   {
     "id": "virtualizing-ebpf-with-late-binding-2026",
@@ -2120,12 +2179,28 @@
       "using",
       "misc"
     ],
-    "summary": "While eBPF has become the de facto standard for kernel customization in cloud-native systems, its design implicitly assumes a single trust domain. Allowing multiple tenants to deploy their own eBPF programs breaks this assumption, making the system both insecure and inefficient. We identify the root cause as eBPF\u2019s static-binding model, which rigidly couples logical eBPF programs to physical kernel hooks, forcing tenants to contend for shared execution contexts. We propose vBPF, a virtualization layer that shifts to a late-binding model. By repurposing physical hooks as generic interposition points and deferring the binding until the event is attributed at runtime, vBPF decouples tenant context from the underlying kernel. vBPF achieves this via three key mechanisms: (1) a Sniffer that accurately attributes interrupt-driven events to tenants, (2) a Dispatcher that replaces linear traversal with scalable O(1) program lookup, and (3) a compiler-assisted framework for state isolation. Implemented on Linux 6.12, vBPF enables the secure coexistence of multi-tenant workloads. Our evaluation shows that vBPF reduces latency by up to 3.9\u00d7 (lmbench) and improves throughput by 29% (PostgreSQL) compared to native contention.",
+    "summary": "While eBPF has become the de facto standard for kernel customization in cloud-native systems, its design implicitly assumes a single trust domain. Allowing multiple tenants to deploy their own eBPF programs breaks this assumption, making the system both insecure and inefficient. We identify the root cause as eBPF’s static-binding model, which rigidly couples logical eBPF programs to physical kernel hooks, forcing tenants to contend for shared execution contexts. We propose vBPF, a virtualization layer that shifts to a late-binding model. By repurposing physical hooks as generic interposition points and deferring the binding until the event is attributed at runtime, vBPF decouples tenant context from the underlying kernel. vBPF achieves this via three key mechanisms: (1) a Sniffer that accurately attributes interrupt-driven events to tenants, (2) a Dispatcher that replaces linear traversal with scalable O(1) program lookup, and (3) a compiler-assisted framework for state isolation. Implemented on Linux 6.12, vBPF enables the secure coexistence of multi-tenant workloads. Our evaluation shows that vBPF reduces latency by up to 3.9× (lmbench) and improves throughput by 29% (PostgreSQL) compared to native contention.",
     "classification_reasoning": {
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "virtualizing ebpf with late-binding j. zhang x. song d. du y. xia b. zang h. chen osdi 2026",
+    "_adminSearchIndex": "virtualizing ebpf with late-binding j. zhang x. song d. du y. xia b. zang h. chen osdi 2026 while ebpf has become the de facto standard for kernel customization in cloud-native systems, its design implicitly assumes a single trust domain. allowing multiple tenants to deploy their own ebpf programs breaks this assumption, making the system both insecure and inefficient. we identify the root cause as ebpf’s static-binding model, which rigidly couples logical ebpf programs to physical kernel hooks, forcing tenants to contend for shared execution contexts. we propose vbpf, a virtualization layer that shifts to a late-binding model. by repurposing physical hooks as generic interposition points and deferring the binding until the event is attributed at runtime, vbpf decouples tenant context from the underlying kernel. vbpf achieves this via three key mechanisms: (1) a sniffer that accurately attributes interrupt-driven events to tenants, (2) a dispatcher that replaces linear traversal with scalable o(1) program lookup, and (3) a compiler-assisted framework for state isolation. implemented on linux 6.12, vbpf enables the secure coexistence of multi-tenant workloads. our evaluation shows that vbpf reduces latency by up to 3.9× (lmbench) and improves throughput by 29% (postgresql) compared to native contention. using misc addresses general systems research using ebpf."
   },
   {
     "id": "peer-first-class-scheduling-for-latency-critical-ebpf-applications-2026",
@@ -2146,12 +2221,28 @@
       "improving",
       "misc"
     ],
-    "summary": "We present PeeR, a novel eBPF runtime that makes latency-critical eBPF programs preemptable and schedulable while maintaining low overhead. As eBPF programs grow more complex, they expose a fundamental gap: performance-critical hooks execute in a non-preemptable softirq context, which is invisible to the scheduler. These programs bypass resource controls, break isolation, and cause head-of-line blocking, degrading tail latency. PeeR exploits two key properties of eBPF: the verifier enforces clean program state at helper function boundaries, making these sites natural preemption points, and non-trivial programs frequently call helpers, ensuring fine-grained preemption opportunities. Building on these properties, PeeR brings cooperative preemption to eBPF: lightweight budget checks, inserted at each helper call, force programs exceeding their budget to yield and resume later on per-CPU kernel threads. To handle a wide variety of workloads, PeeR uses a two-level scheduling model that integrates with sched e xt, where the outer level controls aggregate CPU time for eBPF workloads, while an inner micro-scheduler orders individual tasks according to an operator-defined policy. Our evaluation on Redis, Memcached, echo-server, and TPC-C workloads shows that PeeR reduces p99 latency for latency-sensitive requests by 3\u00d7 to 19.8\u00d7 over the current eBPF runtime, without starving competing long-running requests.",
+    "summary": "We present PeeR, a novel eBPF runtime that makes latency-critical eBPF programs preemptable and schedulable while maintaining low overhead. As eBPF programs grow more complex, they expose a fundamental gap: performance-critical hooks execute in a non-preemptable softirq context, which is invisible to the scheduler. These programs bypass resource controls, break isolation, and cause head-of-line blocking, degrading tail latency. PeeR exploits two key properties of eBPF: the verifier enforces clean program state at helper function boundaries, making these sites natural preemption points, and non-trivial programs frequently call helpers, ensuring fine-grained preemption opportunities. Building on these properties, PeeR brings cooperative preemption to eBPF: lightweight budget checks, inserted at each helper call, force programs exceeding their budget to yield and resume later on per-CPU kernel threads. To handle a wide variety of workloads, PeeR uses a two-level scheduling model that integrates with sched e xt, where the outer level controls aggregate CPU time for eBPF workloads, while an inner micro-scheduler orders individual tasks according to an operator-defined policy. Our evaluation on Redis, Memcached, echo-server, and TPC-C workloads shows that PeeR reduces p99 latency for latency-sensitive requests by 3× to 19.8× over the current eBPF runtime, without starving competing long-running requests.",
     "classification_reasoning": {
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "peer: first-class scheduling for latency critical ebpf applications j. carin b. holmes w. wang a. bhardwaj m. ghobadi osdi 2026",
+    "_adminSearchIndex": "peer: first-class scheduling for latency critical ebpf applications j. carin b. holmes w. wang a. bhardwaj m. ghobadi osdi 2026 we present peer, a novel ebpf runtime that makes latency-critical ebpf programs preemptable and schedulable while maintaining low overhead. as ebpf programs grow more complex, they expose a fundamental gap: performance-critical hooks execute in a non-preemptable softirq context, which is invisible to the scheduler. these programs bypass resource controls, break isolation, and cause head-of-line blocking, degrading tail latency. peer exploits two key properties of ebpf: the verifier enforces clean program state at helper function boundaries, making these sites natural preemption points, and non-trivial programs frequently call helpers, ensuring fine-grained preemption opportunities. building on these properties, peer brings cooperative preemption to ebpf: lightweight budget checks, inserted at each helper call, force programs exceeding their budget to yield and resume later on per-cpu kernel threads. to handle a wide variety of workloads, peer uses a two-level scheduling model that integrates with sched e xt, where the outer level controls aggregate cpu time for ebpf workloads, while an inner micro-scheduler orders individual tasks according to an operator-defined policy. our evaluation on redis, memcached, echo-server, and tpc-c workloads shows that peer reduces p99 latency for latency-sensitive requests by 3× to 19.8× over the current ebpf runtime, without starving competing long-running requests. improving misc focuses on internal os and ebpf infrastructure like improving."
   },
   {
     "id": "beeqos-a-cloud-native-qos-system-for-adaptive-and-scalable-multi-priority-bandwidth-guarantees-2026",
@@ -2171,16 +2262,32 @@
     "links": {
       "paper": "https://dl.acm.org/doi/pdf/10.1145/3774904.3792487"
     },
+    "summary": "Introduces BeeQoS, a cloud-native Quality of Service framework designed to provide scalable and adaptive bandwidth guarantees across multiple traffic priorities using programmable data planes and eBPF in cloud environments.",
+    "categories": [],
     "primary_categories": [
       "using",
       "networking"
     ],
-    "summary": "Introduces BeeQoS, a cloud-native Quality of Service framework designed to provide scalable and adaptive bandwidth guarantees across multiple traffic priorities using programmable data planes and eBPF in cloud environments.",
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
     "classification_reasoning": {
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "_publicSearchIndex": "beeqos: a cloud-native qos system for adaptive and scalable multi-priority bandwidth guarantees j. liu s. wu h. ma c. li h. yu d. jia f. li p. hu www 2026",
+    "_adminSearchIndex": "beeqos: a cloud-native qos system for adaptive and scalable multi-priority bandwidth guarantees j. liu s. wu h. ma c. li h. yu d. jia f. li p. hu www 2026 introduces beeqos, a cloud-native quality of service framework designed to provide scalable and adaptive bandwidth guarantees across multiple traffic priorities using programmable data planes and ebpf in cloud environments. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "xkernel-rethinking-performance-tunability-of-operating-system-kernels-2026",
@@ -2208,7 +2315,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "xkernel: rethinking performance tunability of operating system kernels z. chen w. zhang y. tang r. shu f. ren t. xu j. liu osdi 2026",
+    "_adminSearchIndex": "xkernel: rethinking performance tunability of operating system kernels z. chen w. zhang y. tang r. shu f. ren t. xu j. liu osdi 2026 the linux kernel is permeated with constant values that are critical to system performance. many of these constants, referred to as perf-consts, are magic numbers with brittle assumptions on hardware and workloads. unfortunately, there is no capability of in-situ tuning of perf-const values on deployed kernels. this paper rethinks os performance tunability. we present xkernel, a system that offers a safe, efficient, and programmable interface for in-situ tuning of any perf-consts directly on a running kernel. xkernel transforms any perf-const into a tunable knob on demand using a novel approach called scoped indirect execution (sie). sie captures precise binary boundaries where a perf-const enters system state and redirects control to synthesized instructions that update the state as if new values were used. xkernel goes beyond version atomicity when updating perf-consts to guarantee side-effect safety, a property notably absent in existing kernel update mechanisms. case studies on various os subsystems demonstrate significant performance benefits of tuning perf-consts which is made possible by xkernel. using misc addresses general systems research using ebpf."
   },
   {
     "id": "hybridmesh-a-hardware-software-hybrid-approach-for-accelerating-service-mesh-ingress-2026",
@@ -2234,7 +2357,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "hybridmesh: a hardware-software hybrid approach for accelerating service mesh ingress m. you j. nam m. seo t. park s. shin nsdi 2026",
+    "_adminSearchIndex": "hybridmesh: a hardware-software hybrid approach for accelerating service mesh ingress m. you j. nam m. seo t. park s. shin nsdi 2026 proposes hybridmesh, a hybrid architecture that offloads critical service mesh ingress processing to smartnic hardware while maintaining flexibility via software ebpf pipelines, significantly accelerating rpc throughput and reducing latency. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "remote-tcp-connection-offload-and-applications-2026",
@@ -2259,7 +2398,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "remote tcp connection offload and applications s. li s. w. d. chien t. gao m. honda nsdi 2026",
+    "_adminSearchIndex": "remote tcp connection offload and applications s. li s. w. d. chien t. gao m. honda nsdi 2026 explores a novel architecture for offloading entire remote tcp connections to programmable nics and data processing units (dpus), leveraging ebpf to manage state synchronization and protocol handling efficiently. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "krakenguard-towards-fine-grained-ebpf-isolation-2026",
@@ -2285,7 +2440,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "krakenguard: towards fine-grained ebpf isolation j. patel l. g. buhl-nielsen a. ghosn m. kogias nsdi 2026",
+    "_adminSearchIndex": "krakenguard: towards fine-grained ebpf isolation j. patel l. g. buhl-nielsen a. ghosn m. kogias nsdi 2026 presents krakenguard, a security framework that introduces fine-grained, compartmentalized isolation for ebpf programs, ensuring that individual extensions cannot leak state or interfere with one another even within the kernel. improving security focuses on internal os and ebpf infrastructure like improving. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "tux-efficient-drop-in-networking-for-database-systems-2025",
@@ -2311,7 +2482,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "tux: efficient drop-in networking for database systems x. zhou v. leis x. yu m. stonebraker vldb 2025",
+    "_adminSearchIndex": "tux: efficient drop-in networking for database systems x. zhou v. leis x. yu m. stonebraker vldb 2025 introduces tux, an efficient drop-in networking library for database systems. it uses ebpf to optimize socket operations and network buffering, reducing cpu overhead and improving query latency without modifying dbms source code. using networking misc the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "bpf-db-a-kernel-embedded-transactional-database-management-system-for-ebpf-applications-2025",
@@ -2340,7 +2527,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
         "Storage": "The paper's primary focus aligns with storage based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "bpf-db: a kernel-embedded transactional database management system for ebpf applications m. butrovich s. arch w. s. lim w. zhang j. m. patel a. pavlo sigmod 2025",
+    "_adminSearchIndex": "bpf-db: a kernel-embedded transactional database management system for ebpf applications m. butrovich s. arch w. s. lim w. zhang j. m. patel a. pavlo sigmod 2025 developers rely on the ebpf framework to augment operating system (os) behavior for the betterment of database management system (dbms) without having to modify kernel code. but ebpf's verifier limits program complexity and data management functionality. as a result ebpf's storage options are limited to kernel-resident, non-durable data structures that lack transactional guarantees. inspired by embedded dbmss for user-space applications, this paper present bpf-db, an os-embedded dbms that offers transactional data management for ebpf applications. we explore the storage management and concurrency control challenges associated with dbms design in ebpf's restrictive execution environment. we demonstrate bpf-db's capabilities with two applications based on real-world systems. the first is a redis-compatible in-memory dbms that uses bpf-db as its transactional storage engine. this system matches the performance of state-of-the-art implementations while offering stronger transactional guarantees. the second application implements a stored procedure-based dbms that provides serializable multi-statement transactions. we compare this application against voltdb, with bpf-db achieving 43% higher throughput. bpf-db's robust and high-performance transactional semantics enable emerging kernel-space applications. improving misc storage focuses on internal os and ebpf infrastructure like improving. the paper's primary focus aligns with storage based on its categorization."
   },
   {
     "id": "approximation-enforced-execution-of-untrusted-linux-kernel-extensions-2025",
@@ -2358,12 +2561,28 @@
       "improving",
       "verifier"
     ],
-    "summary": "Proposes a mechanism for safely executing untrusted kernel extensions by enforcing execution approximations\u2014trading off exact semantic fidelity for guaranteed bounded runtime and strict safety properties, verified via eBPF.",
+    "summary": "Proposes a mechanism for safely executing untrusted kernel extensions by enforcing execution approximations—trading off exact semantic fidelity for guaranteed bounded runtime and strict safety properties, verified via eBPF.",
     "classification_reasoning": {
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "approximation enforced execution of untrusted linux kernel extensions h. sun z. su sec 2025",
+    "_adminSearchIndex": "approximation enforced execution of untrusted linux kernel extensions h. sun z. su sec 2025 proposes a mechanism for safely executing untrusted kernel extensions by enforcing execution approximations—trading off exact semantic fidelity for guaranteed bounded runtime and strict safety properties, verified via ebpf. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "deprivileging-low-level-gpu-drivers-efficiently-with-user-space-processes-and-cheri-compartments-2025",
@@ -2371,7 +2590,7 @@
     "authors": [
       "P. Metzger",
       "A. T. Markettos",
-      "E. T. Napiera\u0142a",
+      "E. T. Napierała",
       "M. Naylor",
       "R. N. M. Watson",
       "T. M. Jones"
@@ -2391,7 +2610,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "deprivileging low-level gpu drivers efficiently with user-space processes and cheri compartments p. metzger a. t. markettos e. t. napierała m. naylor r. n. m. watson t. m. jones ccs 2025",
+    "_adminSearchIndex": "deprivileging low-level gpu drivers efficiently with user-space processes and cheri compartments p. metzger a. t. markettos e. t. napierała m. naylor r. n. m. watson t. m. jones ccs 2025 explores techniques to deprivilege monolithic gpu kernel drivers by moving their core components into user-space processes and hardware-enforced cheri compartments, communicating safely via ebpf boundaries. using security misc the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "rethinking-tamper-evident-logging-a-high-performance-co-designed-auditing-system-2025",
@@ -2416,7 +2651,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "rethinking tamper-evident logging: a high-performance, co-designed auditing system r. zhao m. shoaib v. t. hoang w. u. hassan ccs 2025",
+    "_adminSearchIndex": "rethinking tamper-evident logging: a high-performance, co-designed auditing system r. zhao m. shoaib v. t. hoang w. u. hassan ccs 2025 presents a high-performance auditing system that co-designs the kernel data collection (using ebpf) and user-space storage to guarantee tamper-evident logging with minimal impact on production workloads. using security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "intent-aware-fuzzing-for-android-hardened-application-2025",
@@ -2446,7 +2697,23 @@
         "Security": "The paper's primary focus aligns with security based on its categorization.",
         "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "intent-aware fuzzing for android hardened application s jeong m. choi h. cho s. choi h. kim y. jeon ccs 2025",
+    "_adminSearchIndex": "intent-aware fuzzing for android hardened application s jeong m. choi h. cho s. choi h. kim y. jeon ccs 2025 describes an intent-aware fuzzing framework tailored for hardened android applications, which utilizes ebpf probes to instrument and monitor inter-process communications (ipc) and internal state transitions dynamically. using security tracing misc the paper's primary focus aligns with security based on its categorization. the paper's primary focus aligns with tracing based on its categorization."
   },
   {
     "id": "aeolia-a-fast-and-secure-userspace-interrupt-based-storage-stack-2025",
@@ -2478,7 +2745,23 @@
       "application_domain": {
         "Storage": "The paper's primary focus aligns with storage based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "aeolia: a fast and secure userspace interrupt-based storage stack c. li r. yi z. zhang j. liu c. min j. zhang y. luo x. wang z. wang d. zhou sosp 2025",
+    "_adminSearchIndex": "aeolia: a fast and secure userspace interrupt-based storage stack c. li r. yi z. zhang j. liu c. min j. zhang y. luo x. wang z. wang d. zhou sosp 2025 introduces aeolia, a fast and secure storage stack that leverages user-space interrupts and ebpf-based i/o policing to bypass the traditional kernel storage path, drastically reducing overhead for nvme devices. using storage misc the paper's primary focus aligns with storage based on its categorization."
   },
   {
     "id": "prove-it-to-the-kernel-precise-extension-analysis-via-proof-guided-abstraction-refinement-2025",
@@ -2501,7 +2784,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "prove it to the kernel: precise extension analysis via proof-guided abstraction refinement h. sun z. su sosp 2025",
+    "_adminSearchIndex": "prove it to the kernel: precise extension analysis via proof-guided abstraction refinement h. sun z. su sosp 2025 proposes a novel proof-guided abstraction refinement (pgar) approach to improve the precision of the ebpf verifier. by dynamically adjusting the level of abstraction based on verification failures, it aims to reduce false positives and allow more complex, safe programs to be accepted by the kernel. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "sok-challenges-and-paths-toward-memory-safety-for-ebpf-2025",
@@ -2530,7 +2829,23 @@
         "Security": "The paper's primary focus aligns with security based on its categorization.",
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "sok: challenges and paths toward memory safety for ebpf k. huang j. sampson m. payer g. tan z. qian t. jaeger s&p 2025",
+    "_adminSearchIndex": "sok: challenges and paths toward memory safety for ebpf k. huang j. sampson m. payer g. tan z. qian t. jaeger s&p 2025 a systematization of knowledge (sok) detailing the unique memory safety challenges inherent to the ebpf ecosystem. it evaluates current verifier mechanisms, highlights known vulnerabilities, and proposes future directions for achieving robust memory safety in kernel extensions. analysis security verifier the paper's primary focus aligns with security based on its categorization. focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "swiftsweeper-defeating-use-after-free-bugs-using-memory-sweeper-without-stop-the-world-2025",
@@ -2557,7 +2872,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "swiftsweeper: defeating use-after-free bugs using memory sweeper without stop-the-world j. ahn k. lee c. park h. moon y. kwon s&p 2025",
+    "_adminSearchIndex": "swiftsweeper: defeating use-after-free bugs using memory sweeper without stop-the-world j. ahn k. lee c. park h. moon y. kwon s&p 2025 introduces swiftsweeper, a memory sweeping mechanism designed to mitigate use-after-free vulnerabilities without imposing a stop-the-world penalty, providing an efficient and secure memory management strategy applicable to ebpf environments. using misc security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "ebpf-misbehavior-detection-fuzzing-with-a-specification-based-oracle-2025",
@@ -2584,7 +2915,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "ebpf misbehavior detection: fuzzing with a specification-based oracle t. lyu k. k. dwivedi t. bourgeat m. payer m. xu s. kashyap sosp 2025",
+    "_adminSearchIndex": "ebpf misbehavior detection: fuzzing with a specification-based oracle t. lyu k. k. dwivedi t. bourgeat m. payer m. xu s. kashyap sosp 2025 presents a novel fuzzing framework tailored for ebpf runtimes. it leverages specification-based oracles to effectively detect semantic misbehaviors and implementation flaws within the ebpf verifier and jit compiler. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "flexguard-fast-mutual-exclusion-independent-of-subscription-2025",
@@ -2610,7 +2957,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "flexguard: fast mutual exclusion independent of subscription v. laforet s. kashyap c. iorgulescu j. lawall j.-p. lozi sosp 2025",
+    "_adminSearchIndex": "flexguard: fast mutual exclusion independent of subscription v. laforet s. kashyap c. iorgulescu j. lawall j.-p. lozi sosp 2025 proposes flexguard, a high-performance mutual exclusion synchronization primitive that maintains fast execution times regardless of the number of subscribing threads, optimizing concurrent kernel extensions. using misc addresses general systems research using ebpf."
   },
   {
     "id": "cache-ext-customizing-the-page-cache-with-ebpf-2025",
@@ -2629,16 +2992,34 @@
     "links": {
       "paper": "https://arxiv.org/pdf/2502.02750"
     },
+    "summary": "modify kernel to customize cache eviction polcies.",
+    "categories": [
+      "Kernel extension"
+    ],
     "primary_categories": [
       "using",
       "misc"
     ],
-    "summary": "The page cache is a central part of an OS. It reduces repeated accesses to storage by deciding which pages to retain in memory. As a result, the page cache has a significant impact on the performance of many applications. However, its one-size-fits-all eviction policy performs poorly in many workloads. While the systems community has experimented with a plethora of new and adaptive eviction policies in non-OS settings (e.g., key-value stores, CDNs), it is very difficult to implement such policies in the page cache, due to the complexity of modifying kernel code. To address these shortcomings, we design a novel eBPF-based framework for the Linux page cache, called $\\texttt{cachebpf}$, that allows developers to customize the page cache without modifying the kernel. $\\texttt{cachebpf}$ enables applications to customize the page cache policy for their specific needs, while also ensuring that different applications' policies do not interfere with each other and preserving the page cache's ability to share memory across different processes. We demonstrate the flexibility of $\\texttt{cachebpf}$'s interface by using it to implement several eviction policies. Our evaluation shows that it is indeed beneficial for applications to customize the page cache to match their workloads' unique properties, and that they can achieve up to 70% higher throughput and 58% lower tail latency.",
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
     "classification_reasoning": {
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "_publicSearchIndex": "cache_ext: customizing the page cache with ebpf t. zussman i. zarkadas j. carin a. cheng h. franke j. pfefferle a. cidon sosp 2025",
+    "_adminSearchIndex": "cache_ext: customizing the page cache with ebpf t. zussman i. zarkadas j. carin a. cheng h. franke j. pfefferle a. cidon sosp 2025 modify kernel to customize cache eviction polcies. kernel extension using misc addresses general systems research using ebpf."
   },
   {
     "id": "hermes-enhancing-layer-7-cloud-load-balancers-with-userspace-directed-i-o-event-notification-2025",
@@ -2678,7 +3059,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "hermes: enhancing layer-7 cloud load balancers with userspace-directed i/o event notification t. pan e. song y. zuo s. zhang y. song j. zhao w. hou j. lu x. sun s. zhang y. yang j. zhang t. huang b. lyu x. li r. wen z. zong s. zhu sigcomm 2025",
+    "_adminSearchIndex": "hermes: enhancing layer-7 cloud load balancers with userspace-directed i/o event notification t. pan e. song y. zuo s. zhang y. song j. zhao w. hou j. lu x. sun s. zhang y. yang j. zhang t. huang b. lyu x. li r. wen z. zong s. zhu sigcomm 2025 describes hermes, an optimization for l7 cloud load balancers that leverages userspace-directed i/o event notifications to bypass traditional kernel overheads, significantly improving connection handling throughput and latency. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "extending-applications-safely-and-efficiently-2025",
@@ -2708,7 +3105,23 @@
       "application_domain": {
         "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "extending applications safely and efficiently y. zheng t. yu y. yang y. hu x. lai d. williams a. quinn osdi 2025",
+    "_adminSearchIndex": "extending applications safely and efficiently y. zheng t. yu y. yang y. hu x. lai d. williams a. quinn osdi 2025 explores methodologies for safely and efficiently extending user-space applications using ebpf-like mechanisms, bringing kernel-level observability and extensibility concepts into application boundaries. using tracing misc the paper's primary focus aligns with tracing based on its categorization."
   },
   {
     "id": "rex-closing-the-language-verifier-gap-with-safe-and-usable-kernel-extensions-2025",
@@ -2741,7 +3154,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "rex: closing the language-verifier gap with safe and usable kernel extensions j. jia r. qin m. craun e. lukiyanov a. bansal m. phan m. v. le h. franke h. jamjoom t. xu d. williams atc 2025",
+    "_adminSearchIndex": "rex: closing the language-verifier gap with safe and usable kernel extensions j. jia r. qin m. craun e. lukiyanov a. bansal m. phan m. v. le h. franke h. jamjoom t. xu d. williams atc 2025 introduces rex, a framework aimed at bridging the gap between high-level programming languages and the ebpf verifier, allowing developers to write safe kernel extensions with more expressive language features. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "accelerating-nested-virtualization-with-hyperturtle-2025",
@@ -2767,7 +3196,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "accelerating nested virtualization with hyperturtle o. b. zur j. krebs s. a. bergman m. silberstein atc 2025",
+    "_adminSearchIndex": "accelerating nested virtualization with hyperturtle o. b. zur j. krebs s. a. bergman m. silberstein atc 2025 presents hyperturtle, a system designed to accelerate nested virtualization performance by offloading specific hypervisor intercepts and state management tasks. using misc addresses general systems research using ebpf."
   },
   {
     "id": "pageflex-flexible-and-efficient-user-space-delegation-of-linux-paging-policies-with-ebpf-2025",
@@ -2798,7 +3243,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "pageflex: flexible and efficient user-space delegation of linux paging policies with ebpf a. yelam k. wu z. guo s. yang r. shashidhara w. xu s. novakovic a. c. snoeren k. keeton atc 2025",
+    "_adminSearchIndex": "pageflex: flexible and efficient user-space delegation of linux paging policies with ebpf a. yelam k. wu z. guo s. yang r. shashidhara w. xu s. novakovic a. c. snoeren k. keeton atc 2025 introduces pageflex, which delegates linux kernel paging policies to user-space applications using ebpf. this allows applications to define custom, highly efficient memory management strategies without modifying kernel code. using misc addresses general systems research using ebpf."
   },
   {
     "id": "vep-a-two-stage-verification-toolchain-for-full-ebpf-programmability-2025",
@@ -2828,7 +3289,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "vep: a two-stage verification toolchain for full ebpf programmability x. wu y. feng t. huang x. lu s. lin l. xie s. zhao q. cao nsdi 2025",
+    "_adminSearchIndex": "vep: a two-stage verification toolchain for full ebpf programmability x. wu y. feng t. huang x. lu s. lin l. xie s. zhao q. cao nsdi 2025 presents vep, a novel two-stage verification toolchain that splits ebpf verification into an offline formal analysis phase and a lightweight online check, expanding the complexity of programs that can be safely loaded. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "etran-extensible-kernel-transport-with-ebpf-2025",
@@ -2857,7 +3334,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "etran: extensible kernel transport with ebpf z. chen q. meng c. lao y. liu f. ren m. yu y. zhou nsdi 2025",
+    "_adminSearchIndex": "etran: extensible kernel transport with ebpf z. chen q. meng c. lao y. liu f. ren m. yu y. zhou nsdi 2025 proposes etran, an extensible kernel transport architecture that utilizes ebpf to allow rapid prototyping and deployment of new transport layer protocols directly within the linux kernel. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "state-compute-replication-parallelizing-high-speed-stateful-packet-processing-2025",
@@ -2888,7 +3381,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "state-compute replication: parallelizing high-speed stateful packet processing q. xu s. miano x. gao t. wang a. murugadass s. zhang a. sivaraman g. antichi s. narayana nsdi 2025",
+    "_adminSearchIndex": "state-compute replication: parallelizing high-speed stateful packet processing q. xu s. miano x. gao t. wang a. murugadass s. zhang a. sivaraman g. antichi s. narayana nsdi 2025 explores state-compute replication techniques to parallelize stateful packet processing tasks at high speeds, using programmable data planes and ebpf to distribute state safely across cpu cores. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "p4control-line-rate-cross-host-attack-prevention-via-in-network-information-flow-control-enabled-by-programmable-switches-and-ebpf-2024",
@@ -2915,7 +3424,23 @@
         "Networking": "The paper's primary focus aligns with networking based on its categorization.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "p4control: line-rate cross-host attack prevention via in-network information flow control enabled by programmable switches and ebpf o. bajaber b. ji p. gao s&p 2024",
+    "_adminSearchIndex": "p4control: line-rate cross-host attack prevention via in-network information flow control enabled by programmable switches and ebpf o. bajaber b. ji p. gao s&p 2024 introduces p4control, a system combining programmable switches and ebpf to enforce in-network information flow control. it detects and prevents cross-host attacks at line rate with minimal host overhead. using networking security the paper's primary focus aligns with networking based on its categorization. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "budalloc-defeating-use-after-free-bugs-by-decoupling-virtual-address-management-from-kernel-2024",
@@ -2944,7 +3469,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "budalloc: defeating use-after-free bugs by decoupling virtual address management from kernel j. ahn j. lee k. lee w. gwak m. hwang y. kwon sec 2024",
+    "_adminSearchIndex": "budalloc: defeating use-after-free bugs by decoupling virtual address management from kernel j. ahn j. lee k. lee w. gwak m. hwang y. kwon sec 2024 presents budalloc, an allocator that decouples virtual address management from the kernel to effectively defeat use-after-free (uaf) vulnerabilities by preventing address reuse during the vulnerable window. using misc security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "beebox-hardening-bpf-against-transient-execution-attacks-2024",
@@ -2971,7 +3512,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "beebox: hardening bpf against transient execution attacks d. jin a. j. gaidis v. p. kemerlis sec 2024",
+    "_adminSearchIndex": "beebox: hardening bpf against transient execution attacks d. jin a. j. gaidis v. p. kemerlis sec 2024 describes beebox, a hardening framework that secures the bpf subsystem against transient execution attacks (like spectre) by employing precise masking and bounds-checking optimizations within the jit compiler. improving verifier security focuses on internal os and ebpf infrastructure like verifier. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "eaudit-a-fast-scalable-and-deployable-audit-data-collection-system-2024",
@@ -2996,7 +3553,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "eaudit: a fast, scalable and deployable audit data collection system r. sekar h. kimm r. aich s&p 2024",
+    "_adminSearchIndex": "eaudit: a fast, scalable and deployable audit data collection system r. sekar h. kimm r. aich s&p 2024 introduces eaudit, a high-performance system for collecting audit data from the linux kernel using ebpf. it addresses the scalability and performance bottlenecks of traditional auditd. using security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "toss-a-fault-to-bpfchecker-revealing-implementation-flaws-for-ebpf-runtimes-with-differential-fuzzing-2024",
@@ -3022,7 +3595,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "toss a fault to bpfchecker: revealing implementation flaws for ebpf runtimes with differential fuzzing c. peng m. jiang l. wu y. zhou ccs 2024",
+    "_adminSearchIndex": "toss a fault to bpfchecker: revealing implementation flaws for ebpf runtimes with differential fuzzing c. peng m. jiang l. wu y. zhou ccs 2024 presents bpfchecker, a differential fuzzing tool designed to reveal implementation flaws in ebpf runtimes by comparing the execution behavior of the kernel interpreter against the jit-compiled output. improving verifier jit focuses on internal os and ebpf infrastructure like jit."
   },
   {
     "id": "netedit-an-orchestration-platform-for-ebpf-network-functions-at-scale-2024",
@@ -3056,7 +3645,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "netedit: an orchestration platform for ebpf network functions at scale t. a. benson p. kannan p. gupta b. madhavan k. s. arora j. meng m. lau a. dhamija r. krishnamurthy s. sundaresan n. spring y. zhang sigcomm 2024",
+    "_adminSearchIndex": "netedit: an orchestration platform for ebpf network functions at scale t. a. benson p. kannan p. gupta b. madhavan k. s. arora j. meng m. lau a. dhamija r. krishnamurthy s. sundaresan n. spring y. zhang sigcomm 2024 proposes netedit, a large-scale orchestration platform that simplifies the deployment, lifecycle management, and chaining of ebpf-based network functions across distributed cloud environments. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "merlin-multi-tier-optimization-of-ebpf-code-for-performance-and-compactness-2024",
@@ -3082,7 +3687,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "merlin: multi-tier optimization of ebpf code for performance and compactness j. mao h. ding j. zhai s. ma asplos 2024",
+    "_adminSearchIndex": "merlin: multi-tier optimization of ebpf code for performance and compactness j. mao h. ding j. zhai s. ma asplos 2024 introduces merlin, a multi-tier compiler optimization framework for ebpf that generates highly compact and performant bytecode, reducing instruction counts and improving execution speed. using misc addresses general systems research using ebpf."
   },
   {
     "id": "dint-fast-in-kernel-distributed-transactions-with-ebpf-2024",
@@ -3110,7 +3731,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "dint: fast in-kernel distributed transactions with ebpf y. zhou x. xiang m. kiley s. dharanipragada m. yu nsdi 2024",
+    "_adminSearchIndex": "dint: fast in-kernel distributed transactions with ebpf y. zhou x. xiang m. kiley s. dharanipragada m. yu nsdi 2024 presents dint, an in-kernel distributed transaction processing system using ebpf. by bypassing user-space context switches for transaction coordination, dint significantly accelerates distributed database performance. using networking offload the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "blueswat-a-lightweight-state-aware-security-framework-for-bluetooth-low-energy-2024",
@@ -3138,7 +3775,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "blueswat: a lightweight state-aware security framework for bluetooth low energy x. che y. he x. feng k. sun k. xu q. li ccs 2024",
+    "_adminSearchIndex": "blueswat: a lightweight state-aware security framework for bluetooth low energy x. che y. he x. feng k. sun k. xu q. li ccs 2024 describes blueswat, a state-aware security framework leveraging ebpf to monitor and protect bluetooth low energy (ble) stacks from malicious state-transition attacks and protocol anomalies. using security misc the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "seak-rethinking-the-design-of-a-secure-allocator-for-os-kernel-2024",
@@ -3171,7 +3824,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "seak: rethinking the design of a secure allocator for os kernel z. wang y. guang y. chen z. lin m. le d. k le d. williams x. xing z. gu h. jamjoom sec 2024",
+    "_adminSearchIndex": "seak: rethinking the design of a secure allocator for os kernel z. wang y. guang y. chen z. lin m. le d. k le d. williams x. xing z. gu h. jamjoom sec 2024 introduces seak, a redesigned secure memory allocator for the os kernel that defends against advanced heap exploitation techniques while maintaining low allocation overhead. using security misc the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "rethinking-process-management-for-interactive-mobile-systems-2024",
@@ -3202,7 +3871,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "rethinking process management for interactive mobile systems j. zheng z. li f. qian w. liu h. lin y. liu t. xu n. zhang j. wang c. zhang mobicom 2024",
+    "_adminSearchIndex": "rethinking process management for interactive mobile systems j. zheng z. li f. qian w. liu h. lin y. liu t. xu n. zhang j. wang c. zhang mobicom 2024 proposes a new process management and scheduling framework tailored for interactive mobile systems, utilizing ebpf to rapidly adjust priorities based on ui events and user interaction. using misc addresses general systems research using ebpf."
   },
   {
     "id": "megate-extending-wan-traffic-engineering-to-millions-of-endpoints-in-virtualized-cloud-2024",
@@ -3237,7 +3922,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "megate: extending wan traffic engineering to millions of endpoints in virtualized cloud c. miao z. zhong y. xiao f. yang s. zhang y. jiang z. bai c. lu j. geng z. he y. wang x. zou c. yang sigcomm 2024",
+    "_adminSearchIndex": "megate: extending wan traffic engineering to millions of endpoints in virtualized cloud c. miao z. zhong y. xiao f. yang s. zhang y. jiang z. bai c. lu j. geng z. he y. wang x. zou c. yang sigcomm 2024 presents megate, a massively scalable traffic engineering (te) system that uses ebpf at the edge to enforce te policies for millions of virtualized endpoints across a wide area network. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "fetchbpf-customizable-prefetching-policies-in-linux-with-ebpf-2024",
@@ -3264,7 +3965,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "fetchbpf: customizable prefetching policies in linux with ebpf x. cao s. patel s. y. lim x. han t. pasquier atc 2024",
+    "_adminSearchIndex": "fetchbpf: customizable prefetching policies in linux with ebpf x. cao s. patel s. y. lim x. han t. pasquier atc 2024 introduces fetchbpf, allowing developers to inject custom file prefetching policies into the linux kernel page cache via ebpf, tailoring i/o patterns to specific application workloads. using misc addresses general systems research using ebpf."
   },
   {
     "id": "validating-the-ebpf-verifier-via-state-embedding-2024",
@@ -3288,7 +4005,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "validating the ebpf verifier via state embedding h. sun z. su osdi 2024",
+    "_adminSearchIndex": "validating the ebpf verifier via state embedding h. sun z. su osdi 2024 proposes a state-embedding approach to validate the correctness of the ebpf verifier. by mapping abstract verifier states to concrete executions, it systematically uncovers edge-case bugs in the verifier's logic. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "hive-a-hardware-assisted-isolated-execution-environment-for-ebpf-on-aarch64-2024",
@@ -3323,7 +4056,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "hive: a hardware-assisted isolated execution environment for ebpf on aarch64 p. zhang c. wu x. meng y. zhang m. peng s. zhang b. hu m. xie y. lai y. kang z. wang sec 2024",
+    "_adminSearchIndex": "hive: a hardware-assisted isolated execution environment for ebpf on aarch64 p. zhang c. wu x. meng y. zhang m. peng s. zhang b. hu m. xie y. lai y. kang z. wang sec 2024 describes hive, a hardware-assisted execution environment on aarch64 that isolates ebpf programs. it prevents malicious or compromised ebpf bytecode from interfering with the core kernel state. improving verifier security focuses on internal os and ebpf infrastructure like verifier. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "end-to-end-mechanized-proof-of-a-jit-accelerated-ebpf-virtual-machine-for-iot-2024",
@@ -3347,7 +4096,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "end-to-end mechanized proof of a jit-accelerated ebpf virtual machine for iot s. yuan f. besson j.-p. talpin cav 2024",
+    "_adminSearchIndex": "end-to-end mechanized proof of a jit-accelerated ebpf virtual machine for iot s. yuan f. besson j.-p. talpin cav 2024 presents an end-to-end mechanized proof using formal methods for a jit-accelerated ebpf virtual machine, ensuring absolute execution correctness specifically tailored for constrained iot devices. improving jit focuses on internal os and ebpf infrastructure like jit."
   },
   {
     "id": "fast-flexible-and-practical-kernel-extensions-2024",
@@ -3371,7 +4136,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "fast, flexible, and practical kernel extensions k. k. dwivedi r. iyer s. kashyap sosp 2024",
+    "_adminSearchIndex": "fast, flexible, and practical kernel extensions k. k. dwivedi r. iyer s. kashyap sosp 2024 explores the evolution of modern kernel extensions, showcasing how ebpf achieves a practical balance between the performance of native kernel modules and the safety of user-space execution. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "moat-towards-safe-bpf-kernel-extension-2024",
@@ -3400,7 +4181,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "moat: towards safe bpf kernel extension h. lu s. wang y. wu w. he f. zhang sec 2024",
+    "_adminSearchIndex": "moat: towards safe bpf kernel extension h. lu s. wang y. wu w. he f. zhang sec 2024 introduces moat, a comprehensive framework focused on securing the bpf kernel extension ecosystem by combining strict static analysis with lightweight runtime memory isolation. improving verifier security focuses on internal os and ebpf infrastructure like verifier. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "ehdl-turning-ebpf-xdp-programs-into-hardware-designs-for-the-nic-2023",
@@ -3427,7 +4224,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "ehdl: turning ebpf/xdp programs into hardware designs for the nic a. rivitti r. bifulco a. tulumello m. bonola s. pontarelli asplos 2023",
+    "_adminSearchIndex": "ehdl: turning ebpf/xdp programs into hardware designs for the nic a. rivitti r. bifulco a. tulumello m. bonola s. pontarelli asplos 2023 presents ehdl, a toolchain that directly compiles ebpf/xdp network programs into hardware description languages (hdl), enabling the execution of bpf logic directly on fpga-based smartnics. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "fuzz-on-the-beach-fuzzing-solana-smart-contracts-2023",
@@ -3457,7 +4270,23 @@
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like improving.",
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "fuzz on the beach: fuzzing solana smart contracts s. smolka j.-r. giesen p. winkler o. draissi l. davi g. karame k. pohl ccs 2023",
+    "_adminSearchIndex": "fuzz on the beach: fuzzing solana smart contracts s. smolka j.-r. giesen p. winkler o. draissi l. davi g. karame k. pohl ccs 2023 solana has quickly emerged as a popular platform for building decentralized applications (dapps), such as marketplaces for non-fungible tokens (nfts). a key reason for its success are solana's low transaction fees and high performance, which is achieved in part due to its stateless programming model. although the literature features extensive tooling support for smart contract security, current solutions are largely tailored for the ethereum virtual machine. unfortunately, the very stateless nature of solana's execution environment introduces novel attack patterns specific to solana requiring a rethinking for building vulnerability analysis methods. in this paper, we address this gap and propose fuzzdelsol, the first binary-only coverage-guided fuzzing architecture for solana smart contracts. fuzzdelsol faithfully models runtime specifics such as smart contract interactions. moreover, since source code is not available for the large majority of solana contracts, fuzzdelsol operates on the contract's binary code. hence, due to the lack of semantic information, we carefully extracted low-level program and state information to develop a diverse set of bug oracles covering all major bug classes in solana. our extensive evaluation on 6049 smart contracts shows that fuzzdelsol's bug oracles find bugs with a high precision and recall. to the best of our knowledge, this is the largest evaluation of the security landscape on the solana mainnet. improving security misc focuses on internal os and ebpf infrastructure like improving. the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "xbgp-faster-innovation-in-routing-protocols-2023",
@@ -3487,7 +4316,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "xbgp: faster innovation in routing protocols t. wirtgen t. rousseaux q. de coninck n. rybowski r. bush l. vanbever a. legay o. bonaventure nsdi 2023",
+    "_adminSearchIndex": "xbgp: faster innovation in routing protocols t. wirtgen t. rousseaux q. de coninck n. rybowski r. bush l. vanbever a. legay o. bonaventure nsdi 2023 introduces xbgp, an extensible bgp router implementation that uses ebpf plugins to quickly deploy new routing algorithms and protocol modifications without requiring vendor firmware updates. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "taking-5g-ran-analytics-and-control-to-a-new-level-2023",
@@ -3512,7 +4357,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "taking 5g ran analytics and control to a new level x. foukas b. radunovic m. balkwill z. lai mobicom 2023",
+    "_adminSearchIndex": "taking 5g ran analytics and control to a new level x. foukas b. radunovic m. balkwill z. lai mobicom 2023 explores the use of ebpf and programmable data planes to extract granular analytics and enforce real-time control policies within 5g radio access networks (ran). using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "tigger-a-database-proxy-that-bounces-with-user-bypass-2023",
@@ -3541,7 +4402,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "tigger: a database proxy that bounces with user-bypass m. butrovich k. ramanathan j. rollinson w. s. lim w. zhang j. sherry a. pavlo vldb 2023",
+    "_adminSearchIndex": "tigger: a database proxy that bounces with user-bypass m. butrovich k. ramanathan j. rollinson w. s. lim w. zhang j. sherry a. pavlo vldb 2023 presents tigger, a high-performance database proxy that uses ebpf-based user-bypass techniques to route and filter database queries entirely within the kernel, drastically reducing latency. using networking offload the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "verifying-the-verifier-ebpf-range-analysis-verification-2023",
@@ -3566,7 +4443,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "verifying the verifier: ebpf range analysis verification h. vishwanathan m. shachnai s. narayana s. nagarakatte cav 2023",
+    "_adminSearchIndex": "verifying the verifier: ebpf range analysis verification h. vishwanathan m. shachnai s. narayana s. nagarakatte cav 2023 details a formal verification effort targeting the value range analysis component of the linux ebpf verifier, uncovering several integer arithmetic bugs that could lead to privilege escalation. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "epf-evil-packet-filter-2023",
@@ -3591,7 +4484,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "epf: evil packet filter d. jin v. atlidakis v. p. kemerlis atc 2023",
+    "_adminSearchIndex": "epf: evil packet filter d. jin v. atlidakis v. p. kemerlis atc 2023 analyzes the offensive capabilities of ebpf. the paper demonstrates how attackers can weaponize ebpf to create 'evil packet filters' for stealthy rootkits, network backdoors, and data exfiltration. analysis security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "tastes-great-less-filling-high-performance-and-accurate-training-data-collection-for-self-driving-database-management-systems-2022",
@@ -3620,7 +4529,23 @@
       "application_domain": {
         "Tracing": "The paper's primary focus aligns with tracing based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "tastes great! less filling! high performance and accurate training data collection for self-driving database management systems m. butrovich w. s. lim l. ma j. rollinson w. zhang y. xia a. pavlo sigmod 2022",
+    "_adminSearchIndex": "tastes great! less filling! high performance and accurate training data collection for self-driving database management systems m. butrovich w. s. lim l. ma j. rollinson w. zhang y. xia a. pavlo sigmod 2022 leverages ebpf to collect high-fidelity, low-overhead training data from database management systems. this data is used to train machine learning models for autonomous, self-driving dbms tuning. using tracing misc the paper's primary focus aligns with tracing based on its categorization."
   },
   {
     "id": "domain-specific-run-time-optimization-for-software-data-planes-2022",
@@ -3629,7 +4554,7 @@
       "S. Miano",
       "A. Sanaee",
       "F. Risso",
-      "G. R\u00e9tv\u00e1ri",
+      "G. Rétvári",
       "G. Antichi"
     ],
     "venue": "ASPLOS",
@@ -3647,7 +4572,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "domain specific run time optimization for software data planes s. miano a. sanaee f. risso g. rétvári g. antichi asplos 2022",
+    "_adminSearchIndex": "domain specific run time optimization for software data planes s. miano a. sanaee f. risso g. rétvári g. antichi asplos 2022 proposes a domain-specific jit compilation and runtime optimization framework for software data planes, using ebpf to specialize packet processing pipelines on the fly. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "end-to-end-mechanized-proof-of-an-ebpf-virtual-machine-for-micro-controllers-2022",
@@ -3674,7 +4615,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "end-to-end mechanized proof of an ebpf virtual machine for micro-controllers s. yuan f. besson j.-p. talpin s. hym k. zandberg e. baccelli cav 2022",
+    "_adminSearchIndex": "end-to-end mechanized proof of an ebpf virtual machine for micro-controllers s. yuan f. besson j.-p. talpin s. hym k. zandberg e. baccelli cav 2022 describes a formally verified ebpf virtual machine designed specifically for resource-constrained micro-controllers, ensuring safety and correctness without the overhead of runtime checks. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "application-informed-kernel-synchronization-primitives-2022",
@@ -3702,7 +4659,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "application-informed kernel synchronization primitives s. park d. zhou y. qian i. calciu t. kim s. kashyap osdi 2022",
+    "_adminSearchIndex": "application-informed kernel synchronization primitives s. park d. zhou y. qian i. calciu t. kim s. kashyap osdi 2022 introduces a mechanism allowing applications to inform the kernel about their synchronization state using ebpf, enabling the os to make smarter scheduling decisions and avoid lock-holder preemption. using misc addresses general systems research using ebpf."
   },
   {
     "id": "rapidpatch-firmware-hotpatching-for-real-time-embedded-devices-2022",
@@ -3733,7 +4706,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "rapidpatch: firmware hotpatching for real-time embedded devices y. he z. zou k. sun z. liu k. xu q. wang c. shen z. wang q. li sec 2022",
+    "_adminSearchIndex": "rapidpatch: firmware hotpatching for real-time embedded devices y. he z. zou k. sun z. liu k. xu q. wang c. shen z. wang q. li sec 2022 presents rapidpatch, a system utilizing ebpf to safely and predictably deploy hotpatches to the firmware of real-time embedded devices without requiring system reboots. using misc addresses general systems research using ebpf."
   },
   {
     "id": "faster-software-packet-processing-on-fpga-nics-with-ebpf-program-warping-2022",
@@ -3762,7 +4751,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "faster software packet processing on fpga nics with ebpf program warping m. bonola g. belocchi a. tulumello m. spaziani brunella g. siracusano g. bianchi r. bifulco atc 2022",
+    "_adminSearchIndex": "faster software packet processing on fpga nics with ebpf program warping m. bonola g. belocchi a. tulumello m. spaziani brunella g. siracusano g. bianchi r. bifulco atc 2022 proposes 'program warping', a technique that splits ebpf packet processing programs between the host cpu and fpga nics, dynamically shifting execution to maximize throughput. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "sound-precise-and-fast-abstract-interpretation-with-tristate-numbers-2022",
@@ -3788,7 +4793,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "sound, precise, and fast abstract interpretation with tristate numbers h. vishwanathan m. shachnai s. narayana s. nagarakatte cgo 2022",
+    "_adminSearchIndex": "sound, precise, and fast abstract interpretation with tristate numbers h. vishwanathan m. shachnai s. narayana s. nagarakatte cgo 2022 introduces the use of tristate numbers (tnums) in abstract interpretation. this paper formalizes the tnum arithmetic used in the ebpf verifier to achieve fast and sound bounds checking. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "synthesizing-safe-and-efficient-kernel-extensions-for-packet-processing-2021",
@@ -3815,7 +4836,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "synthesizing safe and efficient kernel extensions for packet processing q. xu m. d. wong t. wagle s. narayana a. sivaraman sigcomm 2021",
+    "_adminSearchIndex": "synthesizing safe and efficient kernel extensions for packet processing q. xu m. d. wong t. wagle s. narayana a. sivaraman sigcomm 2021 presents a synthesis framework that automatically generates safe and efficient ebpf kernel extensions for packet processing from high-level, declarative network specifications. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "an-analysis-of-speculative-type-confusion-vulnerabilities-in-the-wild-2021",
@@ -3839,7 +4876,23 @@
       "application_domain": {
         "Security": "The paper's primary focus aligns with security based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "an analysis of speculative type confusion vulnerabilities in the wild o. kirzner a. morrison sec 2021",
+    "_adminSearchIndex": "an analysis of speculative type confusion vulnerabilities in the wild o. kirzner a. morrison sec 2021 analyzes speculative type confusion vulnerabilities (like spectre v1) in production systems, highlighting how the ebpf verifier can be tricked into generating unsafe, exploitable speculative execution paths. analysis security the paper's primary focus aligns with security based on its categorization."
   },
   {
     "id": "syrup-user-defined-scheduling-across-the-stack-2021",
@@ -3847,7 +4900,7 @@
     "authors": [
       "K. Kaffes",
       "J. Humphries",
-      "D. Mazi\u00e8res",
+      "D. Mazières",
       "C. Kozyrakis"
     ],
     "venue": "SOSP",
@@ -3865,7 +4918,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "syrup: user-defined scheduling across the stack k. kaffes j. humphries d. mazières c. kozyrakis sosp 2021",
+    "_adminSearchIndex": "syrup: user-defined scheduling across the stack k. kaffes j. humphries d. mazières c. kozyrakis sosp 2021 introduces syrup, a framework that uses ebpf to allow developers to deploy user-defined scheduling policies across the entire software stack, coordinating networking, storage, and cpu scheduling. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "revisiting-the-open-vswitch-dataplane-ten-years-later-2021",
@@ -3890,7 +4959,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "revisiting the open vswitch dataplane ten years later w. tu y.-h. wei g. antichi b. pfaff sigcomm 2021",
+    "_adminSearchIndex": "revisiting the open vswitch dataplane ten years later w. tu y.-h. wei g. antichi b. pfaff sigcomm 2021 evaluates the architecture of the open vswitch (ovs) dataplane ten years after its inception, exploring how modern kernel features like ebpf and af_xdp can address its evolving performance bottlenecks. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "synthesizing-jit-compilers-for-in-kernel-dsls-2020",
@@ -3916,7 +5001,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "synthesizing jit compilers for in-kernel dsls j. van geffen l. nelson i. dillig x. wang e. torlak cav 2020",
+    "_adminSearchIndex": "synthesizing jit compilers for in-kernel dsls j. van geffen l. nelson i. dillig x. wang e. torlak cav 2020 proposes a system for automatically synthesizing just-in-time (jit) compilers for in-kernel domain specific languages (like ebpf), ensuring that the resulting jit is mathematically proven correct. improving jit focuses on internal os and ebpf infrastructure like jit."
   },
   {
     "id": "scaling-symbolic-evaluation-for-automated-verification-of-systems-code-with-serval-2019",
@@ -3943,7 +5044,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "scaling symbolic evaluation for automated verification of systems code with serval l. nelson j. bornholt r. gu a. baumann e. torlak x. wang sosp 2019",
+    "_adminSearchIndex": "scaling symbolic evaluation for automated verification of systems code with serval l. nelson j. bornholt r. gu a. baumann e. torlak x. wang sosp 2019 presents serval, a framework for scaling symbolic evaluation. serval enables automated verification of systems code, and is notably applied to formally verify properties of the ebpf jit compiler. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "pluginizing-quic-2019",
@@ -3972,7 +5089,23 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "pluginizing quic q. de coninck f. michel m. piraux f. rochet t. given-wilson a. legay o. pereira o. bonaventure sigcomm 2019",
+    "_adminSearchIndex": "pluginizing quic q. de coninck f. michel m. piraux f. rochet t. given-wilson a. legay o. pereira o. bonaventure sigcomm 2019 explores the use of ebpf to 'pluginize' the quic protocol. by allowing custom congestion control and protocol features to be injected safely into the kernel implementation, it vastly improves flexibility. using networking the paper's primary focus aligns with networking based on its categorization."
   },
   {
     "id": "simple-and-precise-static-analysis-of-untrusted-linux-kernel-extensions-2019",
@@ -4002,7 +5135,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "simple and precise static analysis of untrusted linux kernel extensions e. gershuni n. amit a. gurfinkel n. narodytska j. a. navas n. rinetzky l. ryzhyk m. sagiv pldi 2019",
+    "_adminSearchIndex": "simple and precise static analysis of untrusted linux kernel extensions e. gershuni n. amit a. gurfinkel n. narodytska j. a. navas n. rinetzky l. ryzhyk m. sagiv pldi 2019 introduces prevail, a new static analyzer for ebpf that uses an abstract interpretation framework based on relational domains. prevail handles loops and complex logic much better than the standard kernel verifier. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "the-design-and-implementation-of-hyperupcalls-2018",
@@ -4025,7 +5174,23 @@
       "application_domain": {
         "Systems": "Addresses general systems research using eBPF."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "the design and implementation of hyperupcalls n. amit m. wei atc 2018",
+    "_adminSearchIndex": "the design and implementation of hyperupcalls n. amit m. wei atc 2018 presents hyperupcalls, a fast virtualization communication mechanism. it leverages ebpf to securely inject guest logic into the hypervisor, avoiding expensive vm exits during frequent operations like network i/o. using misc addresses general systems research using ebpf."
   },
   {
     "id": "jitk-a-trustworthy-in-kernel-interpreter-infrastructure-2014",
@@ -4052,7 +5217,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like jit."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "jitk: a trustworthy in-kernel interpreter infrastructure x. wang d. lazar n. zeldovich a. chlipala z. tatlock osdi 2014",
+    "_adminSearchIndex": "jitk: a trustworthy in-kernel interpreter infrastructure x. wang d. lazar n. zeldovich a. chlipala z. tatlock osdi 2014 introduces jitk, a trustworthy in-kernel infrastructure that formally verifies the correctness of translating bpf rules down to machine code, ensuring that the jit compiler does not introduce security vulnerabilities. improving jit focuses on internal os and ebpf infrastructure like jit."
   },
   {
     "id": "safe-kernel-extensions-without-run-time-checking-2096",
@@ -4075,7 +5256,23 @@
       "application_domain": {
         "Operating Systems": "Focuses on internal OS and eBPF infrastructure like verifier."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "safe kernel extensions without run-time checking g. c. necula p. lee osdi 1996",
+    "_adminSearchIndex": "safe kernel extensions without run-time checking g. c. necula p. lee osdi 1996 a seminal 1996 osdi paper introducing proof-carrying code (pcc). it demonstrated that kernel extensions can run safely and at native speed if they carry a machine-checkable proof of safety, inspiring modern verifiers. improving verifier focuses on internal os and ebpf infrastructure like verifier."
   },
   {
     "id": "the-bsd-packet-filter-a-new-architecture-for-user-level-packet-capture-2093",
@@ -4098,6 +5295,22 @@
       "application_domain": {
         "Networking": "The paper's primary focus aligns with networking based on its categorization."
       }
-    }
+    },
+    "research_areas": [],
+    "application_domain": [],
+    "ebpf_mechanisms": [],
+    "deployment_type": [],
+    "innovation_type": [],
+    "secondary_categories": [],
+    "supporting_categories": [],
+    "system_layers": [],
+    "goals": [],
+    "kernel_subsystems": [],
+    "target_workloads": [],
+    "target_resources": [],
+    "performance_objectives": [],
+    "categories": [],
+    "_publicSearchIndex": "the bsd packet filter: a new architecture for user-level packet capture s. mccanne v. jacobson usenix winter 1993",
+    "_adminSearchIndex": "the bsd packet filter: a new architecture for user-level packet capture s. mccanne v. jacobson usenix winter 1993 the foundational 1993 usenix paper introducing the bsd packet filter (bpf). it proposed a register-based vm and a cfg filtering approach that significantly accelerated network packet capture compared to older stack-based models. foundation networking the paper's primary focus aligns with networking based on its categorization."
   }
 ]

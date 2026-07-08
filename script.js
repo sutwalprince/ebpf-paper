@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------
-// Config: which classification fields become sidebar filters.
+// Config: which classification fields become sidebar filters (admin only).
 // Add/remove rows here to change what's filterable — every field still
 // gets full-text search and shows up in the card's "more" detail either way.
 // ---------------------------------------------------------------------
@@ -26,9 +26,23 @@ const DETAIL_FIELDS = [
 
 const ALL_ARRAY_FIELDS = [...FACET_FIELDS, ...DETAIL_FIELDS].map(f => f.key);
 
+// Public categories — visible to all users
+const CATEGORIES = [
+  "Storage & Filesystems",
+  "Kernel extension",
+  "Networking",
+  "Security",
+  "Verifier and Compiler",
+  "Observability and Tracing",
+  "Runtime Extension",
+  "Device Offloading",
+  "Misc",
+];
+
 const state = {
   search: "",
   filters: Object.fromEntries(FACET_FIELDS.map(f => [f.key, new Set()])),
+  activeCategory: null,  // currently selected public category (or null for "all")
   sort: "year-desc",
   page: 1,
 };
@@ -75,6 +89,7 @@ async function loadPapers() {
   const raw = await res.json();
   allPapers = raw.map(normalizePaper);
   ensureUniqueIds();
+  buildCategoryChips();
   buildFacetGroupsDOM();
   attachGlobalListeners();
   applyAdminVisibility();
@@ -86,23 +101,38 @@ function normalizePaper(p) {
   for (const key of ALL_ARRAY_FIELDS) {
     if (!Array.isArray(p[key])) p[key] = [];
   }
+  // Normalize categories to always be an array
+  if (!Array.isArray(p.categories)) {
+    // Migrate old single `category` field
+    if (p.category) {
+      p.categories = [p.category];
+      delete p.category;
+    } else {
+      p.categories = [];
+    }
+  }
   if (!p.id) p.id = makeId(title, p.year);
   const reasoningText = p.classification_reasoning
     ? Object.values(p.classification_reasoning)
         .flatMap(group => Object.values(group))
         .join(" ")
     : "";
-  const searchParts = [
+  const publicSearchParts = [
     title,
     (p.authors || []).join(" "),
     p.venue || "",
     String(p.year || ""),
+  ];
+  const adminSearchParts = [
+    ...publicSearchParts,
     p.summary || "",
+    ...(p.categories || []),
     ...ALL_ARRAY_FIELDS.flatMap(key => p[key]),
     reasoningText,
   ];
   p._title = title;
-  p._searchIndex = searchParts.join(" ").toLowerCase();
+  p._publicSearchIndex = publicSearchParts.join(" ").toLowerCase();
+  p._adminSearchIndex = adminSearchParts.join(" ").toLowerCase();
   return p;
 }
 
@@ -128,7 +158,13 @@ function makeId(title, year) {
 function matchesSearch(paper) {
   const term = state.search.trim().toLowerCase();
   if (!term) return true;
-  return paper._searchIndex.includes(term);
+  const index = isAdmin ? paper._adminSearchIndex : paper._publicSearchIndex;
+  return index.includes(term);
+}
+
+function matchesCategory(paper) {
+  if (!state.activeCategory) return true;
+  return (paper.categories || []).includes(state.activeCategory);
 }
 
 function matchesFilters(paper, excludeKey) {
@@ -143,7 +179,7 @@ function matchesFilters(paper, excludeKey) {
 }
 
 function getFiltered(excludeKey = null) {
-  return allPapers.filter(p => matchesSearch(p) && matchesFilters(p, excludeKey));
+  return allPapers.filter(p => matchesSearch(p) && matchesCategory(p) && matchesFilters(p, excludeKey));
 }
 
 function sortPapers(papers) {
@@ -162,8 +198,81 @@ function sortPapers(papers) {
 function resetFiltersAndSearch() {
   for (const f of FACET_FIELDS) state.filters[f.key].clear();
   state.search = "";
+  state.activeCategory = null;
   document.getElementById("search-input").value = "";
+  updateCategoryChipsUI();
   state.page = 1;
+}
+
+// ---------------------------------------------------------------------
+// Public category chips — visible to all users
+// ---------------------------------------------------------------------
+function buildCategoryChips() {
+  const container = document.getElementById("category-chips");
+  container.innerHTML = "";
+
+  // "All" chip
+  const allChip = document.createElement("button");
+  allChip.type = "button";
+  allChip.className = "category-chip is-active";
+  allChip.textContent = "All";
+  allChip.dataset.category = "";
+  allChip.addEventListener("click", () => {
+    state.activeCategory = null;
+    state.page = 1;
+    updateCategoryChipsUI();
+    render();
+  });
+  container.appendChild(allChip);
+
+  for (const cat of CATEGORIES) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "category-chip";
+    chip.textContent = cat;
+    chip.dataset.category = cat;
+    chip.addEventListener("click", () => {
+      if (state.activeCategory === cat) {
+        state.activeCategory = null;
+      } else {
+        state.activeCategory = cat;
+      }
+      state.page = 1;
+      updateCategoryChipsUI();
+      render();
+    });
+    container.appendChild(chip);
+  }
+}
+
+function updateCategoryChipsUI() {
+  const chips = document.querySelectorAll(".category-chip");
+  chips.forEach(chip => {
+    const cat = chip.dataset.category;
+    chip.classList.toggle("is-active", cat === (state.activeCategory || ""));
+  });
+}
+
+function updateCategoryCounts() {
+  const chips = document.querySelectorAll(".category-chip");
+  const searchFiltered = allPapers.filter(p => matchesSearch(p));
+  chips.forEach(chip => {
+    const cat = chip.dataset.category;
+    let count;
+    if (!cat) {
+      count = searchFiltered.length;
+    } else {
+      count = searchFiltered.filter(p => (p.categories || []).includes(cat)).length;
+    }
+    // Update count badge
+    let badge = chip.querySelector(".category-count");
+    if (!badge) {
+      badge = document.createElement("span");
+      badge.className = "category-count";
+      chip.appendChild(badge);
+    }
+    badge.textContent = count;
+  });
 }
 
 // ---------------------------------------------------------------------
@@ -311,11 +420,14 @@ function buildCard(p) {
     ? `<a href="${escapeAttr(p.links.paper)}" target="_blank" rel="noopener">${escapeHtml(p._title)}</a>`
     : escapeHtml(p._title);
 
+  // Build tag values — only show detailed facet tags for admin
   const tagValues = [];
   const seen = new Set();
-  for (const f of FACET_FIELDS) {
-    for (const v of p[f.key]) {
-      if (!seen.has(v)) { seen.add(v); tagValues.push({ key: f.key, value: v }); }
+  if (isAdmin) {
+    for (const f of FACET_FIELDS) {
+      for (const v of p[f.key]) {
+        if (!seen.has(v)) { seen.add(v); tagValues.push({ key: f.key, value: v }); }
+      }
     }
   }
 
@@ -335,10 +447,17 @@ function buildCard(p) {
 
   const reasoningHtml = buildReasoningHtml(p.classification_reasoning);
 
+  const categoryBadgesHtml = (p.categories || []).length
+    ? p.categories.map(c => `<span class="category-badge">${escapeHtml(c)}</span>`).join("")
+    : "";
+
   card.innerHTML = `
     <div class="card-top">
       <h2 class="card-title">${titleHtml}</h2>
-      ${venueLabel ? `<span class="venue-badge">${escapeHtml(venueLabel)}</span>` : ""}
+      <div class="card-top-badges">
+        ${categoryBadgesHtml}
+        ${venueLabel ? `<span class="venue-badge">${escapeHtml(venueLabel)}</span>` : ""}
+      </div>
     </div>
     ${p.authors && p.authors.length ? `<p class="card-authors">${escapeHtml(p.authors.join(", "))}</p>` : ""}
     ${p.summary ? `<p class="card-summary">${escapeHtml(p.summary)}</p>` : ""}
@@ -346,7 +465,7 @@ function buildCard(p) {
       ${tagValues.map(t => `<span class="tag" data-facet="${escapeAttr(t.key)}" data-value="${escapeAttr(t.value)}">${escapeHtml(t.value)}</span>`).join("")}
     </div>
     ${linksHtml ? `<div class="card-links">${linksHtml}</div>` : ""}
-    ${(detailFieldsHtml || reasoningHtml) ? `
+    ${(isAdmin && (detailFieldsHtml || reasoningHtml)) ? `
       <details class="card-more">
         <summary>more detail</summary>
         <div class="more-body">
@@ -407,6 +526,7 @@ function render() {
     `<span class="num">${filtered.length}</span> paper${filtered.length === 1 ? "" : "s"}`;
   renderActiveFilters();
   updateFacetCounts();
+  updateCategoryCounts();
 
   const pageSize = 10;
   const totalPages = Math.ceil(filtered.length / pageSize) || 1;
@@ -455,6 +575,10 @@ function cacheModalEls() {
   modalEls.fCodeLink = document.getElementById("f-code-link");
   modalEls.fTalkLink = document.getElementById("f-talk-link");
   modalEls.fSummary = document.getElementById("f-summary");
+  modalEls.fCategories = document.getElementById("f-categories");
+  modalEls.fCategories.innerHTML = CATEGORIES.map(cat => 
+    `<label class="cat-checkbox"><input type="checkbox" value="${escapeAttr(cat)}"> ${escapeHtml(cat)}</label>`
+  ).join("");
   modalEls.fClassification = document.getElementById("f-classification");
   modalEls.deleteBtn = document.getElementById("modal-delete");
 }
@@ -482,6 +606,10 @@ function openModal(id = null) {
     modalEls.fCodeLink.value = p.links?.code || "";
     modalEls.fTalkLink.value = p.links?.talk || "";
     modalEls.fSummary.value = p.summary || "";
+    // Set category checkboxes
+    modalEls.fCategories.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+      cb.checked = (p.categories || []).includes(cb.value);
+    });
     modalEls.fClassification.value = classificationJsonFor(p);
     modalEls.deleteBtn.hidden = false;
   } else {
@@ -519,6 +647,7 @@ function onSaveModal() {
   }
 
   const year = modalEls.fYear.value ? Number(modalEls.fYear.value) : undefined;
+  const selectedCategories = [...modalEls.fCategories.querySelectorAll('input[type="checkbox"]:checked')].map(cb => cb.value);
   const paper = {
     id: editingId || undefined,
     title,
@@ -531,6 +660,7 @@ function onSaveModal() {
       talk: modalEls.fTalkLink.value.trim() || undefined,
     },
     summary: modalEls.fSummary.value.trim() || undefined,
+    categories: selectedCategories.length ? selectedCategories : [],
   };
 
   for (const key of ALL_ARRAY_FIELDS) {
@@ -587,7 +717,7 @@ function showFormError(msg) {
 // Export
 // ---------------------------------------------------------------------
 function exportPapers() {
-  const clean = allPapers.map(({ _title, _searchIndex, ...rest }) => rest);
+  const clean = allPapers.map(({ _title, _publicSearchIndex, _adminSearchIndex, ...rest }) => rest);
   const blob = new Blob([JSON.stringify(clean, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -641,6 +771,14 @@ function updateDirtyIndicator() {
 // Global listeners
 // ---------------------------------------------------------------------
 function attachGlobalListeners() {
+  document.addEventListener("keydown", e => {
+    if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+    if (e.key === "/") {
+      e.preventDefault();
+      document.getElementById("search-input").focus();
+    }
+  });
+
   document.getElementById("search-input").addEventListener("input", e => {
     state.search = e.target.value;
     state.page = 1;

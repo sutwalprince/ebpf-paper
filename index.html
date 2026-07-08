@@ -43,11 +43,16 @@
       <div class="search-input-wrap">
         <span class="prompt-glyph" aria-hidden="true">&#10095;</span>
         <input id="search-input" type="text" autocomplete="off" spellcheck="false"
-               placeholder="title, author, venue, tag&hellip;">
+               placeholder="title, author, venue, year&hellip;">
       </div>
     </div>
 
-    <div id="facet-groups" class="facet-groups"><!-- injected by script.js --></div>
+    <div id="category-filter" class="category-filter">
+      <div class="category-filter-label">category</div>
+      <div id="category-chips" class="category-chips"><!-- injected by script.js --></div>
+    </div>
+
+    <div id="facet-groups" class="facet-groups admin-only" style="display:none"><!-- injected by script.js --></div>
 
     <button id="clear-all" class="clear-all" type="button">clear all filters</button>
   </aside>
@@ -139,6 +144,11 @@
       <span class="field-label">summary</span>
       <textarea id="f-summary" rows="2" placeholder="One or two sentences, in your own words."></textarea>
     </label>
+
+    <div class="field">
+      <span class="field-label">categories <em>select one or more</em></span>
+      <div id="f-categories" class="category-checkboxes"><!-- injected by script.js --></div>
+    </div>
 
     <label class="field">
       <span class="field-label">classification JSON <em>optional &mdash; paste the primary_categories / research_areas / etc. block</em></span>
